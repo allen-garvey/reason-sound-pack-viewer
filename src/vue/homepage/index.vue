@@ -3,7 +3,7 @@
     <header class="header">
         <site-title></site-title>
     </header>
-    <main :class="$style['home-main']">
+    <main :class="$style['main']">
         <pack-list
             :packs="packs"
         >
@@ -13,13 +13,8 @@
 </template>
 
 <style lang="scss" module>
-.home-main{
+.main{
 	padding-bottom: 10em;
-}
-.controls{
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 16px;
 }
 </style>
 
