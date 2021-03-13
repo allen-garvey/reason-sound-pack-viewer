@@ -6,6 +6,7 @@
     <main :class="$style['main']">
         <pack-list
             :packs="packs"
+            @pack-clicked="packClicked"
         >
         </pack-list>
     </main>
@@ -19,9 +20,12 @@
 </style>
 
 <script>
+import { AUDIO_PREVIEW_URL_PREFIX } from '../../jukebox.js';
 import { getPacks } from '../../ajax.js';
 import SiteTitle from '../common/site-title.vue';
 import PackList from './pack-list.vue';
+
+let audio = null;
 
 export default {
     props: {
@@ -33,6 +37,7 @@ export default {
     },
     created(){
         getPacks().then((packsMap) => this.packsMap = packsMap);
+        audio = new Audio();
     },
     data(){
         return {
@@ -42,6 +47,14 @@ export default {
     computed: {
         packs(){
             return Object.keys(this.packsMap).map((key) => this.packsMap[key]);
+        },
+    },
+    methods: {
+        packClicked(packId){
+            const pack = this.packsMap[packId];
+            audio.src = `${AUDIO_PREVIEW_URL_PREFIX}${pack.previewUrl}`;
+            audio.load();
+            audio.play();
         },
     },
 };

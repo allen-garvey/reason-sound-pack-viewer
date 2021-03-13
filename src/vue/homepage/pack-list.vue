@@ -6,7 +6,12 @@
                 :key="pack.id"
                 :class="$style.pack"
             >
-                <img :src="pack.coverPhoto" :class="$style.coverPhoto" loading="lazy" />
+                <img 
+                    :src="pack.coverPhoto" 
+                    :class="$style.coverPhoto" 
+                    loading="lazy" 
+                    @click="packClicked(pack)"
+                />
                 <div :class="$style.packTitle">{{ pack.title }}</div>
             </li>
         </ul>
@@ -50,6 +55,9 @@ export default {
     computed: {
     },
     methods: {
+        packClicked(pack){
+            this.$emit('packClicked', pack.id);
+        }
     }
 };
 </script>

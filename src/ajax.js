@@ -9,6 +9,7 @@ export const getPacks = () =>
                 title: packRaw.title,
                 coverPhoto: packRaw.coverPhoto,
                 author: packRaw.authorDisplayName,
+                previewUrl: packRaw.audio?.audioPreviewKey,
             };
             ret[pack.id] = pack;
         });
