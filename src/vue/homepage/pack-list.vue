@@ -1,8 +1,13 @@
 <template>
     <div :class="$style.container">
-        <ul>
-            <li v-for="pack in packs" :key="pack.id">
-                <div>{{ pack.name }}</div>
+        <ul :class="$style.packList">
+            <li 
+                v-for="pack in packs" 
+                :key="pack.id"
+                :class="$style.pack"
+            >
+                <img :src="pack.coverPhoto" :class="$style.coverPhoto" loading="lazy" />
+                <div :class="$style.packTitle">{{ pack.title }}</div>
             </li>
         </ul>
     </div>
@@ -10,7 +15,26 @@
 
 <style lang="scss" module>
     .container {
-        background-color: red;
+        
+    }
+
+    .packList {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .pack {
+        margin: 0 0 20px;
+        width: 150px;
+    }
+
+    .packTitle {
+        padding: 0 1em;
+        text-align: center;
+    }
+
+    .coverPhoto {
+        
     }
 </style>
 <script>
