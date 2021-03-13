@@ -1,0 +1,36 @@
+{
+  "name": "reason-sound-pack-viewer",
+  "version": "1.0.0",
+  "description": "View reason sound packs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --config webpack.config.js",
+    "build": "webpack --config webpack.config.js",
+    "deploy": "webpack --config webpack.config.js --mode='production'",
+    "hydrate": "curl https://nautilus.reasonstudios.com/pack/ > public_html/packs.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "MIT",
+  "homepage": "",
+  "devDependencies": {
+    "@vue/compiler-sfc": "3.0.7",
+    "css-loader": "^5.1.2",
+    "mini-css-extract-plugin": "^1.3.9",
+    "node-sass": "^5.0.0",
+    "sass-loader": "^11.0.1",
+    "vue-loader": "^16.1.0",
+    "vue-style-loader": "^4.1.3",
+    "webpack": "^5.25.0",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "vue": "3.0.7",
+    "vue-router": "4.0.5"
+  }
+}
