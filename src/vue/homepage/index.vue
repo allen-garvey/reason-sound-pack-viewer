@@ -21,24 +21,22 @@
 
 <script>
 import { AUDIO_PREVIEW_URL_PREFIX } from '../../jukebox.js';
-import { getPacks } from '../../ajax.js';
 import SiteTitle from '../common/site-title.vue';
 import PackList from './pack-list.vue';
 
 export default {
     props: {
-        
+        packsMap: {
+            type: Object,
+            required: true,
+        },
     },
     components: {
         SiteTitle,
         PackList,
     },
-    created(){
-        getPacks().then((packsMap) => this.packsMap = packsMap);
-    },
     data(){
         return {
-            packsMap: {},
         };
     },
     computed: {
