@@ -10,6 +10,11 @@ export const getPacks = () =>
                 coverPhoto: packRaw.coverPhoto,
                 author: packRaw.authorDisplayName,
                 previewUrl: packRaw.audio?.audioPreviewKey,
+                description: packRaw.description,
+                patches: packRaw.patchList.map((patch) => ({
+                    name: patch.patchName,
+                    url: patch.patchAudio?.audioPreviewKey,
+                })),
             };
             ret[pack.id] = pack;
         });
