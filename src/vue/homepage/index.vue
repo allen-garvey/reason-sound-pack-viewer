@@ -41,7 +41,7 @@ export default {
     },
     computed: {
         packs(){
-            return Object.keys(this.packsMap).map((key) => this.packsMap[key]);
+            return Object.keys(this.packsMap).reverse().map((key) => this.packsMap[key]);
         },
     },
     methods: {
