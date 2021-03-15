@@ -9,6 +9,10 @@
     <loading-indicator
         v-if="!isFinishedLoading"
      />
+     <media-controls 
+        v-if="isFinishedLoading"
+        :title="mediaTitle"
+     />
 </div>
 </template>
 
@@ -18,12 +22,14 @@
 <script>
 import { getPacks } from '../ajax.js';
 import LoadingIndicator from './common/loading-indicator.vue';
+import MediaControls from './common/media-controls.vue';
 
 let audio = null;
 
 export default {
     components: {
         LoadingIndicator,
+        MediaControls,
     },
     created(){
         audio = new Audio();
@@ -32,6 +38,7 @@ export default {
     data(){
         return {
             packsMap: null,
+            mediaTitle: '',
         };
     },
     computed: {
@@ -41,11 +48,13 @@ export default {
     },
     methods: {
         startAudio({title, url}){
+            this.mediaTitle = title;
             audio.src = url;
             audio.load();
             audio.play();
         },
         stopAudio(){
+            this.mediaTitle = '';
             audio.pause();
         },
     },
