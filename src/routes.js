@@ -1,4 +1,5 @@
 import HomePage from './vue/homepage/index.vue';
+import ShowPage from './vue/showpage/show.vue';
 
 export function getRoutes(){
     return [
@@ -6,9 +7,10 @@ export function getRoutes(){
             path: '/',
             component: HomePage,
         },
-        // {
-        //     path: '/pack/:id',
-        //     component: ShowPage,
-        // },
+        {
+            path: '/pack/:id',
+            name: 'show',
+            component: ShowPage,
+        },
     ];
 }

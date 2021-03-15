@@ -12,7 +12,9 @@
                     loading="lazy" 
                     @click="packClicked(pack)"
                 />
-                <div :class="$style.packTitle">{{ pack.title }}</div>
+                <div :class="$style.packTitle">
+                    <router-link :to="{name: 'show', params: {id: pack.id}}">{{ pack.title }}</router-link>
+                </div>
             </li>
         </ul>
     </div>

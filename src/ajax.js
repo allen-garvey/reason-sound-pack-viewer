@@ -12,8 +12,9 @@ export const getPacks = () =>
                 previewUrl: packRaw.audio?.audioPreviewKey,
                 description: packRaw.description,
                 patches: packRaw.patchList.map((patch) => ({
+                    id: patch.id,
                     name: patch.patchName,
-                    url: patch.patchAudio?.audioPreviewKey,
+                    previewUrl: patch.patchAudio?.audioPreviewKey,
                 })),
             };
             ret[pack.id] = pack;
