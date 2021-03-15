@@ -11,7 +11,7 @@
      />
      <media-controls 
         v-if="isFinishedLoading"
-        :title="mediaTitle"
+        :title="audioTitle"
      />
 </div>
 </template>
@@ -33,23 +33,34 @@ export default {
     },
     created(){
         audio = new Audio();
+        audio.addEventListener('loadeddata', () => {
+            this.audioLoaded = true;
+        });
         getPacks().then((packsMap) => this.packsMap = packsMap);
     },
     data(){
         return {
             packsMap: null,
             mediaTitle: '',
+            audioLoaded: false,
         };
     },
     computed: {
         isFinishedLoading(){
             return this.packsMap !== null;
         },
+        audioTitle(){
+            if(!this.mediaTitle){
+                return '';
+            }
+            return this.audioLoaded ? this.mediaTitle : 'Loading…';
+        },
     },
     methods: {
         startAudio({title, url}){
             this.mediaTitle = title;
             audio.src = url;
+            this.audioLoaded = false;
             audio.load();
             audio.play();
         },
