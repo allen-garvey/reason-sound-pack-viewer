@@ -12,7 +12,7 @@
     padding-left: 0.5em;
 
     a{
-        color: white;
+        color: #000;
     }
 }
 </style>
