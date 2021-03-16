@@ -5,9 +5,11 @@
     </header>
     <main :class="$style['main']">
         <h2>{{ pack.title }}</h2>
-        <img 
-            :src="pack.coverPhoto" 
-            :class="$style.coverPhoto" 
+        <cover-image
+            :class="$style.coverImageContainer"
+            :is-playing="isPackPlaying"
+            :src="pack.coverPhoto"
+            @controls-clicked="packClicked(pack)"
         />
         <p>{{ pack.author }}</p>
         <p>{{ pack.description }}</p>
@@ -32,13 +34,15 @@
 
 <style lang="scss" module>
 $icon-controls-dimensions: 40px;
+$cover-image-dimensions: 300px;
 
 .main{
 	padding-bottom: 10em;
 }
 
-.coverPhoto {
-    width: 300px;
+.coverImageContainer {
+    height: $cover-image-dimensions;
+    width: $cover-image-dimensions;
 }
 
 .patch {
@@ -69,6 +73,7 @@ $icon-controls-dimensions: 40px;
 <script>
 import { AUDIO_PREVIEW_URL_PREFIX } from '../../jukebox.js';
 import SiteTitle from '../common/site-title.vue';
+import CoverImage from '../common/cover-image.vue';
 
 export default {
     props: {
@@ -82,6 +87,7 @@ export default {
     },
     components: {
         SiteTitle,
+        CoverImage,
     },
     data(){
         return {
@@ -91,6 +97,9 @@ export default {
         pack(){
             return this.packsMap[this.$route.params.id];
         },
+        isPackPlaying(){
+            return this.pack.id === this.mediaId;
+        }
     },
     methods: {
         patchId(patch){
@@ -108,6 +117,18 @@ export default {
                     url: `${AUDIO_PREVIEW_URL_PREFIX}${patch.previewUrl}`,
                     title: `${this.pack.title} - ${patch.name}`,
                     id: this.patchId(patch),
+                });
+            }
+        },
+        packClicked(pack){
+            if(this.isPackPlaying){
+                this.$emit('audioStop');
+            }
+            else {
+                this.$emit('audioStart', {
+                    url: `${AUDIO_PREVIEW_URL_PREFIX}${this.pack.previewUrl}`,
+                    title: this.pack.title,
+                    id: this.pack.id,
                 });
             }
         },
