@@ -6,12 +6,21 @@
                 :key="pack.id"
                 :class="$style.pack"
             >
-                <img 
-                    :src="pack.coverPhoto" 
-                    :class="$style.coverPhoto" 
-                    loading="lazy" 
-                    @click="packClicked(pack)"
-                />
+                <div :class="$style.imageContainer">
+                    <div
+                        :class="$style.imageControlContainer"
+                        @click="packClicked(pack)"
+                    >
+                        <svg :class="$style.icon">
+                            <use xlink:href="#icon-play" />
+                        </svg>
+                    </div>
+                    <img 
+                        :src="pack.coverPhoto" 
+                        :class="$style.coverPhoto" 
+                        loading="lazy" 
+                    />
+                </div>
                 <div :class="$style.packTitle">
                     <router-link :to="{name: 'show', params: {id: pack.id}}">{{ pack.title }}</router-link>
                 </div>
@@ -21,6 +30,8 @@
 </template>
 
 <style lang="scss" module>
+    $image-dimensions: 150px;
+
     .container {
         
     }
@@ -32,7 +43,7 @@
     
     .pack {
         margin: 0 0 20px;
-        width: 150px;
+        width: $image-dimensions;
     }
 
     .packTitle {
@@ -40,8 +51,45 @@
         text-align: center;
     }
 
-    .coverPhoto {
-        
+    .imageContainer {
+        position: relative;
+        height: $image-dimensions;
+
+        &:hover {
+            .imageControlContainer {
+                display: flex;
+            }
+        }
+    }
+
+    .imageControlContainer {
+        color: #fff;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        &:after {
+            content: '';
+            background-color: #000;
+            opacity: 0.5;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    }
+
+    .icon {
+        position: relative;
+        z-index: 1;
+        max-width: 67%;
     }
 </style>
 <script>
