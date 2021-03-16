@@ -2,6 +2,7 @@
 <div>
     <router-view
         :packs-map="packsMap"
+        :media-id="mediaId"
         @audio-start="startAudio"
         @audio-stop="stopAudio"
         v-if="isFinishedLoading"
@@ -42,6 +43,7 @@ export default {
         return {
             packsMap: null,
             mediaTitle: '',
+            mediaId: null,
             audioLoaded: false,
         };
     },
@@ -57,7 +59,8 @@ export default {
         },
     },
     methods: {
-        startAudio({title, url}){
+        startAudio({title, url, id}){
+            this.mediaId = id;
             this.mediaTitle = title;
             audio.src = url;
             this.audioLoaded = false;
@@ -65,6 +68,7 @@ export default {
             audio.play();
         },
         stopAudio(){
+            this.mediaId = null;
             this.mediaTitle = '';
             audio.pause();
         },

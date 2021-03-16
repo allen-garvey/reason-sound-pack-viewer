@@ -6,6 +6,7 @@
     <main :class="$style['main']">
         <pack-list
             :packs="packs"
+            :is-pack-playing="isPackPlaying"
             @pack-clicked="packClicked"
         >
         </pack-list>
@@ -30,6 +31,9 @@ export default {
             type: Object,
             required: true,
         },
+        mediaId: {
+            required: true,
+        },
     },
     components: {
         SiteTitle,
@@ -45,12 +49,21 @@ export default {
         },
     },
     methods: {
+        isPackPlaying(packId){
+            return packId === this.mediaId;
+        },
         packClicked(packId){
-            const pack = this.packsMap[packId];
-            this.$emit('audioStart', {
-                url: `${AUDIO_PREVIEW_URL_PREFIX}${pack.previewUrl}`,
-                title: pack.title,
-            });
+            if(this.isPackPlaying(packId)){
+                this.$emit('audioStop');
+            }
+            else{
+                const pack = this.packsMap[packId];
+                this.$emit('audioStart', {
+                    url: `${AUDIO_PREVIEW_URL_PREFIX}${pack.previewUrl}`,
+                    title: pack.title,
+                    id: pack.id,
+                });
+            }
         },
     },
 };

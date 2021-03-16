@@ -12,7 +12,8 @@
                         @click="packClicked(pack)"
                     >
                         <svg :class="$style.icon">
-                            <use xlink:href="#icon-play" />
+                            <use xlink:href="#icon-play" v-if="!isPackPlaying(pack.id)" />
+                            <use xlink:href="#icon-pause" v-if="isPackPlaying(pack.id)" />
                         </svg>
                     </div>
                     <img 
@@ -98,7 +99,11 @@ export default {
         packs: {
             type: Array,
             required: true,
-        }
+        },
+        isPackPlaying: {
+            type: Function,
+            required: true,
+        },
     },
     components: {
     },
