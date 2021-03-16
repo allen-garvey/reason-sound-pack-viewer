@@ -6,22 +6,12 @@
                 :key="pack.id"
                 :class="$style.pack"
             >
-                <div :class="$style.imageContainer">
-                    <div
-                        :class="$style.imageControlContainer"
-                        @click="packClicked(pack)"
-                    >
-                        <svg :class="$style.icon">
-                            <use xlink:href="#icon-play" v-if="!isPackPlaying(pack.id)" />
-                            <use xlink:href="#icon-pause" v-if="isPackPlaying(pack.id)" />
-                        </svg>
-                    </div>
-                    <img 
-                        :src="pack.coverPhoto" 
-                        :class="$style.coverPhoto" 
-                        loading="lazy" 
-                    />
-                </div>
+                <cover-image
+                    :class="$style.imageContainer"
+                    :is-playing="isPackPlaying(pack.id)"
+                    :src="pack.coverPhoto"
+                    @controls-clicked="packClicked(pack)"
+                 />
                 <div :class="$style.packTitle">
                     <router-link :to="{name: 'show', params: {id: pack.id}}">{{ pack.title }}</router-link>
                 </div>
@@ -53,47 +43,12 @@
     }
 
     .imageContainer {
-        position: relative;
         height: $image-dimensions;
-
-        &:hover {
-            .imageControlContainer {
-                display: flex;
-            }
-        }
-    }
-
-    .imageControlContainer {
-        color: #fff;
-        display: none;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-
-        &:after {
-            content: '';
-            background-color: #000;
-            opacity: 0.5;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
-    }
-
-    .icon {
-        position: relative;
-        z-index: 1;
-        max-width: 67%;
     }
 </style>
 <script>
+import CoverImage from '../common/cover-image.vue';
+
 export default {
     props: {
         packs: {
@@ -106,6 +61,7 @@ export default {
         },
     },
     components: {
+        CoverImage,
     },
     computed: {
     },
