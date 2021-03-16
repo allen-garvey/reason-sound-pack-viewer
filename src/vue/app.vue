@@ -37,6 +37,9 @@ export default {
         audio.addEventListener('loadeddata', () => {
             this.audioLoaded = true;
         });
+        audio.addEventListener('ended', () => {
+            this.clearAudioDisplay();
+        });
         getPacks().then((packsMap) => this.packsMap = packsMap);
     },
     data(){
@@ -68,10 +71,13 @@ export default {
             audio.play();
         },
         stopAudio(){
-            this.mediaId = null;
-            this.mediaTitle = '';
+            this.clearAudioDisplay();
             audio.pause();
         },
+        clearAudioDisplay(){
+            this.mediaId = null;
+            this.mediaTitle = '';
+        }
     },
 };
 </script>
