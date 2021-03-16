@@ -15,8 +15,15 @@
             <li 
                 v-for="patch in pack.patches" 
                 :key="patch.id"
+                :class="$style.patch"
             >
-                <span @click="patchClicked(patch)">{{ patch.name }}</span>
+                <span :class="$style.iconContainer" @click="patchClicked(patch)">
+                    <svg :class="$style.icon">
+                        <use xlink:href="#icon-play" v-if="!isPatchPlaying(patch)" />
+                        <use xlink:href="#icon-pause" v-if="isPatchPlaying(patch)" />
+                    </svg>
+                </span>
+                <span>{{ patch.name }}</span>
             </li>
         </ul>
     </main>
@@ -24,12 +31,38 @@
 </template>
 
 <style lang="scss" module>
+$icon-controls-dimensions: 40px;
+
 .main{
 	padding-bottom: 10em;
 }
 
 .coverPhoto {
     width: 300px;
+}
+
+.patch {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 0 0 1em;
+}
+
+.iconContainer {
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 2rem;
+    height: $icon-controls-dimensions;
+    width: $icon-controls-dimensions;
+
+    &:hover {
+        color: #666;
+    }
+}
+
+.icon {
+    max-height: 100%;
+    max-width: 100%;
 }
 </style>
 
@@ -41,6 +74,9 @@ export default {
     props: {
         packsMap: {
             type: Object,
+            required: true,
+        },
+        mediaId: {
             required: true,
         },
     },
@@ -57,11 +93,23 @@ export default {
         },
     },
     methods: {
+        patchId(patch){
+            return `${this.pack.id}-${patch.id}`;
+        },
+        isPatchPlaying(patch){
+            return this.patchId(patch) === this.mediaId;
+        },
         patchClicked(patch){
-            this.$emit('audioStart', {
-                url: `${AUDIO_PREVIEW_URL_PREFIX}${patch.previewUrl}`,
-                title: `${this.pack.title} - ${patch.name}`,
-            });
+            if(this.isPatchPlaying(patch)){
+                this.$emit('audioStop');
+            }
+            else {
+                this.$emit('audioStart', {
+                    url: `${AUDIO_PREVIEW_URL_PREFIX}${patch.previewUrl}`,
+                    title: `${this.pack.title} - ${patch.name}`,
+                    id: this.patchId(patch),
+                });
+            }
         },
     },
 };
