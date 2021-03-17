@@ -7,7 +7,7 @@ export const getPacks = () =>
             const pack = {
                 id: packRaw.id,
                 title: packRaw.title,
-                coverPhoto: packRaw.coverPhoto,
+                coverPhoto: `/images/pack-${packRaw.id}.webp`,
                 author: packRaw.authorDisplayName,
                 previewUrl: packRaw.audio?.audioPreviewKey,
                 description: packRaw.description,
