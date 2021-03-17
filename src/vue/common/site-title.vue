@@ -6,10 +6,7 @@
 
 <style lang="scss" module>
 .title{
-    margin-bottom: 0;
-    display: inline-block;
-    padding: 0.45em 1em;
-    padding-left: 0.5em;
+    margin: 1.5rem 0 0;
 
     a{
         color: #000;
