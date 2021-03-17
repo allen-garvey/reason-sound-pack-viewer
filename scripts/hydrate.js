@@ -32,7 +32,7 @@ Promise.all([
     .then(([res]) => Promise.all([res.json(), createImageCacheSet()]))
     .then(([packs, imageSet]) => {
         const promises = writePackImages(packs, imageSet);
-        promises.push(fs.promises.writeFile(path.join(OUTPUT_DIR, 'packs2.json'), JSON.stringify(packs)));
+        promises.push(fs.promises.writeFile(path.join(OUTPUT_DIR, 'packs.json'), JSON.stringify(packs)));
         
         return Promise.all(promises);
     });
