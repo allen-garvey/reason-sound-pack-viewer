@@ -20,7 +20,9 @@ const writePackImages = (packs, imageSet) => packs.map((pack) => {
     }
     return fetch(pack.coverPhoto)
         .then(res => res.buffer())
-        .then((data) => sharp(data).resize({width: IMAGE_DIMENSIONS, height: IMAGE_DIMENSIONS}).toFile(path.join(IMAGES_DIR, imageName)))
+        .then((data) => sharp(data)
+            .resize({width: IMAGE_DIMENSIONS, height: IMAGE_DIMENSIONS, quality: 85})
+            .toFile(path.join(IMAGES_DIR, imageName)))
 });
 
 Promise.all([
