@@ -5,9 +5,11 @@ const fetch = require('node-fetch');
 const OUTPUT_DIR = path.join(__dirname, '..', 'public_html');
 const IMAGES_DIR = path.join(__dirname, '..', 'public_html', 'images');
 
-fs.promises.mkdir(IMAGES_DIR, {recursive: true})
-    .then(() => fetch('https://nautilus.reasonstudios.com/pack/'))
-    .then(res => res.json())
+Promise.all([
+    fetch('https://nautilus.reasonstudios.com/pack/'),
+    fs.promises.mkdir(IMAGES_DIR, {recursive: true})
+])
+    .then(([res]) => res.json())
     .then((packs) => {
         fs.promises.writeFile(path.join(OUTPUT_DIR, 'packs2.json'), JSON.stringify(packs))
     });
