@@ -22,7 +22,8 @@ const writePackImages = (packs, imageSet) => packs.map((pack) => {
         .then(res => res.buffer())
         .then((data) => sharp(data)
             .resize({width: IMAGE_DIMENSIONS, height: IMAGE_DIMENSIONS, quality: 85})
-            .toFile(path.join(IMAGES_DIR, imageName)));
+            .toFile(path.join(IMAGES_DIR, imageName)))
+        .then(() => 1);
 });
 
 Promise.all([
@@ -35,4 +36,8 @@ Promise.all([
         promises.push(fs.promises.writeFile(path.join(OUTPUT_DIR, 'packs.json'), JSON.stringify(packs)));
         
         return Promise.all(promises);
+    })
+    .then((results) => {
+        const amountUpdated = results.reduce((total, currentValue) => currentValue === 1 ? total + currentValue : total, 0);
+        console.log(`${amountUpdated} pack cover${amountUpdated === 1 ? '' : 's'} downloaded`);
     });
