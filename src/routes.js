@@ -5,10 +5,10 @@ import PatchTagsShow from './vue/patch-tags/show/show.vue';
 
 export function getRoutes(){
     return [
-        {
-            path: '/',
+        { 
+            path: '/', 
             name: 'home',
-            component: PacksIndex,
+            redirect: '/packs' 
         },
         {
             path: '/packs',
