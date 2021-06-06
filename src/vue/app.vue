@@ -40,11 +40,15 @@ export default {
         audio.addEventListener('ended', () => {
             this.clearAudioDisplay();
         });
-        getPacks().then((packsMap) => this.packsMap = packsMap);
+        getPacks().then(({packsMap, patchTagsSet}) => {
+            this.packsMap = packsMap;
+            this.patchTagsSet = patchTagsSet;
+        });
     },
     data(){
         return {
             packsMap: null,
+            patchTagsSet: null,
             mediaTitle: '',
             mediaId: null,
             audioLoaded: false,

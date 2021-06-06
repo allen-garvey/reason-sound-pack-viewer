@@ -2,7 +2,8 @@ export const getPacks = () =>
     fetch('/packs.json')
     .then((res) => res.json())
     .then((packs) => {
-        const ret = {};
+        const packsMap = {};
+        const patchTagsSet = new Set();
         packs.forEach((packRaw) => {
             const pack = {
                 id: packRaw.id,
@@ -15,10 +16,16 @@ export const getPacks = () =>
                     id: patch.id,
                     name: patch.patchName,
                     previewUrl: patch.patchAudio?.audioPreviewKey,
+                    tags: patch.tagList.reduce((tagsSet, tag) => { 
+                        const tagName = tag.title;
+                        patchTagsSet.add(tagName);
+                        tagsSet.add(tagName);
+                        return tagsSet;
+                    }, new Set),
                 })),
             };
-            ret[pack.id] = pack;
+            packsMap[pack.id] = pack;
         });
 
-        return ret;
+        return {packsMap, patchTagsSet};
     });
