@@ -1,29 +1,17 @@
 <template>
-<div class="container">
-    <header class="header">
-        <site-title></site-title>
-    </header>
-    <main :class="$style['main']">
-        <patch-list 
-            :patches="patches"
-            :media-id="mediaId"
-            :parent-name="patchKey"
-            @audio-start="bubbleAudioStart"
-            @audio-stop="bubbleAudioStop"
-        />
-    </main>
-</div>
+<patch-list 
+    :patches="patches"
+    :media-id="mediaId"
+    :parent-name="patchKey"
+    @audio-start="bubbleAudioStart"
+    @audio-stop="bubbleAudioStop"
+/>
 </template>
 
 <style lang="scss" module>
-.main {
-    margin-top: 1.5rem;
-	padding-bottom: 10em;
-}
 </style>
 
 <script>
-import SiteTitle from '../../common/site-title.vue';
 import PatchList from '../../common/patch-list.vue';
 
 export default {
@@ -37,7 +25,6 @@ export default {
         },
     },
     components: {
-        SiteTitle,
         PatchList,
     },
     data(){

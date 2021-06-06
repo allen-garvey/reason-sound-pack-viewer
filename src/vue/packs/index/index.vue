@@ -1,29 +1,16 @@
 <template>
-<div class="container">
-    <header class="header">
-        <site-title></site-title>
-    </header>
-    <main :class="$style['main']">
-        <pack-list
-            :packs="packs"
-            :is-pack-playing="isPackPlaying"
-            @pack-clicked="packClicked"
-        >
-        </pack-list>
-    </main>
-</div>
+<pack-list
+    :packs="packs"
+    :is-pack-playing="isPackPlaying"
+    @pack-clicked="packClicked"
+/>
 </template>
 
 <style lang="scss" module>
-.main{
-    margin-top: 1.5rem;
-	padding-bottom: 10em;
-}
 </style>
 
 <script>
 import { AUDIO_PREVIEW_URL_PREFIX } from '../../../jukebox.js';
-import SiteTitle from '../../common/site-title.vue';
 import PackList from './pack-list.vue';
 
 export default {
@@ -37,7 +24,6 @@ export default {
         },
     },
     components: {
-        SiteTitle,
         PackList,
     },
     data(){

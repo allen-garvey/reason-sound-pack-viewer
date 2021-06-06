@@ -1,13 +1,22 @@
 <template>
 <div>
-    <router-view
-        :packs-map="packsMap"
-        :media-id="mediaId"
-        :patch-tags-set="patchTagsSet"
-        @audio-start="startAudio"
-        @audio-stop="stopAudio"
+    <div 
+        class="container"
         v-if="isFinishedLoading"
-    />
+    >
+        <header class="header">
+            <site-title></site-title>
+        </header>
+        <main :class="$style.main">
+            <router-view
+                :packs-map="packsMap"
+                :media-id="mediaId"
+                :patch-tags-set="patchTagsSet"
+                @audio-start="startAudio"
+                @audio-stop="stopAudio"
+            />
+        </main>
+    </div>
     <loading-indicator
         v-if="!isFinishedLoading"
      />
@@ -19,10 +28,15 @@
 </template>
 
 <style lang="scss" module>
+.main{
+    margin-top: 1.5rem;
+	padding-bottom: 10em;
+}
 </style>
 
 <script>
 import { getPacks } from '../ajax.js';
+import SiteTitle from './common/site-title.vue';
 import LoadingIndicator from './common/loading-indicator.vue';
 import MediaControls from './common/media-controls.vue';
 
@@ -30,6 +44,7 @@ let audio = null;
 
 export default {
     components: {
+        SiteTitle,
         LoadingIndicator,
         MediaControls,
     },
