@@ -1,13 +1,16 @@
 <template>
-<ul>
-    <li
-        v-for="tag in tags"
-        :key="tag"
-        :class="$style.item"
-    >
-        <router-link :to="{name: 'patchTagsShow', params: {id: tag}}">{{ tag }}</router-link>
-    </li>
-</ul>
+<div>
+    <h2>Patch Tags</h2>
+    <ul>
+        <li
+            v-for="tag in tags"
+            :key="tag"
+            :class="$style.item"
+        >
+            <router-link :to="{name: 'patchTagsShow', params: {id: tag}}">{{ tag }}</router-link>
+        </li>
+    </ul>
+</div>
 </template>
 
 <style lang="scss" module>
