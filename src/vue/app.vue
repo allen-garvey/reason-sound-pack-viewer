@@ -3,6 +3,7 @@
     <router-view
         :packs-map="packsMap"
         :media-id="mediaId"
+        :patch-tags-set="patchTagsSet"
         @audio-start="startAudio"
         @audio-stop="stopAudio"
         v-if="isFinishedLoading"
