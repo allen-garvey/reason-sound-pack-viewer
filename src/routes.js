@@ -5,6 +5,11 @@ export function getRoutes(){
     return [
         {
             path: '/',
+            name: 'home',
+            component: PacksIndex,
+        },
+        {
+            path: '/packs',
             name: 'packsIndex',
             component: PacksIndex,
         },
