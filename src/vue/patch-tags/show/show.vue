@@ -4,15 +4,13 @@
         <site-title></site-title>
     </header>
     <main :class="$style['main']">
-        <ul>
-            <li
-                v-for="patch in patches"
-                :key="patch.id"
-                :class="$style.item"
-            >
-                {{ patch.name }}
-            </li>
-        </ul>
+        <patch-list 
+            :patches="patches"
+            :media-id="mediaId"
+            :parent-name="patchKey"
+            @audio-start="bubbleAudioStart"
+            @audio-stop="bubbleAudioStop"
+        />
     </main>
 </div>
 </template>
@@ -22,14 +20,11 @@
     margin-top: 1.5rem;
 	padding-bottom: 10em;
 }
-
-.item {
-    margin: 0 0 1em;
-}
 </style>
 
 <script>
 import SiteTitle from '../../common/site-title.vue';
+import PatchList from '../../common/patch-list.vue';
 
 export default {
     props: {
@@ -43,20 +38,27 @@ export default {
     },
     components: {
         SiteTitle,
+        PatchList,
     },
     data(){
         return {
         };
     },
     computed: {
+        patchKey(){
+            return this.$route.params.id;
+        },
         patches(){
-            const patchKey = this.$route.params.id;
-
-            return Object.keys(this.packsMap).map((packKey) => this.packsMap[packKey].patches.filter(patch => patch.tags.has(patchKey))).flat();
+            return Object.keys(this.packsMap).map((packKey) => this.packsMap[packKey].patches.filter(patch => patch.tags.has(this.patchKey))).flat();
         },
     },
     methods: {
-
+        bubbleAudioStart(event){
+            this.$emit('audioStart', event);
+        },
+        bubbleAudioStop(event){
+            this.$emit('audioStop');
+        },
     },
 };
 </script>
