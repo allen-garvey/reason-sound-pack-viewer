@@ -11,7 +11,14 @@
                 <use xlink:href="#icon-pause" v-if="isPatchPlaying(patch)" />
             </svg>
         </span>
-        <span>{{ patch.name }}</span>
+        <span :class="$style.patchName">{{ patch.name }}</span>
+        <router-link 
+            :to="{name: 'packsShow', params: {id: getPack(patch).id}}"
+            :class="$style.packLink"
+            v-if="shouldShowPackLink"
+        >
+            {{ getPack(patch).title }}
+        </router-link>
     </li>
 </ul>
 </template>
@@ -42,6 +49,14 @@ $icon-controls-dimensions: 40px;
     max-height: 100%;
     max-width: 100%;
 }
+
+.patchName {
+    min-width: 13em;
+}
+
+.packLink {
+    margin-left: 2em;
+}
 </style>
 
 <script>
@@ -59,7 +74,11 @@ export default {
         getPack: {
             type: Function,
             required: true,
-        }
+        },
+        shouldShowPackLink: {
+            type: Boolean,
+            default: false,
+        },
     },
     methods: {
         patchId(patch){

@@ -3,6 +3,7 @@
     :patches="patches"
     :media-id="mediaId"
     :get-pack="getPackForPatch"
+    :should-show-pack-link="true"
     @audio-start="bubbleAudioStart"
     @audio-stop="bubbleAudioStop"
 />
