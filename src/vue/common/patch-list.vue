@@ -56,8 +56,9 @@ export default {
         mediaId: {
             required: true,
         },
-        parentName: {
-            type: String,
+        getPack: {
+            type: Function,
+            required: true,
         }
     },
     methods: {
@@ -74,7 +75,7 @@ export default {
             else {
                 this.$emit('audioStart', {
                     url: `${AUDIO_PREVIEW_URL_PREFIX}${patch.previewUrl}`,
-                    title: `${this.parentName} - ${patch.name}`,
+                    title: `${this.getPack(patch).title} - ${patch.name}`,
                     id: this.patchId(patch),
                 });
             }

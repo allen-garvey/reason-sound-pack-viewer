@@ -2,7 +2,7 @@
 <patch-list 
     :patches="patches"
     :media-id="mediaId"
-    :parent-name="patchKey"
+    :get-pack="getPackForPatch"
     @audio-start="bubbleAudioStart"
     @audio-stop="bubbleAudioStop"
 />
@@ -36,10 +36,22 @@ export default {
             return this.$route.params.id;
         },
         patches(){
-            return Object.keys(this.packsMap).map((packKey) => this.packsMap[packKey].patches.filter(patch => patch.tags.has(this.patchKey))).flat();
+            return Object.keys(this.packsMap)
+                .map((packKey) => {
+                    const pack = this.packsMap[packKey];
+                    return pack.patches
+                    .filter(patch => patch.tags.has(this.patchKey))
+                    .map(patch => {
+                        patch.packId = pack.id;
+                        return patch;
+                    })
+                }).flat();
         },
     },
     methods: {
+        getPackForPatch(patch){
+            return this.packsMap[patch.packId];
+        },
         bubbleAudioStart(event){
             this.$emit('audioStart', event);
         },

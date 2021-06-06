@@ -12,7 +12,7 @@
     <patch-list 
         :patches="pack.patches"
         :media-id="mediaId"
-        :parent-name="pack.title"
+        :get-pack="() => pack"
         @audio-start="bubbleAudioStart"
         @audio-stop="bubbleAudioStop"
     />
