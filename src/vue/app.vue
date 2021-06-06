@@ -18,6 +18,11 @@
                             :to="{name: 'patchTagsIndex'}"
                             :active-class="$style.navActive">Patch Tags</router-link>
                     </li>
+                    <li>
+                        <router-link
+                            :to="{name: 'creatorsIndex'}"
+                            :active-class="$style.navActive">Creators</router-link>
+                    </li>
                 </ul>
             </nav>
         </header>
