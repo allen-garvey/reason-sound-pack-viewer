@@ -1,6 +1,6 @@
 <template>
     <h1 :class="$style['title']">
-        <router-link to="/">{{ title }}</router-link>
+        <router-link :to="{name: 'packsIndex'}">{{ title }}</router-link>
     </h1>
 </template>
 

@@ -22,8 +22,8 @@
 </style>
 
 <script>
-import { AUDIO_PREVIEW_URL_PREFIX } from '../../jukebox.js';
-import SiteTitle from '../common/site-title.vue';
+import { AUDIO_PREVIEW_URL_PREFIX } from '../../../jukebox.js';
+import SiteTitle from '../../common/site-title.vue';
 import PackList from './pack-list.vue';
 
 export default {

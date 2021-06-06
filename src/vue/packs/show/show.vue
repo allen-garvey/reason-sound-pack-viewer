@@ -71,9 +71,9 @@ $cover-image-dimensions: 300px;
 </style>
 
 <script>
-import { AUDIO_PREVIEW_URL_PREFIX } from '../../jukebox.js';
-import SiteTitle from '../common/site-title.vue';
-import CoverImage from '../common/cover-image.vue';
+import { AUDIO_PREVIEW_URL_PREFIX } from '../../../jukebox.js';
+import SiteTitle from '../../common/site-title.vue';
+import CoverImage from '../../common/cover-image.vue';
 
 export default {
     props: {

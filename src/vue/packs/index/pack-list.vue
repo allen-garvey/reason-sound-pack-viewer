@@ -13,7 +13,7 @@
                     @controls-clicked="packClicked(pack)"
                  />
                 <div :class="$style.packTitle">
-                    <router-link :to="{name: 'show', params: {id: pack.id}}">{{ pack.title }}</router-link>
+                    <router-link :to="{name: 'packsShow', params: {id: pack.id}}">{{ pack.title }}</router-link>
                 </div>
             </li>
         </ul>
@@ -47,7 +47,7 @@
     }
 </style>
 <script>
-import CoverImage from '../common/cover-image.vue';
+import CoverImage from '../../common/cover-image.vue';
 
 export default {
     props: {

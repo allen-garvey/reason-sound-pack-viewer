@@ -1,16 +1,17 @@
-import HomePage from './vue/homepage/index.vue';
-import ShowPage from './vue/showpage/show.vue';
+import PacksIndex from './vue/packs/index/index.vue';
+import PacksShow from './vue/packs/show/show.vue';
 
 export function getRoutes(){
     return [
         {
             path: '/',
-            component: HomePage,
+            name: 'packsIndex',
+            component: PacksIndex,
         },
         {
             path: '/pack/:id',
-            name: 'show',
-            component: ShowPage,
+            name: 'packsShow',
+            component: PacksShow,
         },
     ];
 }
