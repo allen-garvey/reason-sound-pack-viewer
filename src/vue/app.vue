@@ -6,6 +6,20 @@
     >
         <header class="header">
             <site-title></site-title>
+            <nav :class="$style.nav">
+                <ul :class="$style.navList">
+                    <li>
+                        <router-link
+                            :to="{name: 'packsIndex'}"
+                            :active-class="$style.navActive">Packs</router-link>
+                    </li>
+                    <li>
+                        <router-link
+                            :to="{name: 'patchTagsIndex'}"
+                            :active-class="$style.navActive">Patch Tags</router-link>
+                    </li>
+                </ul>
+            </nav>
         </header>
         <main :class="$style.main">
             <router-view
@@ -28,9 +42,25 @@
 </template>
 
 <style lang="scss" module>
-.main{
+.main {
     margin-top: 1.5rem;
 	padding-bottom: 10em;
+}
+
+.nav {
+    margin-top: 0.5em;
+}
+
+.navList {
+    display: flex;
+
+    li + li {
+        margin-left: 1em;
+    }
+}
+
+.navActive {
+    color: red;
 }
 </style>
 
