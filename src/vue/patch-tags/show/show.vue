@@ -1,15 +1,23 @@
 <template>
-<patch-list 
-    :patches="patches"
-    :media-id="mediaId"
-    :get-pack="getPackForPatch"
-    :should-show-pack-link="true"
-    @audio-start="bubbleAudioStart"
-    @audio-stop="bubbleAudioStop"
-/>
+<div>
+    <h2>{{ patchKey }} <span :class="$style.patchCount">({{ patches.length }})</span></h2>
+    <patch-list 
+        :patches="patches"
+        :media-id="mediaId"
+        :get-pack="getPackForPatch"
+        :should-show-pack-link="true"
+        @audio-start="bubbleAudioStart"
+        @audio-stop="bubbleAudioStop"
+    />
+</div>
 </template>
 
 <style lang="scss" module>
+.patchCount {
+    font-size: 0.57em;
+    vertical-align: super;
+}
+
 </style>
 
 <script>
