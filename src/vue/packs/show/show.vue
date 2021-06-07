@@ -59,15 +59,15 @@ export default {
         }
     },
     methods: {
-        patchClicked(patch){
-            if(this.isPatchPlaying(patch)){
+        packClicked(pack){
+            if(this.isPackPlaying){
                 this.$emit('audioStop');
             }
             else {
                 this.$emit('audioStart', {
-                    url: `${AUDIO_PREVIEW_URL_PREFIX}${patch.previewUrl}`,
-                    title: `${this.pack.title} - ${patch.name}`,
-                    id: this.patchId(patch),
+                    url: `${AUDIO_PREVIEW_URL_PREFIX}${this.pack.previewUrl}`,
+                    title: this.pack.title,
+                    id: this.pack.id,
                 });
             }
         },
