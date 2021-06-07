@@ -7,7 +7,11 @@
             :key="creator"
             :class="$style.item"
         >
-            {{ creator }}
+            <router-link
+                :to="{name: 'creatorsShow', params: {id: creator}}"
+            >
+                {{ creator }}
+            </router-link>
         </li>
     </ul>
 </div>

@@ -15,6 +15,16 @@ export function getRoutes(){
             path: '/packs',
             name: 'packsIndex',
             component: PacksIndex,
+            props: (route) => {
+                const props = {
+                    title: 'Packs',
+                    packsFilter(packs){
+                        return packs;
+                    }
+                };
+
+                return props;
+            },
         },
         {
             path: '/pack/:id',
@@ -35,6 +45,21 @@ export function getRoutes(){
             path: '/creators',
             name: 'creatorsIndex',
             component: CreatorsIndex,
+        },
+        {
+            path: '/creators/:id',
+            name: 'creatorsShow',
+            component: PacksIndex,
+            props: (route) => {
+                const props = {
+                    title: route.params.id,
+                    packsFilter(packs){
+                        return packs.filter((pack) => pack.author === route.params.id);
+                    }
+                };
+
+                return props;
+            },
         },
     ];
 }

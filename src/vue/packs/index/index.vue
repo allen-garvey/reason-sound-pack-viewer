@@ -1,9 +1,12 @@
 <template>
-<pack-list
-    :packs="packs"
-    :is-pack-playing="isPackPlaying"
-    @pack-clicked="packClicked"
-/>
+<div>
+    <h2>{{ title }}</h2>
+    <pack-list
+        :packs="packs"
+        :is-pack-playing="isPackPlaying"
+        @pack-clicked="packClicked"
+    />
+</div>
 </template>
 
 <style lang="scss" module>
@@ -23,6 +26,14 @@ export default {
         mediaId: {
             required: true,
         },
+        packsFilter: {
+            type: Function,
+            required: true,
+        },
+        title: {
+            type: String,
+            required: true,
+        },
     },
     components: {
         PackList,
@@ -33,7 +44,7 @@ export default {
     },
     computed: {
         packs(){
-            return enumeratePacks(this.packsMap).reverse();
+            return this.packsFilter(enumeratePacks(this.packsMap)).reverse();
         },
     },
     methods: {
