@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h2>{{ title }}</h2>
+    <h2>{{ title }} <span :class="$style.packCount">({{ packs.length }})</span></h2>
     <pack-list
         :packs="packs"
         :is-pack-playing="isPackPlaying"
@@ -10,6 +10,10 @@
 </template>
 
 <style lang="scss" module>
+.packCount {
+    font-size: 0.57em;
+    vertical-align: super;
+}
 </style>
 
 <script>
