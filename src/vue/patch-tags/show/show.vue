@@ -21,6 +21,7 @@
 </style>
 
 <script>
+import bubbleAudioEventsMixinBuilder from '../../mixins/bubble-audio-events';
 import PatchList from '../../common/patch-list.vue';
 
 export default {
@@ -36,6 +37,7 @@ export default {
     components: {
         PatchList,
     },
+    mixins: [bubbleAudioEventsMixinBuilder()],
     data(){
         return {
         };
@@ -60,12 +62,6 @@ export default {
     methods: {
         getPackForPatch(patch){
             return this.packsMap[patch.packId];
-        },
-        bubbleAudioStart(event){
-            this.$emit('audioStart', event);
-        },
-        bubbleAudioStop(event){
-            this.$emit('audioStop');
         },
     },
 };

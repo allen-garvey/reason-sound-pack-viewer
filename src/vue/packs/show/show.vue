@@ -31,6 +31,7 @@ $cover-image-dimensions: 300px;
 
 <script>
 import { AUDIO_PREVIEW_URL_PREFIX } from '../../../jukebox.js';
+import bubbleAudioEventsMixinBuilder from '../../mixins/bubble-audio-events';
 import CoverImage from '../../common/cover-image.vue';
 import PatchList from '../../common/patch-list.vue';
 
@@ -48,6 +49,7 @@ export default {
         CoverImage,
         PatchList,
     },
+    mixins: [bubbleAudioEventsMixinBuilder()],
     computed: {
         pack(){
             return this.packsMap[this.$route.params.id];
@@ -68,12 +70,6 @@ export default {
                     id: this.patchId(patch),
                 });
             }
-        },
-        bubbleAudioStart(event){
-            this.$emit('audioStart', event);
-        },
-        bubbleAudioStop(event){
-            this.$emit('audioStop');
         },
     },
 };
