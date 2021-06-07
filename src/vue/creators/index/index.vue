@@ -20,6 +20,8 @@
 </style>
 
 <script>
+import { enumeratePacks } from '../../../model-helpers';
+
 export default {
     props: {
         packsMap: {
@@ -31,11 +33,10 @@ export default {
         creators(){
             const creatorsSet = new Set();
 
-            Object.keys(this.packsMap)
-                .forEach((packKey) => {
-                    const pack = this.packsMap[packKey];
-                    creatorsSet.add(pack.author);
+            enumeratePacks(this.packsMap).forEach((pack) => {
+                creatorsSet.add(pack.author);
             });
+
             return Array.from(creatorsSet.entries()).map(([key, dupKey]) => key).sort();
         },
     },

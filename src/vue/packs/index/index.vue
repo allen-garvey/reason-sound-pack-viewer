@@ -11,6 +11,7 @@
 
 <script>
 import { AUDIO_PREVIEW_URL_PREFIX } from '../../../jukebox.js';
+import { enumeratePacks } from '../../../model-helpers';
 import PackList from './pack-list.vue';
 
 export default {
@@ -32,7 +33,7 @@ export default {
     },
     computed: {
         packs(){
-            return Object.keys(this.packsMap).reverse().map((key) => this.packsMap[key]);
+            return enumeratePacks(this.packsMap).reverse();
         },
     },
     methods: {
