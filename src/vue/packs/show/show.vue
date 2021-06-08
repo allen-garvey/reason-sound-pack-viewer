@@ -9,6 +9,15 @@
     />
     <p>{{ pack.author }}</p>
     <p>{{ pack.description }}</p>
+    <ul :class="$style.tagsList">
+        <li><h4 :class="$style.tagsHeading">Tags:</h4></li>
+        <li
+            v-for="tag in tags"
+            :key="tag"
+        >
+            <router-link :to="{name: 'packTagsShow', params: {id: tag}}">{{ tag }}</router-link>
+        </li>
+    </ul>
     <patch-list 
         :patches="pack.patches"
         :media-id="mediaId"
@@ -25,6 +34,19 @@ $cover-image-dimensions: 300px;
 .coverImageContainer {
     height: $cover-image-dimensions;
     width: $cover-image-dimensions;
+}
+
+.tagsHeading {
+    margin: 0;
+}
+
+.tagsList {
+    display: flex;
+    margin: 0 0 2em;
+
+    li + li {
+        margin-left: 1em;
+    }
 }
 
 </style>
@@ -56,7 +78,10 @@ export default {
         },
         isPackPlaying(){
             return this.pack.id === this.mediaId;
-        }
+        },
+        tags(){
+            return Array.from(this.pack.tags.entries()).map(([key, dup]) => key).sort();
+        },
     },
     methods: {
         packClicked(pack){
