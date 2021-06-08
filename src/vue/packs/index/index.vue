@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h2>{{ title }} <span :class="$style.packCount">({{ packs.length }})</span></h2>
+    <h2>{{ title }} <items-count :count="packs.length" /></h2>
     <pack-list
         :packs="packs"
         :is-pack-playing="isPackPlaying"
@@ -10,16 +10,14 @@
 </template>
 
 <style lang="scss" module>
-.packCount {
-    font-size: 0.57em;
-    vertical-align: super;
-}
+
 </style>
 
 <script>
 import { AUDIO_PREVIEW_URL_PREFIX } from '../../../jukebox.js';
 import { enumeratePacks } from '../../../model-helpers';
 import PackList from './pack-list.vue';
+import ItemsCount from '../../common/items-count.vue';
 
 export default {
     props: {
@@ -41,6 +39,7 @@ export default {
     },
     components: {
         PackList,
+        ItemsCount,
     },
     data(){
         return {

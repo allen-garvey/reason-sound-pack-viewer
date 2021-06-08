@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h2>{{ patchKey }} <span :class="$style.patchCount">({{ patches.length }})</span></h2>
+    <h2>{{ patchKey }} <items-count :count="patches.length" /></h2>
     <patch-list 
         :patches="patches"
         :media-id="mediaId"
@@ -13,16 +13,13 @@
 </template>
 
 <style lang="scss" module>
-.patchCount {
-    font-size: 0.57em;
-    vertical-align: super;
-}
 
 </style>
 
 <script>
 import bubbleAudioEventsMixinBuilder from '../../mixins/bubble-audio-events';
 import PatchList from '../../common/patch-list.vue';
+import ItemsCount from '../../common/items-count.vue';
 
 export default {
     props: {
@@ -36,6 +33,7 @@ export default {
     },
     components: {
         PatchList,
+        ItemsCount,
     },
     mixins: [bubbleAudioEventsMixinBuilder()],
     data(){
