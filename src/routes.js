@@ -75,7 +75,9 @@ export function getRoutes(){
                 const props = {
                     title: route.params.id,
                     packsFilter(packs){
-                        return packs.filter((pack) => pack.tags.has(route.params.id));
+                        return packs.filter((pack) => pack.tags.has(route.params.id)).sort((packA, packB) => {
+                            return packA.title > packB.title ? -1 : 1;
+                        });
                     }
                 };
 
