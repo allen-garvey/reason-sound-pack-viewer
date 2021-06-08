@@ -30,6 +30,7 @@
     .packList {
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-between;
     }
     
     .pack {
