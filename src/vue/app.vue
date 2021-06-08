@@ -15,6 +15,11 @@
                     </li>
                     <li>
                         <router-link
+                            :to="{name: 'packTagsIndex'}"
+                            :active-class="$style.navActive">Pack Tags</router-link>
+                    </li>
+                    <li>
+                        <router-link
                             :to="{name: 'patchTagsIndex'}"
                             :active-class="$style.navActive">Patch Tags</router-link>
                     </li>
@@ -31,6 +36,7 @@
                 :packs-map="packsMap"
                 :media-id="mediaId"
                 :patch-tags-set="patchTagsSet"
+                :pack-tags-set="packTagsSet"
                 @audio-start="startAudio"
                 @audio-stop="stopAudio"
             />
@@ -91,14 +97,16 @@ export default {
         audio.addEventListener('ended', () => {
             this.clearAudioDisplay();
         });
-        getPacks().then(({packsMap, patchTagsSet}) => {
+        getPacks().then(({packsMap, packTagsSet, patchTagsSet}) => {
             this.packsMap = packsMap;
+            this.packTagsSet = packTagsSet;
             this.patchTagsSet = patchTagsSet;
         });
     },
     data(){
         return {
             packsMap: null,
+            packTagsSet: null,
             patchTagsSet: null,
             mediaTitle: '',
             mediaId: null,

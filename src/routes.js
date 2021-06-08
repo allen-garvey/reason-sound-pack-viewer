@@ -3,6 +3,7 @@ import PacksShow from './vue/packs/show/show.vue';
 import PatchTagsIndex from './vue/patch-tags/index/index.vue';
 import PatchTagsShow from './vue/patch-tags/show/show.vue';
 import CreatorsIndex from './vue/creators/index/index.vue';
+import PackTagsIndex from './vue/pack-tags/index/index.vue';
 
 export function getRoutes(){
     return [
@@ -55,6 +56,26 @@ export function getRoutes(){
                     title: route.params.id,
                     packsFilter(packs){
                         return packs.filter((pack) => pack.author === route.params.id);
+                    }
+                };
+
+                return props;
+            },
+        },
+        {
+            path: '/pack-tags',
+            name: 'packTagsIndex',
+            component: PackTagsIndex,
+        },
+        {
+            path: '/pack-tags/:id',
+            name: 'packTagsShow',
+            component: PacksIndex,
+            props: (route) => {
+                const props = {
+                    title: route.params.id,
+                    packsFilter(packs){
+                        return packs.filter((pack) => pack.tags.has(route.params.id));
                     }
                 };
 
