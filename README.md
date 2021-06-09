@@ -21,6 +21,10 @@ Preview all Reason+ sound packs in your browser.
 
 This project is in no way associated with Reason Studios
 
+## Attribution
+
+Icons are from [Feather Icons](https://feathericons.com/)
+
 ## License
 
 Reason Sound Pack Viewer is released under the MIT License. See license.txt for more details.
