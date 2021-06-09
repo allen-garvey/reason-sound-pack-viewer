@@ -5,10 +5,20 @@
         :key="patch.id"
         :class="$style.patch"
     >
-        <span :class="$style.iconContainer" @click="patchClicked(patch)">
-            <svg :class="$style.icon">
-                <use xlink:href="#icon-play" v-if="!isPatchPlaying(patch)" />
-                <use xlink:href="#icon-pause" v-if="isPatchPlaying(patch)" />
+        <span :class="$style.iconContainer">
+            <svg 
+                :class="[$style.icon, patchHasAudioPreview(patch) && $style.enabledIcon]"
+                @click="patchClicked(patch)"
+            >
+                <use 
+                    xlink:href="#icon-play"
+                    v-if="!isPatchPlaying(patch) && patchHasAudioPreview(patch)" />
+                <use 
+                    xlink:href="#icon-pause"
+                    v-if="isPatchPlaying(patch)" />
+                <use 
+                    xlink:href="#icon-x"
+                    v-if="!patchHasAudioPreview(patch)" />
             </svg>
         </span>
         <span :class="$style.patchName">{{ patch.name }}</span>
@@ -34,20 +44,25 @@ $icon-controls-dimensions: 40px;
 }
 
 .iconContainer {
-    cursor: pointer;
     display: inline-block;
     margin-right: 2rem;
     height: $icon-controls-dimensions;
     width: $icon-controls-dimensions;
-
-    &:hover {
-        color: #666;
-    }
 }
 
 .icon {
     max-height: 100%;
     max-width: 100%;
+    opacity: 0.3;
+
+    &.enabledIcon {
+        cursor: pointer;
+        opacity: 1;
+        
+        &:hover {
+            color: #666;
+        }
+    }
 }
 
 .patchName {
@@ -84,10 +99,16 @@ export default {
         patchId(patch){
             return patch.id;
         },
+        patchHasAudioPreview(patch){
+            return !!patch.previewUrl;
+        },
         isPatchPlaying(patch){
             return this.patchId(patch) === this.mediaId;
         },
         patchClicked(patch){
+            if(!this.patchHasAudioPreview(patch)){
+                return;
+            }
             if(this.isPatchPlaying(patch)){
                 this.$emit('audioStop');
             }
