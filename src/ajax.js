@@ -1,9 +1,9 @@
-const fillTagsSet = (set, tags) => {
-    return tags.reduce((tagsSet, tag) => { 
-        const tagName = tag.title;
-        set.add(tagName);
-        tagsSet.add(tagName);
-        return tagsSet;
+const fillSet = (masterSet, items, key='title') => {
+    return items.reduce((localSet, item) => { 
+        const itemName = item[key] || item;
+        masterSet.add(itemName);
+        localSet.add(itemName);
+        return localSet;
     }, new Set);
 };
 
@@ -14,6 +14,7 @@ export const getPacks = () =>
         const packsMap = {};
         const packTagsSet = new Set();
         const patchTagsSet = new Set();
+        const patchDevicesSet = new Set();
         packs.forEach((packRaw) => {
             const pack = {
                 id: packRaw.id,
@@ -22,16 +23,20 @@ export const getPacks = () =>
                 author: packRaw.authorDisplayName,
                 previewUrl: packRaw.audio?.audioPreviewKey,
                 description: packRaw.description,
-                tags: fillTagsSet(packTagsSet, packRaw.tagList),
-                patches: packRaw.patchList.map((patch) => ({
-                    id: patch.id,
-                    name: patch.patchName,
-                    previewUrl: patch.patchAudio?.audioPreviewKey,
-                    tags: fillTagsSet(patchTagsSet, patch.tagList),
-                })),
+                tags: fillSet(packTagsSet, packRaw.tagList),
+                patches: packRaw.patchList.map((patch) => {
+                    const devices = patch.data.devices.rackExtensions || patch.data.devices.builtin || [];
+                    return {
+                        id: patch.id,
+                        name: patch.patchName,
+                        previewUrl: patch.patchAudio?.audioPreviewKey,
+                        tags: fillSet(patchTagsSet, patch.tagList),
+                        devices: fillSet(patchDevicesSet, devices, 'name'),
+                    }
+                }),
             };
             packsMap[pack.id] = pack;
         });
 
-        return {packsMap, packTagsSet, patchTagsSet};
+        return {packsMap, packTagsSet, patchTagsSet, patchDevicesSet};
     });

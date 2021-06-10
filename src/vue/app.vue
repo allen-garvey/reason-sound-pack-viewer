@@ -37,6 +37,7 @@
                 :media-id="mediaId"
                 :patch-tags-set="patchTagsSet"
                 :pack-tags-set="packTagsSet"
+                :patch-devices-set="patchDevicesSet"
                 @audio-start="startAudio"
                 @audio-stop="stopAudio"
             />
@@ -97,10 +98,11 @@ export default {
         audio.addEventListener('ended', () => {
             this.clearAudioDisplay();
         });
-        getPacks().then(({packsMap, packTagsSet, patchTagsSet}) => {
+        getPacks().then(({packsMap, packTagsSet, patchTagsSet, patchDevicesSet}) => {
             this.packsMap = packsMap;
             this.packTagsSet = packTagsSet;
             this.patchTagsSet = patchTagsSet;
+            this.patchDevicesSet = patchDevicesSet;
         });
     },
     data(){
@@ -108,6 +110,7 @@ export default {
             packsMap: null,
             packTagsSet: null,
             patchTagsSet: null,
+            patchDevicesSet: null,
             mediaTitle: '',
             mediaId: null,
             audioLoaded: false,

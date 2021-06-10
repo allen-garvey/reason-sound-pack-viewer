@@ -21,14 +21,27 @@
                     v-if="!patchHasAudioPreview(patch)" />
             </svg>
         </span>
-        <span :class="$style.patchName">{{ patch.name }}</span>
-        <router-link 
-            :to="{name: 'packsShow', params: {id: getPack(patch).id}}"
-            :class="$style.packLink"
-            v-if="shouldShowPackLink"
-        >
-            {{ getPack(patch).title }}
-        </router-link>
+        <div>
+            <div>
+                <span :class="$style.patchName">{{ patch.name }}</span>
+                <router-link 
+                    :to="{name: 'packsShow', params: {id: getPack(patch).id}}"
+                    :class="$style.packLink"
+                    v-if="shouldShowPackLink"
+                >
+                    {{ getPack(patch).title }}
+                </router-link>
+            </div>
+            <ul :class="$style.deviceList">
+                <li
+                    v-for="device of patch.devices"
+                    :key="device"
+                    :class="$style.device"
+                >
+                    {{ device }}
+                </li>
+            </ul>
+        </div>
     </li>
 </ul>
 </template>
@@ -71,6 +84,17 @@ $icon-controls-dimensions: 40px;
 
 .packLink {
     margin-left: 2em;
+}
+
+.deviceList {
+    display: flex;
+    flex-wrap: wrap;
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.device {
+    margin-right: 1em;
 }
 </style>
 
