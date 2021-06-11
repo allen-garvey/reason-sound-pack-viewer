@@ -3,6 +3,7 @@ import PacksShow from './vue/packs/show/show.vue';
 import CreatorsIndex from './vue/creators/index/index.vue';
 import TextListPage from './vue/common/text-list-page.vue';
 import PatchListPage from './vue/common/patch-list-page.vue';
+import { enumeratePacks } from './model-helpers';
 
 export function getRoutes(){
     return [
@@ -135,7 +136,31 @@ export function getRoutes(){
                     getItems(){
                         return Array.from(this.patchDevicesSet.entries()).map(([key, dupKey]) => key).sort();
                     },
-                    itemRouteName: 'patchTagsShow'
+                    itemRouteName: 'devicesShow'
+                };
+
+                return props;
+            },
+        },
+        {
+            path: '/devices/:id',
+            name: 'devicesShow',
+            component: PatchListPage,
+            props: (route) => {
+                const props = {
+                    title: route.params.id,
+                    getPatches(){
+                        const deviceKey = route.params.id;
+
+                        return enumeratePacks(this.packsMap).map((pack) => 
+                            pack.patches
+                                .filter(patch => patch.devices.has(deviceKey))
+                                .map(patch => {
+                                    patch.packId = pack.id;
+                                    return patch;
+                                })
+                        ).flat();
+                    },
                 };
 
                 return props;
