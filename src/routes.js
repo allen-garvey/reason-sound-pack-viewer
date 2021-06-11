@@ -57,16 +57,15 @@ export function getRoutes(){
                     title: route.params.id,
                     getPatches(){
                         const patchKey = route.params.id;
-                        return Object.keys(this.packsMap)
-                            .map((packKey) => {
-                                const pack = this.packsMap[packKey];
-                                return pack.patches
-                                    .filter(patch => patch.tags.has(patchKey))
-                                    .map(patch => {
-                                        patch.packId = pack.id;
-                                        return patch;
-                                    });
-                            }).flat();
+
+                        return enumeratePacks(this.packsMap).map((pack) => 
+                            pack.patches
+                                .filter(patch => patch.tags.has(patchKey))
+                                .map(patch => {
+                                    patch.packId = pack.id;
+                                    return patch;
+                                })
+                        ).flat();
                     },
                 };
 
