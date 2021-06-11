@@ -1,9 +1,8 @@
 import PacksIndex from './vue/packs/index/index.vue';
 import PacksShow from './vue/packs/show/show.vue';
-import PatchTagsIndex from './vue/patch-tags/index/index.vue';
 import PatchTagsShow from './vue/patch-tags/show/show.vue';
 import CreatorsIndex from './vue/creators/index/index.vue';
-import PackTagsIndex from './vue/pack-tags/index/index.vue';
+import TextListPage from './vue/common/text-list-page.vue';
 
 export function getRoutes(){
     return [
@@ -35,7 +34,18 @@ export function getRoutes(){
         {
             path: '/patch-tags',
             name: 'patchTagsIndex',
-            component: PatchTagsIndex,
+            component: TextListPage,
+            props: (route) => {
+                const props = {
+                    title: 'Patch Tags',
+                    getItems(){
+                        return Array.from(this.patchTagsSet.entries()).map(([key, dupKey]) => key).sort();
+                    },
+                    itemRouteName: 'patchTagsShow'
+                };
+
+                return props;
+            },
         },
         {
             path: '/patch-tags/:id',
@@ -65,7 +75,18 @@ export function getRoutes(){
         {
             path: '/pack-tags',
             name: 'packTagsIndex',
-            component: PackTagsIndex,
+            component: TextListPage,
+            props: (route) => {
+                const props = {
+                    title: 'Pack Tags',
+                    getItems(){
+                        return Array.from(this.packTagsSet.entries()).map(([key, dupKey]) => key).sort();
+                    },
+                    itemRouteName: 'packTagsShow'
+                };
+
+                return props;
+            },
         },
         {
             path: '/pack-tags/:id',
