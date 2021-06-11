@@ -28,6 +28,11 @@
                             :to="{name: 'creatorsIndex'}"
                             :active-class="$style.navActive">Creators</router-link>
                     </li>
+                    <li>
+                        <router-link
+                            :to="{name: 'devicesIndex'}"
+                            :active-class="$style.navActive">Devices</router-link>
+                    </li>
                 </ul>
             </nav>
         </header>

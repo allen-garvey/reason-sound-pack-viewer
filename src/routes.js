@@ -105,5 +105,21 @@ export function getRoutes(){
                 return props;
             },
         },
+        {
+            path: '/devices',
+            name: 'devicesIndex',
+            component: TextListPage,
+            props: (route) => {
+                const props = {
+                    title: 'Devices',
+                    getItems(){
+                        return Array.from(this.patchDevicesSet.entries()).map(([key, dupKey]) => key).sort();
+                    },
+                    itemRouteName: 'patchTagsShow'
+                };
+
+                return props;
+            },
+        },
     ];
 }

@@ -31,6 +31,10 @@ export default {
             type: Set,
             required: true,
         },
+        patchDevicesSet: {
+            type: Set,
+            required: true,
+        },
         // From route
         title: {
             type: String,
