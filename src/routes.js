@@ -1,8 +1,8 @@
 import PacksIndex from './vue/packs/index/index.vue';
 import PacksShow from './vue/packs/show/show.vue';
-import PatchTagsShow from './vue/patch-tags/show/show.vue';
 import CreatorsIndex from './vue/creators/index/index.vue';
 import TextListPage from './vue/common/text-list-page.vue';
+import PatchListPage from './vue/common/patch-list-page.vue';
 
 export function getRoutes(){
     return [
@@ -50,7 +50,27 @@ export function getRoutes(){
         {
             path: '/patch-tags/:id',
             name: 'patchTagsShow',
-            component: PatchTagsShow,
+            component: PatchListPage,
+            props: (route) => {
+                const props = {
+                    title: route.params.id,
+                    getPatches(){
+                        const patchKey = route.params.id;
+                        return Object.keys(this.packsMap)
+                            .map((packKey) => {
+                                const pack = this.packsMap[packKey];
+                                return pack.patches
+                                    .filter(patch => patch.tags.has(patchKey))
+                                    .map(patch => {
+                                        patch.packId = pack.id;
+                                        return patch;
+                                    });
+                            }).flat();
+                    },
+                };
+
+                return props;
+            },
         },
         {
             path: '/creators',
