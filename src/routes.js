@@ -1,6 +1,5 @@
 import PacksIndex from './vue/packs/index/index.vue';
 import PacksShow from './vue/packs/show/show.vue';
-import CreatorsIndex from './vue/creators/index/index.vue';
 import TextListPage from './vue/common/text-list-page.vue';
 import PatchListPage from './vue/common/patch-list-page.vue';
 import { enumeratePacks } from './model-helpers';
@@ -75,7 +74,22 @@ export function getRoutes(){
         {
             path: '/creators',
             name: 'creatorsIndex',
-            component: CreatorsIndex,
+            component: TextListPage,
+            props: (route) => {
+                const props = {
+                    title: 'Creators',
+                    getItems(){
+                        const creatorsSet = new Set();
+                        enumeratePacks(this.packsMap).forEach((pack) => {
+                            creatorsSet.add(pack.author);
+                        });
+                        return Array.from(creatorsSet.entries()).map(([key, dupKey]) => key).sort();
+                    },
+                    itemRouteName: 'creatorsShow'
+                };
+
+                return props;
+            },
         },
         {
             path: '/creators/:id',

@@ -23,6 +23,10 @@
 export default {
     props: {
         // From app.vue
+        packsMap: {
+            type: Object,
+            required: true,
+        },
         patchTagsSet: {
             type: Set,
             required: true,
