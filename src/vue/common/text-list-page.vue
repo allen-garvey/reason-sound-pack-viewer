@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h2>{{ title }}</h2>
+    <h2>{{ title }} <items-count :count="getItems().length" /></h2>
     <ul>
         <li
             v-for="item in getItems()"
@@ -20,6 +20,8 @@
 </style>
 
 <script>
+import ItemsCount from './items-count.vue';
+
 export default {
     props: {
         // From app.vue
@@ -52,6 +54,9 @@ export default {
             type: Function,
             required: true,
         },
+    },
+    components: {
+        ItemsCount,
     },
 };
 </script>
