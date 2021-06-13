@@ -9,11 +9,15 @@
                 <use xlink:href="#icon-pause" v-if="isPlaying" />
             </svg>
         </div>
-        <img 
-            :src="src" 
-            :class="$style.coverPhoto" 
-            loading="lazy" 
-        />
+        <picture>
+            <source :srcset="src.webp" type="image/webp" />
+            <source :srcset="src.png" type="image/png" />
+            <img 
+                :src="src.png" 
+                :class="$style.coverPhoto" 
+                loading="lazy" 
+            />
+        </picture>
     </div>
 </template>
 
@@ -63,7 +67,7 @@
 export default {
     props: {
         src: {
-            type: String,
+            type: Object,
             required: true,
         },
         isPlaying: {

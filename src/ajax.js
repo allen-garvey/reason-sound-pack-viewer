@@ -21,7 +21,10 @@ export const getPacks = () =>
             const pack = {
                 id: packRaw.id,
                 title: packRaw.title,
-                coverPhoto: `/images/pack-${packRaw.id}.webp`,
+                coverPhoto: {
+                    webp: `/images/pack-${packRaw.id}.webp`,
+                    png: packRaw.coverPhoto,
+                },
                 author: packRaw.authorDisplayName,
                 previewUrl: packRaw.audio?.audioPreviewKey,
                 description: packRaw.description,
