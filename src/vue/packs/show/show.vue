@@ -9,6 +9,10 @@
     />
     <p>{{ pack.author }}</p>
     <p>{{ pack.description }}</p>
+    <dl>
+        <dt>Size:</dt>
+        <dd>{{ packSize }}</dd>
+    </dl>
     <ul :class="$style.tagsList">
         <li><h4 :class="$style.tagsHeading">Tags:</h4></li>
         <li
@@ -38,6 +42,13 @@ $cover-image-dimensions: 300px;
 
 .tagsHeading {
     margin: 0;
+}
+
+dl {
+    display: flex;
+    dd {
+        margin-left: 1.35em;
+    }
 }
 
 .tagsList {
@@ -81,6 +92,9 @@ export default {
         },
         tags(){
             return Array.from(this.pack.tags.entries()).map(([key, dup]) => key).sort();
+        },
+        packSize(){
+            return `${(this.pack.size / 1000000).toFixed(2)} MB`;
         },
     },
     methods: {

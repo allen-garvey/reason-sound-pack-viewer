@@ -28,6 +28,7 @@ export const getPacks = () =>
                 author: packRaw.authorDisplayName,
                 previewUrl: packRaw.audio?.audioPreviewKey,
                 description: packRaw.description,
+                size: packRaw.size,
                 tags: fillSet(packTagsSet, packRaw.tagList),
                 patches: packRaw.patchList.map((patch) => {
                     const devices = (patch.data.devices.rackExtensions || patch.data.devices.builtin || []).map((deviceRaw) => {
