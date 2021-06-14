@@ -9,6 +9,7 @@
             <svg 
                 :class="[$style.icon, patchHasAudioPreview(patch) && $style.enabledIcon]"
                 @click="patchClicked(patch)"
+                viewBox="0 0 24 24"
             >
                 <use 
                     xlink:href="#icon-play"
@@ -65,7 +66,7 @@ $icon-controls-dimensions: 40px;
 
 .icon {
     max-height: 100%;
-    max-width: 100%;
+    width: $icon-controls-dimensions;
     opacity: 0.3;
 
     &.enabledIcon {
