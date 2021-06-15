@@ -54,6 +54,10 @@
      <media-controls 
         v-if="isFinishedLoading"
         :title="audioTitle"
+        :play-state="playState"
+        :media-id="mediaId"
+        @audio-restart="restartAudio"
+        @audio-stop="stopAudio"
      />
 </div>
 </template>
@@ -83,6 +87,7 @@
 
 <script>
 import { getPacks } from '../ajax.js';
+import playStates from './models/play-states';
 import SiteTitle from './common/site-title.vue';
 import LoadingIndicator from './common/loading-indicator.vue';
 import MediaControls from './common/media-controls.vue';
@@ -98,10 +103,10 @@ export default {
     created(){
         audio = new Audio();
         audio.addEventListener('loadeddata', () => {
-            this.audioLoaded = true;
+            this.playState = playStates.IS_PLAYING;
         });
         audio.addEventListener('ended', () => {
-            this.clearAudioDisplay();
+            this.playState = playStates.IS_PAUSED;
         });
         getPacks().then(({packsMap, packTagsSet, patchTagsSet, patchDevicesSet}) => {
             this.packsMap = packsMap;
@@ -118,7 +123,7 @@ export default {
             patchDevicesSet: null,
             mediaTitle: '',
             mediaId: null,
-            audioLoaded: false,
+            playState: playStates.IS_EMPTY,
         };
     },
     computed: {
@@ -126,10 +131,14 @@ export default {
             return this.packsMap !== null;
         },
         audioTitle(){
-            if(!this.mediaTitle){
-                return '';
+            switch(this.playState){
+                case playStates.IS_EMPTY:
+                    return '';
+                case playStates.IS_LOADING:
+                    return 'Loading…';
+                default:
+                    return this.mediaTitle;
             }
-            return this.audioLoaded ? this.mediaTitle : 'Loading…';
         },
     },
     methods: {
@@ -137,18 +146,18 @@ export default {
             this.mediaId = id;
             this.mediaTitle = title;
             audio.src = url;
-            this.audioLoaded = false;
+            this.playState = playStates.IS_LOADING;
             audio.load();
             audio.play();
         },
         stopAudio(){
-            this.clearAudioDisplay();
+            this.playState = playStates.IS_PAUSED;
             audio.pause();
         },
-        clearAudioDisplay(){
-            this.mediaId = null;
-            this.mediaTitle = '';
-        }
+        restartAudio(){
+            this.playState = playStates.IS_PLAYING;
+            audio.play();
+        },
     },
 };
 </script>
