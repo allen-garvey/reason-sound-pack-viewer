@@ -51,7 +51,7 @@ $icon-controls-dimensions: 40px;
     cursor: pointer;
     
     &:hover {
-        color: #666;
+        color: #888;
     }
 }
 </style>
