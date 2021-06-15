@@ -7,7 +7,12 @@
         :src="pack.coverPhoto"
         @controls-clicked="packClicked(pack)"
     />
-    <p>{{ pack.author }}</p>
+    <p>
+        <router-link
+            :to="{name: 'creatorsShow', params: {id: pack.author}}"
+        >{{ pack.author }}
+        </router-link>
+    </p>
     <p>{{ pack.description }}</p>
     <dl>
         <dt>Size:</dt>
