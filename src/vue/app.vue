@@ -143,12 +143,17 @@ export default {
     },
     methods: {
         startAudio({title, url, id}){
-            this.mediaId = id;
-            this.mediaTitle = title;
-            audio.src = url;
-            this.playState = playStates.IS_LOADING;
-            audio.load();
-            audio.play();
+            if(this.mediaId !== id){
+                this.mediaId = id;
+                this.mediaTitle = title;
+                audio.src = url;
+                this.playState = playStates.IS_LOADING;
+                audio.load();
+                audio.play();
+            }
+            else {
+                this.restartAudio();
+            }
         },
         stopAudio(){
             this.playState = playStates.IS_PAUSED;
