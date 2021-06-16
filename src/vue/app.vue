@@ -43,6 +43,7 @@
                 :patch-tags-set="patchTagsSet"
                 :pack-tags-set="packTagsSet"
                 :patch-devices-set="patchDevicesSet"
+                :play-state="playState"
                 @audio-start="startAudio"
                 @audio-stop="stopAudio"
             />

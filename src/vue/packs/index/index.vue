@@ -16,6 +16,7 @@
 <script>
 import { AUDIO_PREVIEW_URL_PREFIX } from '../../../jukebox.js';
 import { enumeratePacks } from '../../../model-helpers';
+import playStates from '../../models/play-states';
 import PackList from './pack-list.vue';
 import ItemsCount from '../../common/items-count.vue';
 
@@ -26,6 +27,10 @@ export default {
             required: true,
         },
         mediaId: {
+            required: true,
+        },
+        playState: {
+            type: Number,
             required: true,
         },
         packsFilter: {
@@ -52,7 +57,7 @@ export default {
     },
     methods: {
         isPackPlaying(packId){
-            return packId === this.mediaId;
+            return packId === this.mediaId && this.playState === playStates.IS_PLAYING;
         },
         packClicked(packId){
             if(this.isPackPlaying(packId)){
