@@ -30,6 +30,7 @@
     <patch-list 
         :patches="pack.patches"
         :media-id="mediaId"
+        :play-state="playState"
         :get-pack="() => pack"
         @audio-start="bubbleAudioStart"
         @audio-stop="bubbleAudioStop"
@@ -80,6 +81,10 @@ export default {
             required: true,
         },
         mediaId: {
+            required: true,
+        },
+        playState: {
+            type: Number,
             required: true,
         },
     },

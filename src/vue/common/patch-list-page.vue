@@ -6,6 +6,7 @@
         :media-id="mediaId"
         :get-pack="getPackForPatch"
         :should-show-pack-link="true"
+        :play-state="playState"
         @audio-start="bubbleAudioStart"
         @audio-stop="bubbleAudioStop"
     />
@@ -29,6 +30,10 @@ export default {
             required: true,
         },
         mediaId: {
+            required: true,
+        },
+        playState: {
+            type: Number,
             required: true,
         },
         // From route
