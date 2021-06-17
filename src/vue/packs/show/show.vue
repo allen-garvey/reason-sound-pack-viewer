@@ -70,7 +70,7 @@ dl {
 
 <script>
 import { AUDIO_PREVIEW_URL_PREFIX } from '../../../jukebox.js';
-import playStates from '../../models/play-states';
+import { isMediaPlaying } from '../../models/media-helpers';
 import bubbleAudioEventsMixinBuilder from '../../mixins/bubble-audio-events';
 import CoverImage from '../../common/cover-image.vue';
 import PatchList from '../../common/patch-list.vue';
@@ -99,7 +99,7 @@ export default {
             return this.packsMap[this.$route.params.id];
         },
         isPackPlaying(){
-            return this.pack.id === this.mediaId && this.playState === playStates.IS_PLAYING;
+            return isMediaPlaying(this.pack.id, this.mediaId, this.playState);
         },
         tags(){
             return Array.from(this.pack.tags.entries()).map(([key, dup]) => key).sort();

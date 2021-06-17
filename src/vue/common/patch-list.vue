@@ -101,7 +101,7 @@ $icon-controls-dimensions: 40px;
 
 <script>
 import { AUDIO_PREVIEW_URL_PREFIX } from '../../jukebox.js';
-import playStates from '../models/play-states';
+import { isMediaPlaying } from '../models/media-helpers';
 
 export default {
     props: {
@@ -133,7 +133,7 @@ export default {
             return !!patch.previewUrl;
         },
         isPatchPlaying(patch){
-            return this.patchId(patch) === this.mediaId && this.playState === playStates.IS_PLAYING;
+            return isMediaPlaying(this.patchId(patch), this.mediaId, this.playState);
         },
         patchClicked(patch){
             if(!this.patchHasAudioPreview(patch)){
