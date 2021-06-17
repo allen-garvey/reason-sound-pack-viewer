@@ -1,4 +1,5 @@
 const bubbleAudioEventsMixinBuilder = () => ({
+    emits: ['audioStart', 'audioStop'],
     methods: {
         bubbleAudioStart(event){
             this.$emit('audioStart', event);
