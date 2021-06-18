@@ -22,6 +22,16 @@ ul{
     padding-left: 0;
     margin: 0;
 }
+
+button {
+    background-color: transparent;
+    border: none;
+
+    &:focus-visible {
+        outline: #0f0 solid 2px;
+    }
+}
+
 .container{
     margin: 0 auto;
     max-width: 1200px;

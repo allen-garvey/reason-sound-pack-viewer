@@ -4,18 +4,19 @@
             :class="$style.buttonContainer"
             v-if="hasAudio"
         >
-            <svg 
-                :class="$style.icon"
-                @click="buttonClicked"
-                viewBox="0 0 24 24"
-            >
-                <use 
-                    xlink:href="#icon-play"
-                    v-if="isPaused" />
-                <use 
-                    xlink:href="#icon-pause"
-                    v-if="isPlaying" />
-            </svg>
+            <button @click="buttonClicked">
+                <svg 
+                    :class="$style.icon"
+                    viewBox="0 0 24 24"
+                >
+                    <use 
+                        xlink:href="#icon-play"
+                        v-if="isPaused" />
+                    <use 
+                        xlink:href="#icon-pause"
+                        v-if="isPlaying" />
+                </svg>
+            </button>
         </div>
         <div>
             {{ title }}
@@ -31,7 +32,7 @@ $icon-controls-dimensions: 40px;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 3em;
+    height: 3.5em;
     text-align: center;
     display: flex;
     align-items: center;
@@ -43,6 +44,10 @@ $icon-controls-dimensions: 40px;
 .buttonContainer {
     max-height: 100%;
     margin-right: 1em;
+
+    button {
+        color: #fff;
+    }
 }
 
 .icon {
