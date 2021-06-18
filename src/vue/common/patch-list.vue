@@ -6,21 +6,22 @@
         :class="$style.patch"
     >
         <span :class="$style.iconContainer">
-            <svg 
-                :class="[$style.icon, patchHasAudioPreview(patch) && $style.enabledIcon]"
-                @click="patchClicked(patch)"
-                viewBox="0 0 24 24"
-            >
-                <use 
-                    xlink:href="#icon-play"
-                    v-if="!isPatchPlaying(patch) && patchHasAudioPreview(patch)" />
-                <use 
-                    xlink:href="#icon-pause"
-                    v-if="isPatchPlaying(patch)" />
-                <use 
-                    xlink:href="#icon-x"
-                    v-if="!patchHasAudioPreview(patch)" />
-            </svg>
+            <button @click="patchClicked(patch)" :disabled="!patchHasAudioPreview(patch)">
+                <svg 
+                    :class="[$style.icon, patchHasAudioPreview(patch) && $style.enabledIcon]"
+                    viewBox="0 0 24 24"
+                >
+                    <use 
+                        xlink:href="#icon-play"
+                        v-if="!isPatchPlaying(patch) && patchHasAudioPreview(patch)" />
+                    <use 
+                        xlink:href="#icon-pause"
+                        v-if="isPatchPlaying(patch)" />
+                    <use 
+                        xlink:href="#icon-x"
+                        v-if="!patchHasAudioPreview(patch)" />
+                </svg>
+            </button>
         </span>
         <div>
             <div>
