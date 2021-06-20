@@ -4,7 +4,7 @@
             :class="$style.buttonContainer"
             v-if="hasAudio"
         >
-            <button @click="buttonClicked">
+            <button @click="buttonClicked" tabindex="1">
                 <svg 
                     :class="$style.icon"
                     viewBox="0 0 24 24"
