@@ -1,6 +1,6 @@
 <template>
     <div :class="$style.container">
-        <div
+        <button
             :class="$style.imageControlContainer"
             @click="clicked()"
         >
@@ -8,7 +8,7 @@
                 <use xlink:href="#icon-play" v-if="!isPlaying" />
                 <use xlink:href="#icon-pause" v-if="isPlaying" />
             </svg>
-        </div>
+        </button>
         <picture>
             <source :srcset="src.webp" type="image/webp" />
             <source :srcset="src.png" type="image/png" />
@@ -24,17 +24,11 @@
 <style lang="scss" module>
 .container {
     position: relative;
-
-    &:hover {
-        .imageControlContainer {
-            display: flex;
-        }
-    }
 }
 
 .imageControlContainer {
-    color: #fff;
-    display: none;
+    color: transparent;
+    display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -44,15 +38,19 @@
     left: 0;
     right: 0;
 
-    &:after {
-        content: '';
-        background-color: #000;
-        opacity: 0.5;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
+    &:hover, &:focus-visible {
+        color: #fff;
+
+        &:after {
+            content: '';
+            background-color: #000;
+            opacity: 0.5;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
     }
 }
 
