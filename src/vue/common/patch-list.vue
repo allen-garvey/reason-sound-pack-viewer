@@ -43,6 +43,11 @@
                     {{ device }}
                 </li>
             </ul>
+            <reason-plus-link 
+                :class="$style.reasonPlusLink"
+                :pack-id="getPack(patch).id"
+                v-if="shouldShowReasonPlusLink"
+            />
         </div>
     </li>
 </ul>
@@ -88,11 +93,14 @@ $icon-controls-dimensions: 40px;
     margin-left: 2em;
 }
 
+.deviceList, .reasonPlusLink {
+    font-size: 0.8rem;
+}
+
 .deviceList {
     display: flex;
     flex-wrap: wrap;
     color: #888;
-    font-size: 0.8rem;
 }
 
 .device {
@@ -103,6 +111,7 @@ $icon-controls-dimensions: 40px;
 <script>
 import { AUDIO_PREVIEW_URL_PREFIX } from '../../jukebox.js';
 import { isMediaPlaying } from '../models/media-helpers';
+import ReasonPlusLink from '../common/reason-plus-link.vue';
 
 export default {
     props: {
@@ -125,6 +134,13 @@ export default {
             type: Boolean,
             default: false,
         },
+        shouldShowReasonPlusLink: {
+            type: Boolean,
+            default: false,
+        },
+    },
+    components: {
+        ReasonPlusLink,
     },
     methods: {
         patchId(patch){

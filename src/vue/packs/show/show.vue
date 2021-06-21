@@ -27,6 +27,10 @@
             <router-link :to="{name: 'packTagsShow', params: {id: tag}}">{{ tag }}</router-link>
         </li>
     </ul>
+    <reason-plus-link
+        :class="$style.reasonPlusLink"
+        :pack-id="pack.id"
+    />
     <patch-list 
         :patches="pack.patches"
         :media-id="mediaId"
@@ -59,11 +63,15 @@ dl {
 
 .tagsList {
     display: flex;
-    margin: 0 0 2em;
+    margin: 0 0 1em;
 
     li + li {
         margin-left: 1em;
     }
+}
+
+.reasonPlusLink {
+    margin: 0 0 2em;
 }
 
 </style>
@@ -74,6 +82,7 @@ import { isMediaPlaying } from '../../models/media-helpers';
 import bubbleAudioEventsMixinBuilder from '../../mixins/bubble-audio-events';
 import CoverImage from '../../common/cover-image.vue';
 import PatchList from '../../common/patch-list.vue';
+import ReasonPlusLink from '../../common/reason-plus-link.vue';
 
 export default {
     props: {
@@ -92,6 +101,7 @@ export default {
     components: {
         CoverImage,
         PatchList,
+        ReasonPlusLink,
     },
     mixins: [bubbleAudioEventsMixinBuilder()],
     computed: {

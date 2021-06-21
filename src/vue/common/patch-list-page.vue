@@ -6,6 +6,7 @@
         :media-id="mediaId"
         :get-pack="getPackForPatch"
         :should-show-pack-link="true"
+        :should-show-reason-plus-link="true"
         :play-state="playState"
         @audio-start="bubbleAudioStart"
         @audio-stop="bubbleAudioStop"
