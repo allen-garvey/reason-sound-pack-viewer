@@ -10,6 +10,7 @@
                     :class="$style.imageContainer"
                     :is-playing="isPackPlaying(pack.id)"
                     :src="pack.coverPhoto"
+                    :pack-title="pack.title"
                     @controls-clicked="packClicked(pack)"
                  />
                 <div :class="$style.packTitle">

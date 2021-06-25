@@ -13,7 +13,8 @@
             <source :srcset="src.webp" type="image/webp" />
             <source :srcset="src.png" type="image/png" />
             <img 
-                :src="src.png" 
+                :src="src.png"
+                :alt="altText"
                 :class="$style.coverPhoto" 
                 loading="lazy" 
             />
@@ -72,8 +73,15 @@ export default {
             type: Boolean,
             required: true,
         },
+        packTitle: {
+            type: String,
+            required: true,
+        },
     },
     computed: {
+        altText(){
+            return `${this.packTitle} cover image`;
+        },
     },
     methods: {
         clicked(){

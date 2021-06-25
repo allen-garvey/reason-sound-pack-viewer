@@ -5,6 +5,7 @@
         :class="$style.coverImageContainer"
         :is-playing="isPackPlaying"
         :src="pack.coverPhoto"
+        :pack-title="pack.title"
         @controls-clicked="packClicked(pack)"
     />
     <p>
