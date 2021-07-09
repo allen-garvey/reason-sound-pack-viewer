@@ -99,33 +99,34 @@ $icon-controls-dimensions: 40px;
     width: 24px;
 }
 
+$volume-slider-handle-color: #6b6b6b;
+$volume-slider-handle-dimensions: 15px;
+$volume-slider-handle-border-radius: 50%;
+
 .volumeInput {
     -webkit-appearance: none;
     appearance: none;
     cursor: pointer;
-    background: greenyellow;
-    border-radius: 5px;
-    height: 10px;
+    background: #88c341;
+    border: 1px solid #82887a;
+    border-radius: $volume-slider-handle-dimensions;
+    height: $volume-slider-handle-dimensions - 1px;
     width: 100px;
-
-    $volume-slider-handle-color: gray;
-    $volume-slider-dimensions: 15px;
-    $volume-slider-border-radius: 50%;
 
     &::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
         
-        width: $volume-slider-dimensions;
-        height: $volume-slider-dimensions;
-        border-radius: $volume-slider-border-radius;
+        width: $volume-slider-handle-dimensions;
+        height: $volume-slider-handle-dimensions;
+        border-radius: $volume-slider-handle-border-radius;
         background: $volume-slider-handle-color;
     }
 
     &::-moz-range-thumb {
-        width: $volume-slider-dimensions;
-        height: $volume-slider-dimensions;
-        border-radius: $volume-slider-border-radius;
+        width: $volume-slider-handle-dimensions;
+        height: $volume-slider-handle-dimensions;
+        border-radius: $volume-slider-handle-border-radius;
         background: $volume-slider-handle-color;
     }
 }
