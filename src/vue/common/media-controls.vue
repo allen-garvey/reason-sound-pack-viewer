@@ -66,6 +66,7 @@ $icon-controls-dimensions: 40px;
     justify-content: center;
     background-color: #541604;
     color: #fff;
+    box-shadow: 0 -5px 15px rgba(84, 22, 8, 0.2);
 }
 
 .buttonContainer {
