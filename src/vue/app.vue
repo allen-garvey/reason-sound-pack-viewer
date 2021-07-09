@@ -108,6 +108,7 @@ export default {
         this.audioVolume = audio.volume;
         audio.addEventListener('loadeddata', () => {
             this.playState = playStates.IS_PLAYING;
+            audio.volume = this.audioVolume;
         });
         audio.addEventListener('ended', () => {
             this.playState = playStates.IS_PAUSED;

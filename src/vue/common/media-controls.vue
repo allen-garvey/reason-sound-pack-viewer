@@ -21,7 +21,7 @@
         <div>
             {{ title }}
         </div>
-        <div :class="$style.volumeContainer" v-if="hasAudio">
+        <div :class="$style.volumeContainer" v-show="!isAudioEmpty">
             <svg 
                 :class="$style.volumeIcon"
                 viewBox="0 0 24 24"
@@ -153,6 +153,9 @@ export default {
         },
     },
     computed: {
+        isAudioEmpty(){
+            return this.playState === playStates.IS_EMPTY;
+        },
         hasAudio(){
             return this.playState !== playStates.IS_EMPTY && this.playState !== playStates.IS_LOADING;
         },
