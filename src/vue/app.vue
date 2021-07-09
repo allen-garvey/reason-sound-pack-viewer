@@ -57,8 +57,10 @@
         :title="audioTitle"
         :play-state="playState"
         :media-id="mediaId"
+        :audio-volume="audioVolume"
         @audio-restart="restartAudio"
         @audio-stop="stopAudio"
+        @volume-changed="adjustVolume"
      />
 </div>
 </template>
@@ -103,6 +105,7 @@ export default {
     },
     created(){
         audio = new Audio();
+        this.audioVolume = audio.volume;
         audio.addEventListener('loadeddata', () => {
             this.playState = playStates.IS_PLAYING;
         });
@@ -125,6 +128,7 @@ export default {
             mediaTitle: '',
             mediaId: null,
             playState: playStates.IS_EMPTY,
+            audioVolume: 0,
         };
     },
     computed: {
@@ -163,6 +167,10 @@ export default {
         restartAudio(){
             this.playState = playStates.IS_PLAYING;
             audio.play();
+        },
+        adjustVolume(value){
+            audio.volume = value;
+            this.audioVolume = value;
         },
     },
 };
