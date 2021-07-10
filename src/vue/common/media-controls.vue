@@ -103,16 +103,19 @@ $icon-controls-dimensions: 40px;
 $volume-slider-handle-color: #6b6b6b;
 $volume-slider-handle-dimensions: 15px;
 $volume-slider-handle-border-radius: 50%;
+$volume-slider-progress-color: #88c341;
+$volume-slider-range-color: #dbd9d6;
 
 .volumeInput {
     -webkit-appearance: none;
     appearance: none;
     cursor: pointer;
-    background: #88c341;
+    background: $volume-slider-range-color;
     border: 1px solid #82887a;
     border-radius: $volume-slider-handle-dimensions;
     height: $volume-slider-handle-dimensions - 1px;
-    width: 100px;
+    width: 120px;
+    overflow: hidden;
 
     &::-webkit-slider-thumb {
         -webkit-appearance: none;
@@ -122,6 +125,8 @@ $volume-slider-handle-border-radius: 50%;
         height: $volume-slider-handle-dimensions;
         border-radius: $volume-slider-handle-border-radius;
         background: $volume-slider-handle-color;
+
+        box-shadow: -80px 0 0 75px $volume-slider-progress-color;
     }
 
     &::-moz-range-thumb {
@@ -130,7 +135,32 @@ $volume-slider-handle-border-radius: 50%;
         border-radius: $volume-slider-handle-border-radius;
         background: $volume-slider-handle-color;
     }
+
+    &::-moz-range-progress {
+        height: 100%;
+        background-color: $volume-slider-progress-color; 
+    }
+
+    &::-moz-range-track {  
+        height: 100%;
+        background-color: $volume-slider-range-color;
+    }
 }
+
+// // chrome specific styles
+// @media screen and (-webkit-min-device-pixel-ratio:0) {
+//     .volumeInput {
+//         overflow: hidden;
+        
+//         &::-webkit-slider-runnable-track {
+//             height: 10px;
+//             -webkit-appearance: none;
+//             appearance: none;
+//             color: #13bba4;
+//             margin-top: -1px;
+//         }
+//     }
+// }
 </style>
 
 <script>
