@@ -51,7 +51,7 @@
 </template>
 
 <style lang="scss" module>
-$icon-controls-dimensions: 40px;
+$icon-controls-dimensions: 50px;
 
 .container {
     position: fixed;
@@ -59,7 +59,7 @@ $icon-controls-dimensions: 40px;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 3.5em;
+    height: 80px;
     text-align: center;
     display: flex;
     align-items: center;
@@ -97,7 +97,7 @@ $icon-controls-dimensions: 40px;
 .volumeIcon {
     margin-right: 5px;
     max-height: 100%;
-    width: 24px;
+    width: 28px;
 }
 
 $volume-slider-handle-color: #6b6b6b;
@@ -114,7 +114,7 @@ $volume-slider-range-color: #dbd9d6;
     border: 1px solid #82887a;
     border-radius: $volume-slider-handle-dimensions;
     height: $volume-slider-handle-dimensions - 1px;
-    width: 120px;
+    width: 140px;
     overflow: hidden;
 
     &::-webkit-slider-thumb {
