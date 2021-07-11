@@ -90,6 +90,7 @@
 
 <script>
 import { getPacks } from '../ajax.js';
+import userSettings from '../user-settings';
 import playStates from './models/play-states';
 import SiteTitle from './common/site-title.vue';
 import LoadingIndicator from './common/loading-indicator.vue';
@@ -105,7 +106,7 @@ export default {
     },
     created(){
         audio = new Audio();
-        this.audioVolume = audio.volume;
+        this.audioVolume = userSettings.getUserVolume();
         audio.addEventListener('loadeddata', () => {
             this.playState = playStates.IS_PLAYING;
             audio.volume = this.audioVolume;
@@ -172,6 +173,7 @@ export default {
         adjustVolume(value){
             audio.volume = value;
             this.audioVolume = value;
+            userSettings.saveUserVolume(value);
         },
     },
 };
