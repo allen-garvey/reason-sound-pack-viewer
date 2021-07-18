@@ -1,5 +1,9 @@
 <template>
-    <div :class="$style.container">
+<div :class="$style.container">
+    <div :class="$style.mobileTitle">
+        {{ title }}
+    </div>
+    <div :class="$style.innerContainer">
         <div
             :class="$style.buttonContainer"
             v-if="hasAudio"
@@ -18,7 +22,7 @@
                 </svg>
             </button>
         </div>
-        <div>
+        <div :class="$style.desktopTitle">
             {{ title }}
         </div>
         <div :class="$style.volumeContainer" v-show="!isAudioEmpty">
@@ -36,7 +40,7 @@
                     xlink:href="#icon-volume-2"
                     v-else />
             </svg>
-             <input 
+            <input 
                 tabindex="2"
                 type="range"
                 min="0"
@@ -48,10 +52,12 @@
             />
         </div>
     </div>
+</div>
 </template>
 
 <style lang="scss" module>
 $icon-controls-dimensions: 50px;
+$breakpoint: 600px;
 
 .container {
     position: fixed;
@@ -60,18 +66,44 @@ $icon-controls-dimensions: 50px;
     left: 0;
     right: 0;
     height: 80px;
-    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     background-color: #541604;
     color: #fff;
+    text-align: center;
     box-shadow: 0 -5px 15px rgba(84, 22, 8, 0.2);
+
+    @media screen and (max-width: $breakpoint) {
+        height: 104px;
+    }
+}
+
+.innerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobileTitle {
+    margin: 0 0 5px;
+    
+    @media screen and (min-width: $breakpoint) {
+        display: none;
+    }
+}
+
+.desktopTitle {
+    margin-left: 1em;
+    
+    @media screen and (max-width: $breakpoint) {
+        display: none;
+    }
 }
 
 .buttonContainer {
     max-height: 100%;
-    margin-right: 1em;
 
     button {
         color: #fff;
