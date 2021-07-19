@@ -77,9 +77,23 @@
 
 .navList {
     display: flex;
+    flex-wrap: wrap;
+    margin-top: 1em;
 
-    li + li {
-        margin-left: 1em;
+    li {
+        width: 50%;
+        margin-bottom: 1em;
+    }
+
+    @media screen and (min-width: 418px) {
+        li {
+            width: auto;
+            margin-bottom: 1em;
+        }
+
+        li + li {
+            margin-left: 1em;
+        }
     }
 }
 
