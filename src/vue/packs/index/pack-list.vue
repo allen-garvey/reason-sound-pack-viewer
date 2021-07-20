@@ -23,6 +23,7 @@
 
 <style lang="scss" module>
     $image-dimensions: 150px;
+    $pack-right-margin: 10px;
 
     .container {
         
@@ -32,10 +33,11 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+        margin-right: -1 * $pack-right-margin;
     }
     
     .pack {
-        margin: 0 0 20px;
+        margin: 0 $pack-right-margin 20px 0;
         width: $image-dimensions;
     }
 
@@ -46,6 +48,19 @@
 
     .imageContainer {
         height: $image-dimensions;
+    }
+
+    $pack-mobile-right-margin: 28px;
+
+    @media screen and (max-width: 668px) {
+        .packList {
+            justify-content: center;
+            margin-right: -1 * $pack-mobile-right-margin;
+        }
+
+        .pack {
+            margin-right: $pack-mobile-right-margin;
+        }
     }
 </style>
 <script>
