@@ -42,7 +42,7 @@
     }
 
     .packTitle {
-        font-size: 18px;
+        font-size: 1.125rem;
         margin-top: 0.5em;
         padding: 0 1em;
         text-align: center;

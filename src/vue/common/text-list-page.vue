@@ -15,6 +15,7 @@
 
 <style lang="scss" module>
 .item {
+    font-size: 1.125rem;
     margin: 0 0 1em;
 }
 </style>
