@@ -1,7 +1,5 @@
 <template>
-  <div class="loading-container">
-      <div class="loader" v-if="isParentLoading"></div>
-  </div>
+  <div></div>
 </template>
 
 <script>
