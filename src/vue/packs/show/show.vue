@@ -116,7 +116,7 @@ export default {
             return Array.from(this.pack.tags.entries()).map(([key, dup]) => key).sort();
         },
         packSize(){
-            return `${(this.pack.size / 1000000).toFixed(2)} MB`;
+            return `${(this.pack.size / 1048576).toFixed(2)} MB`;
         },
     },
     methods: {
