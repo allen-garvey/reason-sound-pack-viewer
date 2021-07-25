@@ -30,6 +30,10 @@ export default {
             type: Object,
             required: true,
         },
+        creatorsMap: {
+            type: Map,
+            required: true,
+        },
         patchTagsSet: {
             type: Set,
             required: true,

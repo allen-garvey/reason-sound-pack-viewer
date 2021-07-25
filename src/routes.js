@@ -79,11 +79,7 @@ export function getRoutes(){
                 const props = {
                     title: 'Creators',
                     getItems(){
-                        const creatorsSet = new Set();
-                        enumeratePacks(this.packsMap).forEach((pack) => {
-                            creatorsSet.add(pack.author);
-                        });
-                        return Array.from(creatorsSet.values()).sort();
+                        return Array.from(this.creatorsMap.keys()).sort();
                     },
                     itemRouteName: 'creatorsShow'
                 };

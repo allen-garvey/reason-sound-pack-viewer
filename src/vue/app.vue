@@ -39,6 +39,7 @@
         <main :class="$style.main">
             <router-view
                 :packs-map="packsMap"
+                :creators-map="creatorsMap"
                 :media-id="mediaId"
                 :patch-tags-set="patchTagsSet"
                 :pack-tags-set="packTagsSet"
@@ -128,11 +129,12 @@ export default {
         audio.addEventListener('ended', () => {
             this.playState = playStates.IS_PAUSED;
         });
-        getPacks().then(({packsMap, packTagsSet, patchTagsSet, patchDevicesSet}) => {
+        getPacks().then(({packsMap, packTagsSet, patchTagsSet, patchDevicesSet, creatorsMap}) => {
             this.packsMap = packsMap;
             this.packTagsSet = packTagsSet;
             this.patchTagsSet = patchTagsSet;
             this.patchDevicesSet = patchDevicesSet;
+            this.creatorsMap = creatorsMap;
         });
     },
     data(){
@@ -141,6 +143,7 @@ export default {
             packTagsSet: null,
             patchTagsSet: null,
             patchDevicesSet: null,
+            creatorsMap: null,
             mediaTitle: '',
             mediaId: null,
             playState: playStates.IS_EMPTY,

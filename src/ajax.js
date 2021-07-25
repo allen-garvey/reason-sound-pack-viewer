@@ -17,15 +17,19 @@ export const getPacks = () =>
         const packTagsSet = new Set();
         const patchTagsSet = new Set();
         const patchDevicesSet = new Set();
+        const creatorsMap = new Map();
         packs.forEach((packRaw) => {
+            const id = packRaw.id;
+            const author = packRaw.authorDisplayName;
+
             const pack = {
-                id: packRaw.id,
+                id,
                 title: packRaw.title,
                 coverPhoto: {
-                    webp: `/images/pack-${packRaw.id}.webp`,
+                    webp: `/images/pack-${id}.webp`,
                     png: packRaw.coverPhoto,
                 },
-                author: packRaw.authorDisplayName,
+                author,
                 previewUrl: packRaw.audio?.audioPreviewKey,
                 description: packRaw.description,
                 size: packRaw.size,
@@ -44,8 +48,14 @@ export const getPacks = () =>
                     }
                 }),
             };
-            packsMap[pack.id] = pack;
+            if(creatorsMap.has(author)){
+                creatorsMap.get(author).push(id);
+            }
+            else{
+                creatorsMap.set(author, [id]);
+            }
+            packsMap[id] = pack;
         });
 
-        return {packsMap, packTagsSet, patchTagsSet, patchDevicesSet};
+        return {packsMap, packTagsSet, patchTagsSet, patchDevicesSet, creatorsMap};
     });
