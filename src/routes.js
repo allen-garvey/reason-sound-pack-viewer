@@ -39,7 +39,7 @@ export function getRoutes(){
                 const props = {
                     title: 'Patch Tags',
                     getItems(){
-                        return Array.from(this.patchTagsSet.entries()).map(([key, dupKey]) => key).sort();
+                        return Array.from(this.patchTagsSet.values()).sort();
                     },
                     itemRouteName: 'patchTagsShow'
                 };
@@ -83,7 +83,7 @@ export function getRoutes(){
                         enumeratePacks(this.packsMap).forEach((pack) => {
                             creatorsSet.add(pack.author);
                         });
-                        return Array.from(creatorsSet.entries()).map(([key, dupKey]) => key).sort();
+                        return Array.from(creatorsSet.values()).sort();
                     },
                     itemRouteName: 'creatorsShow'
                 };
@@ -114,7 +114,7 @@ export function getRoutes(){
                 const props = {
                     title: 'Pack Tags',
                     getItems(){
-                        return Array.from(this.packTagsSet.entries()).map(([key, dupKey]) => key).sort();
+                        return Array.from(this.packTagsSet.values()).sort();
                     },
                     itemRouteName: 'packTagsShow'
                 };
@@ -147,7 +147,7 @@ export function getRoutes(){
                 const props = {
                     title: 'Devices',
                     getItems(){
-                        return Array.from(this.patchDevicesSet.entries()).map(([key, dupKey]) => key).sort();
+                        return Array.from(this.patchDevicesSet.values()).sort();
                     },
                     itemRouteName: 'devicesShow'
                 };

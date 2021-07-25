@@ -113,7 +113,7 @@ export default {
             return isMediaPlaying(this.pack.id, this.mediaId, this.playState);
         },
         tags(){
-            return Array.from(this.pack.tags.entries()).map(([key, dup]) => key).sort();
+            return Array.from(this.pack.tags.values()).sort();
         },
         packSize(){
             return `${(this.pack.size / 1048576).toFixed(2)} MB`;
