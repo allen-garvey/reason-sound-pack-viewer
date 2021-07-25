@@ -7,7 +7,13 @@
             :key="item"
             :class="$style.item"
         >
-            <router-link :to="{name: itemRouteName, params: {id: item}}">{{ item }}</router-link>
+            <router-link :to="{name: itemRouteName, params: {id: item}}">
+                {{ item }}
+                <items-count 
+                    :count="getItemLength(item)"
+                    v-if="getItemLength"
+                />
+            </router-link>
         </li>
     </ul>
 </div>
@@ -58,6 +64,10 @@ export default {
         getItems: {
             type: Function,
             required: true,
+        },
+        getItemLength: {
+            type: Function,
+            default: null,
         },
     },
     components: {

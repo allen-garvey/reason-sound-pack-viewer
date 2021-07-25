@@ -81,6 +81,9 @@ export function getRoutes(){
                     getItems(){
                         return Array.from(this.creatorsMap.keys()).sort();
                     },
+                    getItemLength(creator){
+                        return this.creatorsMap.get(creator).length;
+                    },
                     itemRouteName: 'creatorsShow'
                 };
 
