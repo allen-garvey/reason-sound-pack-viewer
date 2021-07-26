@@ -41,6 +41,9 @@ export function getRoutes(){
                     getItems(){
                         return Array.from(this.patchTagsMap.keys()).sort();
                     },
+                    getItemLength(patchTag){
+                        return this.patchTagsMap.get(patchTag).length;
+                    },
                     itemRouteName: 'patchTagsShow'
                 };
 
@@ -115,6 +118,9 @@ export function getRoutes(){
                     getItems(){
                         return Array.from(this.packTagsMap.keys()).sort();
                     },
+                    getItemLength(packTag){
+                        return this.packTagsMap.get(packTag).length;
+                    },
                     itemRouteName: 'packTagsShow'
                 };
 
@@ -147,6 +153,9 @@ export function getRoutes(){
                     title: 'Devices',
                     getItems(){
                         return Array.from(this.patchDevicesMap.keys()).sort();
+                    },
+                    getItemLength(device){
+                        return this.patchDevicesMap.get(device).length;
                     },
                     itemRouteName: 'devicesShow'
                 };
