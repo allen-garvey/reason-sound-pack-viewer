@@ -1,9 +1,14 @@
 import { normalizeDeviceName } from './device-normalizer';
 
-const fillSet = (masterSet, items, key='title') => {
+const fillSet = (masterMap, items, key='title') => {
     return items.reduce((localSet, item) => { 
         const itemName = item[key] || item;
-        masterSet.add(itemName);
+        if(masterMap.has(itemName)){
+            masterMap.get(itemName).push(item);
+        }
+        else {
+            masterMap.set(itemName, [item]);
+        }
         localSet.add(itemName);
         return localSet;
     }, new Set);
@@ -14,9 +19,9 @@ export const getPacks = () =>
     .then((res) => res.json())
     .then((packs) => {
         const packsMap = {};
-        const packTagsSet = new Set();
-        const patchTagsSet = new Set();
-        const patchDevicesSet = new Set();
+        const packTagsMap = new Map();
+        const patchTagsMap = new Map();
+        const patchDevicesMap = new Map();
         const creatorsMap = new Map();
         packs.forEach((packRaw) => {
             const id = packRaw.id;
@@ -33,7 +38,7 @@ export const getPacks = () =>
                 previewUrl: packRaw.audio?.audioPreviewKey,
                 description: packRaw.description,
                 size: packRaw.size,
-                tags: fillSet(packTagsSet, packRaw.tagList),
+                tags: fillSet(packTagsMap, packRaw.tagList),
                 patches: packRaw.patchList.map((patch) => {
                     const devices = (patch.data.devices.rackExtensions || patch.data.devices.builtin || []).map((deviceRaw) => {
                         const deviceName = typeof deviceRaw === 'object' ? deviceRaw.name : deviceRaw;
@@ -43,8 +48,8 @@ export const getPacks = () =>
                         id: patch.id,
                         name: patch.patchName,
                         previewUrl: patch.patchAudio?.audioPreviewKey,
-                        tags: fillSet(patchTagsSet, patch.tagList),
-                        devices: fillSet(patchDevicesSet, devices, null),
+                        tags: fillSet(patchTagsMap, patch.tagList),
+                        devices: fillSet(patchDevicesMap, devices, null),
                     }
                 }),
             };
@@ -57,5 +62,5 @@ export const getPacks = () =>
             packsMap[id] = pack;
         });
 
-        return {packsMap, packTagsSet, patchTagsSet, patchDevicesSet, creatorsMap};
+        return {packsMap, packTagsMap, patchTagsMap,patchDevicesMap, creatorsMap};
     });

@@ -41,9 +41,9 @@
                 :packs-map="packsMap"
                 :creators-map="creatorsMap"
                 :media-id="mediaId"
-                :patch-tags-set="patchTagsSet"
-                :pack-tags-set="packTagsSet"
-                :patch-devices-set="patchDevicesSet"
+                :patch-tags-map="patchTagsMap"
+                :pack-tags-map="packTagsMap"
+                :patch-devices-map="patchDevicesMap"
                 :play-state="playState"
                 @audio-start="startAudio"
                 @audio-stop="stopAudio"
@@ -129,20 +129,20 @@ export default {
         audio.addEventListener('ended', () => {
             this.playState = playStates.IS_PAUSED;
         });
-        getPacks().then(({packsMap, packTagsSet, patchTagsSet, patchDevicesSet, creatorsMap}) => {
+        getPacks().then(({packsMap, packTagsMap, patchTagsMap, patchDevicesMap, creatorsMap}) => {
             this.packsMap = packsMap;
-            this.packTagsSet = packTagsSet;
-            this.patchTagsSet = patchTagsSet;
-            this.patchDevicesSet = patchDevicesSet;
+            this.packTagsMap = packTagsMap;
+            this.patchTagsMap = patchTagsMap;
+            this.patchDevicesMap = patchDevicesMap;
             this.creatorsMap = creatorsMap;
         });
     },
     data(){
         return {
             packsMap: null,
-            packTagsSet: null,
-            patchTagsSet: null,
-            patchDevicesSet: null,
+            packTagsMap: null,
+            patchTagsMap: null,
+            patchDevicesMap: null,
             creatorsMap: null,
             mediaTitle: '',
             mediaId: null,

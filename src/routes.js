@@ -39,7 +39,7 @@ export function getRoutes(){
                 const props = {
                     title: 'Patch Tags',
                     getItems(){
-                        return Array.from(this.patchTagsSet.values()).sort();
+                        return Array.from(this.patchTagsMap.keys()).sort();
                     },
                     itemRouteName: 'patchTagsShow'
                 };
@@ -113,7 +113,7 @@ export function getRoutes(){
                 const props = {
                     title: 'Pack Tags',
                     getItems(){
-                        return Array.from(this.packTagsSet.values()).sort();
+                        return Array.from(this.packTagsMap.keys()).sort();
                     },
                     itemRouteName: 'packTagsShow'
                 };
@@ -146,7 +146,7 @@ export function getRoutes(){
                 const props = {
                     title: 'Devices',
                     getItems(){
-                        return Array.from(this.patchDevicesSet.values()).sort();
+                        return Array.from(this.patchDevicesMap.keys()).sort();
                     },
                     itemRouteName: 'devicesShow'
                 };

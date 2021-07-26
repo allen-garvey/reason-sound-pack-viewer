@@ -40,16 +40,16 @@ export default {
             type: Map,
             required: true,
         },
-        patchTagsSet: {
-            type: Set,
+        patchTagsMap: {
+            type: Map,
             required: true,
         },
-        packTagsSet: {
-            type: Set,
+        packTagsMap: {
+            type: Map,
             required: true,
         },
-        patchDevicesSet: {
-            type: Set,
+        patchDevicesMap: {
+            type: Map,
             required: true,
         },
         // From route
