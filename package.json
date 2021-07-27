@@ -8,7 +8,8 @@
     "start": "webpack serve --config webpack.config.js",
     "build": "webpack --config webpack.config.js",
     "deploy": "webpack --config webpack.config.js --mode='production'",
-    "hydrate": "time node scripts/hydrate.js"
+    "hydrate": "time node scripts/hydrate.js",
+    "dev": "npm run hydrate && npm start"
   },
   "repository": {
     "type": "git",
