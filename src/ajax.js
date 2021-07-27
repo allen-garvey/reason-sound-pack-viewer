@@ -1,13 +1,13 @@
 import { normalizeDeviceName } from './device-normalizer';
 
-const fillSet = (masterMap, items, key='title') => {
+const fillSet = (masterMap, items, packId, key='title') => {
     return items.reduce((localSet, item) => { 
         const itemName = item[key] || item;
         if(masterMap.has(itemName)){
-            masterMap.get(itemName).push(item);
+            masterMap.get(itemName).push(packId);
         }
         else {
-            masterMap.set(itemName, [item]);
+            masterMap.set(itemName, [packId]);
         }
         localSet.add(itemName);
         return localSet;
@@ -38,7 +38,7 @@ export const getPacks = () =>
                 previewUrl: packRaw.audio?.audioPreviewKey,
                 description: packRaw.description,
                 size: packRaw.size,
-                tags: fillSet(packTagsMap, packRaw.tagList),
+                tags: fillSet(packTagsMap, packRaw.tagList, id),
                 patches: packRaw.patchList.map((patch) => {
                     const devices = (patch.data.devices.rackExtensions || patch.data.devices.builtin || []).map((deviceRaw) => {
                         const deviceName = typeof deviceRaw === 'object' ? deviceRaw.name : deviceRaw;
@@ -48,8 +48,8 @@ export const getPacks = () =>
                         id: patch.id,
                         name: patch.patchName,
                         previewUrl: patch.patchAudio?.audioPreviewKey,
-                        tags: fillSet(patchTagsMap, patch.tagList),
-                        devices: fillSet(patchDevicesMap, devices, null),
+                        tags: fillSet(patchTagsMap, patch.tagList, id),
+                        devices: fillSet(patchDevicesMap, devices, id, null),
                     }
                 }),
             };

@@ -26,6 +26,14 @@ export default {
             type: Object,
             required: true,
         },
+        creatorsMap: {
+            type: Map,
+            required: true,
+        },
+        packTagsMap: {
+            type: Map,
+            required: true,
+        },
         mediaId: {
             required: true,
         },
@@ -33,7 +41,7 @@ export default {
             type: Number,
             required: true,
         },
-        packsFilter: {
+        getPacks: {
             type: Function,
             required: true,
         },
@@ -52,7 +60,7 @@ export default {
     },
     computed: {
         packs(){
-            return this.packsFilter(enumeratePacks(this.packsMap)).reverse();
+            return this.getPacks();
         },
     },
     methods: {

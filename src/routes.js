@@ -18,9 +18,9 @@ export function getRoutes(){
             props: (route) => {
                 const props = {
                     title: 'Packs',
-                    packsFilter(packs){
-                        return packs;
-                    }
+                    getPacks(){
+                        return enumeratePacks(this.packsMap).reverse();
+                    },
                 };
 
                 return props;
@@ -100,9 +100,9 @@ export function getRoutes(){
             props: (route) => {
                 const props = {
                     title: route.params.id,
-                    packsFilter(packs){
-                        return packs.filter((pack) => pack.author === route.params.id);
-                    }
+                    getPacks(){
+                        return this.creatorsMap.get(route.params.id).map((id) => this.packsMap[id]);
+                    },
                 };
 
                 return props;
@@ -134,11 +134,9 @@ export function getRoutes(){
             props: (route) => {
                 const props = {
                     title: route.params.id,
-                    packsFilter(packs){
-                        return packs.filter((pack) => pack.tags.has(route.params.id)).sort((packA, packB) => {
-                            return packA.title > packB.title ? -1 : 1;
-                        });
-                    }
+                    getPacks(){
+                        return this.packTagsMap.get(route.params.id).map((id) => this.packsMap[id]);
+                    },
                 };
 
                 return props;
