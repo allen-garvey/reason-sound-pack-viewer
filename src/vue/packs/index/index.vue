@@ -15,7 +15,6 @@
 
 <script>
 import { AUDIO_PREVIEW_URL_PREFIX } from '../../../jukebox.js';
-import { enumeratePacks } from '../../../model-helpers';
 import { isMediaPlaying } from '../../models/media-helpers';
 import PackList from './pack-list.vue';
 import ItemsCount from '../../common/items-count.vue';
