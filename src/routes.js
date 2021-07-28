@@ -60,14 +60,15 @@ export function getRoutes(){
                     getPatches(){
                         const patchKey = route.params.id;
 
-                        return enumeratePacks(this.packsMap).map((pack) => 
-                            pack.patches
+                        return this.patchTagsMap.get(patchKey).map((packId) => {
+                            const pack = this.packsMap[packId];
+                            return pack.patches
                                 .filter(patch => patch.tags.has(patchKey))
                                 .map(patch => {
                                     patch.packId = pack.id;
                                     return patch;
-                                })
-                        ).flat();
+                                });
+                        }).flat();
                     },
                 };
 

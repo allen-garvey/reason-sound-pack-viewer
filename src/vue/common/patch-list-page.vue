@@ -1,8 +1,8 @@
 <template>
 <div>
-    <h2>{{ title }} <items-count :count="getPatches().length" /></h2>
+    <h2>{{ title }} <items-count :count="patches.length" /></h2>
     <patch-list 
-        :patches="getPatches()"
+        :patches="patches"
         :media-id="mediaId"
         :get-pack="getPackForPatch"
         :should-show-pack-link="true"
@@ -30,6 +30,10 @@ export default {
             type: Object,
             required: true,
         },
+        patchTagsMap: {
+            type: Map,
+            required: true,
+        },
         mediaId: {
             required: true,
         },
@@ -52,6 +56,11 @@ export default {
         ItemsCount,
     },
     mixins: [bubbleAudioEventsMixinBuilder()],
+    computed: {
+        patches(){
+            return this.getPatches();
+        },
+    },
     methods: {
         getPackForPatch(patch){
             return this.packsMap[patch.packId];
