@@ -34,6 +34,10 @@ export default {
             type: Map,
             required: true,
         },
+        patchDevicesMap: {
+            type: Map,
+            required: true,
+        },
         mediaId: {
             required: true,
         },

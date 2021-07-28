@@ -14,6 +14,20 @@ const fillSet = (masterMap, items, packId, key='title') => {
     }, new Set);
 };
 
+const fillInnerSet = (masterMap, items, packId, key='title') => {
+    return items.reduce((localSet, item) => { 
+        const itemName = item[key] || item;
+        if(masterMap.has(itemName)){
+            masterMap.get(itemName).add(packId);
+        }
+        else {
+            masterMap.set(itemName, new Set([packId]));
+        }
+        localSet.add(itemName);
+        return localSet;
+    }, new Set);
+};
+
 export const getPacks = () => 
     fetch('/packs.json')
     .then((res) => res.json())
@@ -49,7 +63,7 @@ export const getPacks = () =>
                         name: patch.patchName,
                         previewUrl: patch.patchAudio?.audioPreviewKey,
                         tags: fillSet(patchTagsMap, patch.tagList, id),
-                        devices: fillSet(patchDevicesMap, devices, id, null),
+                        devices: fillInnerSet(patchDevicesMap, devices, id, null),
                     }
                 }),
             };

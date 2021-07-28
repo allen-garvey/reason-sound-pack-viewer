@@ -154,7 +154,7 @@ export function getRoutes(){
                         return Array.from(this.patchDevicesMap.keys()).sort();
                     },
                     getItemLength(device){
-                        return this.patchDevicesMap.get(device).length;
+                        return this.patchDevicesMap.get(device).size;
                     },
                     itemRouteName: 'devicesShow'
                 };
@@ -171,15 +171,20 @@ export function getRoutes(){
                     title: route.params.id,
                     getPatches(){
                         const deviceKey = route.params.id;
+                        const patches = [];
+                        const packsSet = this.patchDevicesMap.get(deviceKey);
 
-                        return enumeratePacks(this.packsMap).map((pack) => 
+                        for(const packId of packsSet.keys()){
+                            const pack = this.packsMap[packId];
                             pack.patches
-                                .filter(patch => patch.devices.has(deviceKey))
-                                .map(patch => {
-                                    patch.packId = pack.id;
-                                    return patch;
-                                })
-                        ).flat();
+                                .forEach(patch => {
+                                    if(patch.devices.has(deviceKey)){
+                                        patch.packId = pack.id;
+                                        patches.push(patch);
+                                    }
+                                });
+                        }
+                        return patches;
                     },
                 };
 
