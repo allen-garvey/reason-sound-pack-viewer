@@ -42,7 +42,7 @@ export function getRoutes(){
                         return Array.from(this.patchTagsMap.keys()).sort();
                     },
                     getItemLength(patchTag){
-                        return this.patchTagsMap.get(patchTag).length;
+                        return this.patchTagsMap.get(patchTag).size;
                     },
                     itemRouteName: 'patchTagsShow'
                 };
@@ -59,16 +59,20 @@ export function getRoutes(){
                     title: route.params.id,
                     getPatches(){
                         const patchKey = route.params.id;
+                        const patches = [];
+                        const packsSet = this.patchTagsMap.get(patchKey);
 
-                        return this.patchTagsMap.get(patchKey).map((packId) => {
+                        for(const packId of packsSet.keys()){
                             const pack = this.packsMap[packId];
-                            return pack.patches
-                                .filter(patch => patch.tags.has(patchKey))
-                                .map(patch => {
-                                    patch.packId = pack.id;
-                                    return patch;
+                            pack.patches
+                                .forEach(patch => {
+                                    if(patch.tags.has(patchKey)){
+                                        patch.packId = pack.id;
+                                        patches.push(patch);
+                                    }
                                 });
-                        }).flat();
+                        }
+                        return patches;
                     },
                 };
 

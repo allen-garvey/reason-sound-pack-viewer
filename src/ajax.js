@@ -62,7 +62,7 @@ export const getPacks = () =>
                         id: patch.id,
                         name: patch.patchName,
                         previewUrl: patch.patchAudio?.audioPreviewKey,
-                        tags: fillSet(patchTagsMap, patch.tagList, id),
+                        tags: fillInnerSet(patchTagsMap, patch.tagList, id),
                         devices: fillInnerSet(patchDevicesMap, devices, id, null),
                     }
                 }),
