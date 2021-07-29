@@ -17,12 +17,19 @@ const fillSet = (masterMap, items, packId, key='title') => {
 const fillInnerSet = (masterMap, items, packId, key='title') => {
     return items.reduce((localSet, item) => { 
         const itemName = item[key] || item;
+        let masterEntry;
         if(masterMap.has(itemName)){
-            masterMap.get(itemName).add(packId);
+            masterEntry = masterMap.get(itemName);
         }
         else {
-            masterMap.set(itemName, new Set([packId]));
+            masterEntry = {
+                length: 0,
+                set: new Set(),
+            };
+            masterMap.set(itemName, masterEntry);
         }
+        masterEntry.set.add(packId);
+        masterEntry.length++;
         localSet.add(itemName);
         return localSet;
     }, new Set);

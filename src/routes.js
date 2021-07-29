@@ -42,7 +42,7 @@ export function getRoutes(){
                         return Array.from(this.patchTagsMap.keys()).sort();
                     },
                     getItemLength(patchTag){
-                        return this.patchTagsMap.get(patchTag).size;
+                        return this.patchTagsMap.get(patchTag).length;
                     },
                     itemRouteName: 'patchTagsShow'
                 };
@@ -60,7 +60,7 @@ export function getRoutes(){
                     getPatches(){
                         const patchKey = route.params.id;
                         const patches = [];
-                        const packsSet = this.patchTagsMap.get(patchKey);
+                        const packsSet = this.patchTagsMap.get(patchKey).set;
 
                         for(const packId of packsSet.keys()){
                             const pack = this.packsMap[packId];
@@ -158,7 +158,7 @@ export function getRoutes(){
                         return Array.from(this.patchDevicesMap.keys()).sort();
                     },
                     getItemLength(device){
-                        return this.patchDevicesMap.get(device).size;
+                        return this.patchDevicesMap.get(device).length;
                     },
                     itemRouteName: 'devicesShow'
                 };
@@ -176,7 +176,7 @@ export function getRoutes(){
                     getPatches(){
                         const deviceKey = route.params.id;
                         const patches = [];
-                        const packsSet = this.patchDevicesMap.get(deviceKey);
+                        const packsSet = this.patchDevicesMap.get(deviceKey).set;
 
                         for(const packId of packsSet.keys()){
                             const pack = this.packsMap[packId];
