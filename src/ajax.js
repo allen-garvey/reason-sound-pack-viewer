@@ -61,7 +61,9 @@ export const getPacks = () =>
                 size: packRaw.size,
                 tags: fillSet(packTagsMap, packRaw.tagList, id),
                 patches: packRaw.patchList.map((patch) => {
-                    const devices = (patch.data.devices.rackExtensions || patch.data.devices.builtin || []).map((deviceRaw) => {
+                    const devicesCombined = (patch.data.devices.rackExtensions || patch.data.devices.builtin || []).concat(patch.devices);
+                    
+                    const devices = devicesCombined.map((deviceRaw) => {
                         const deviceName = typeof deviceRaw === 'object' ? deviceRaw.name : deviceRaw;
                         return normalizeDeviceName(deviceName);
                     });

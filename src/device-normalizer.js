@@ -6,17 +6,46 @@ const FRIKTION_NAME = 'Friktion Modeled Strings';
 const KONG_NAME = 'Kong Drum Studio';
 const NN19_NAME = 'NN-19 Sampler';
 const NNXT_NAME = 'NN-XT Sampler';
+const UMPF_NAME = 'Umpf Club Drums'
+const SCREAM_NAME = 'Scream 4 Distortion';
+const ROTOR_NAME = 'Rotor Rotary Speaker';
+const REASON_DRUM_KITS_NAME = 'Reason Drum Kits';
+const ALGORITM_NAME = 'Algoritm FM Synthesizer';
+const AUDIOMATIC_NAME = 'Audiomatic Retro Transformer';
+const RYTMIK_NAME = 'Rytmik Drum Machine';
 
 const deviceMap = new Map();
 deviceMap.set('RV7000', RV700_NAME);
 deviceMap.set('Kong', KONG_NAME);
+deviceMap.set('NN19', NN19_NAME);
 deviceMap.set('NN19 Sampler', NN19_NAME);
 deviceMap.set('NN19 Digital Sampler', NN19_NAME);
+deviceMap.set('NNXT', NNXT_NAME);
 deviceMap.set('NNXT Digital Sampler', NNXT_NAME);
 deviceMap.set('Alligator', ALLIGATOR_NAME);
 deviceMap.set('Friktion', FRIKTION_NAME);
 deviceMap.set('XWave Synth', MALSTROM_NAME);
 deviceMap.set('CRM-3 Synth', THOR_NAME);
+deviceMap.set('Umpf', UMPF_NAME);
+deviceMap.set('Scream4', SCREAM_NAME);
+deviceMap.set('Scream 4', SCREAM_NAME);
+deviceMap.set('Rotor', ROTOR_NAME);
+deviceMap.set('RDK', REASON_DRUM_KITS_NAME);
+deviceMap.set('Algoritm', ALGORITM_NAME);
+deviceMap.set('Audiomatic', AUDIOMATIC_NAME);
+deviceMap.set('DMFC', RYTMIK_NAME);
+
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+// based on https://stackoverflow.com/questions/5582228/insert-space-before-capital-letters
+const removePascalCase = (str) => str.replace(/([a-z])([A-Z])/g, '$1 $2');
 
 
-export const normalizeDeviceName = (deviceName) => deviceMap.has(deviceName) ? deviceMap.get(deviceName) : deviceName;
+export const normalizeDeviceName = (deviceNameRaw) => {
+    const deviceName = removePascalCase(capitalize(deviceNameRaw.replace(/^.*\./, '')));
+
+    if(deviceMap.has(deviceName)){
+        return deviceMap.get(deviceName);
+    }
+    return deviceName;
+};
