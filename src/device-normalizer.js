@@ -13,6 +13,12 @@ const REASON_DRUM_KITS_NAME = 'Reason Drum Kits';
 const ALGORITM_NAME = 'Algoritm FM Synthesizer';
 const AUDIOMATIC_NAME = 'Audiomatic Retro Transformer';
 const RYTMIK_NAME = 'Rytmik Drum Machine';
+const COMPLEX_NAME = 'Complex-1 Modular Synthesizer';
+const EUROPA_NAME = 'Europa Shapeshifting Synthesizer';
+const GRAIN_NAME = 'Grain Sample Manipulator';
+const HUMANA_NAME = 'Humana Vocal Ensemble';
+const KLANG_NAME = 'Klang Tuned Percussion';
+const PANGEA_NAME = 'Pangea World Instruments';
 
 const deviceMap = new Map();
 deviceMap.set('RV7000', RV700_NAME);
@@ -34,6 +40,12 @@ deviceMap.set('RDK', REASON_DRUM_KITS_NAME);
 deviceMap.set('Algoritm', ALGORITM_NAME);
 deviceMap.set('Audiomatic', AUDIOMATIC_NAME);
 deviceMap.set('DMFC', RYTMIK_NAME);
+deviceMap.set('Complex', COMPLEX_NAME);
+deviceMap.set('Europa', EUROPA_NAME);
+deviceMap.set('Grain', GRAIN_NAME);
+deviceMap.set('Humana', HUMANA_NAME);
+deviceMap.set('Klang', KLANG_NAME);
+deviceMap.set('Pangea', PANGEA_NAME);
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
