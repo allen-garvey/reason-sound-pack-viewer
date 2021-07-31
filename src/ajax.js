@@ -63,10 +63,11 @@ export const getPacks = () =>
                 patches: packRaw.patchList.map((patch) => {
                     const devicesCombined = (patch.data.devices.rackExtensions || patch.data.devices.builtin || []).concat(patch.devices);
                     
-                    const devices = devicesCombined.map((deviceRaw) => {
+                    const devices = [...new Set(devicesCombined.map((deviceRaw) => {
                         const deviceName = typeof deviceRaw === 'object' ? deviceRaw.name : deviceRaw;
                         return normalizeDeviceName(deviceName);
-                    });
+                    })).keys()];
+                    
                     return {
                         id: patch.id,
                         name: patch.patchName,
