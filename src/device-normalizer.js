@@ -1,3 +1,5 @@
+const deviceMap = new Map();
+
 const RV700_NAME = 'RV7000 Reverb';
 const THOR_NAME = 'Thor';
 const MALSTROM_NAME = 'Malström';
@@ -19,33 +21,56 @@ const GRAIN_NAME = 'Grain Sample Manipulator';
 const HUMANA_NAME = 'Humana Vocal Ensemble';
 const KLANG_NAME = 'Klang Tuned Percussion';
 const PANGEA_NAME = 'Pangea World Instruments';
+const REASON_ELECTRIC_BASS_NAME = 'Reason Electric Bass';
+const SWEEPER_NAME = 'Sweeper Modulation Effect';
+const SYNCHRONOUS_NAME = 'Synchronous Effect Modulator';
+const REDRUM_NAME = 'Redrum Drum Computer';
+const QUARTET_NAME = 'Quartet Chorus Ensemble';
+const PULVERISER_NAME = 'Pulveriser Demolition';
+const PARSEC_NAME = 'Parsec Spectral Synthesizer';
+const PULSAR_NAME = 'Pulsar Dual LFO';
 
-const deviceMap = new Map();
-deviceMap.set('RV7000', RV700_NAME);
-deviceMap.set('Kong', KONG_NAME);
+[
+    RV700_NAME,
+    KONG_NAME,
+    ALLIGATOR_NAME,
+    FRIKTION_NAME,
+    UMPF_NAME,
+    ROTOR_NAME,
+    ALGORITM_NAME,
+    AUDIOMATIC_NAME,
+    COMPLEX_NAME,
+    EUROPA_NAME,
+    GRAIN_NAME,
+    HUMANA_NAME,
+    KLANG_NAME,
+    PANGEA_NAME,
+    SWEEPER_NAME,
+    SYNCHRONOUS_NAME,
+    REDRUM_NAME,
+    QUARTET_NAME,
+    PULVERISER_NAME,
+    PARSEC_NAME,
+    PULSAR_NAME,
+].forEach((deviceFullName) => {
+    const firstWord = deviceFullName.split(' ')[0];
+    deviceMap.set(firstWord, deviceFullName);
+});
+
+
 deviceMap.set('NN19', NN19_NAME);
 deviceMap.set('NN19 Sampler', NN19_NAME);
 deviceMap.set('NN19 Digital Sampler', NN19_NAME);
 deviceMap.set('NNXT', NNXT_NAME);
 deviceMap.set('NNXT Digital Sampler', NNXT_NAME);
-deviceMap.set('Alligator', ALLIGATOR_NAME);
-deviceMap.set('Friktion', FRIKTION_NAME);
 deviceMap.set('XWave Synth', MALSTROM_NAME);
 deviceMap.set('CRM-3 Synth', THOR_NAME);
-deviceMap.set('Umpf', UMPF_NAME);
 deviceMap.set('Scream4', SCREAM_NAME);
 deviceMap.set('Scream 4', SCREAM_NAME);
-deviceMap.set('Rotor', ROTOR_NAME);
 deviceMap.set('RDK', REASON_DRUM_KITS_NAME);
-deviceMap.set('Algoritm', ALGORITM_NAME);
-deviceMap.set('Audiomatic', AUDIOMATIC_NAME);
 deviceMap.set('DMFC', RYTMIK_NAME);
 deviceMap.set('Complex', COMPLEX_NAME);
-deviceMap.set('Europa', EUROPA_NAME);
-deviceMap.set('Grain', GRAIN_NAME);
-deviceMap.set('Humana', HUMANA_NAME);
-deviceMap.set('Klang', KLANG_NAME);
-deviceMap.set('Pangea', PANGEA_NAME);
+deviceMap.set('Electric Bass', REASON_ELECTRIC_BASS_NAME);
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
