@@ -29,6 +29,21 @@ const QUARTET_NAME = 'Quartet Chorus Ensemble';
 const PULVERISER_NAME = 'Pulveriser Demolition';
 const PARSEC_NAME = 'Parsec Spectral Synthesizer';
 const PULSAR_NAME = 'Pulsar Dual LFO';
+const SCENIC_NAME = 'Scenic Hybrid Instrument';
+const POLAR_NAME = 'Polar Dual Pitch Shifter';
+const MONOTONE_NAME = 'Monotone Bass Synthesizer';
+const MASTER_BUS_COMPRESSOR_NAME = 'Master Bus Compressor';
+const LAYERS_WAVES_NAME = 'Layers Wave Edition';
+const DRUM_SEQUENCER_NAME = 'Drum Sequencer';
+const SOFTUBE_AMP_NAME = 'Softube Amp';
+const SOFTUBE_BASS_AMP_NAME = 'Softube Bass Amp';
+const SCALES_AND_CHORDS_NAME = 'Scales & Chords';
+const RADICAL_PIANO_NAME = 'Radical Piano';
+const PATTERN_MUTATOR_NAME = 'Pattern Mutator';
+const DR_REX_NAME = 'Dr. Octo Rex Loop Player';
+const LINE_MIXER_NAME = 'Line Mixer 6:2';
+const MIXER_NAME = 'Mixer 14:2';
+const DUAL_ARPEGGIO_NAME = 'Dual Arpeggio';
 
 [
     RV700_NAME,
@@ -52,6 +67,8 @@ const PULSAR_NAME = 'Pulsar Dual LFO';
     PULVERISER_NAME,
     PARSEC_NAME,
     PULSAR_NAME,
+    POLAR_NAME,
+    MONOTONE_NAME,
 ].forEach((deviceFullName) => {
     const firstWord = deviceFullName.split(' ')[0];
     deviceMap.set(firstWord, deviceFullName);
@@ -71,6 +88,20 @@ deviceMap.set('RDK', REASON_DRUM_KITS_NAME);
 deviceMap.set('DMFC', RYTMIK_NAME);
 deviceMap.set('Complex', COMPLEX_NAME);
 deviceMap.set('Electric Bass', REASON_ELECTRIC_BASS_NAME);
+deviceMap.set('Scenic Hybrid', SCENIC_NAME);
+deviceMap.set('Master Compressor', MASTER_BUS_COMPRESSOR_NAME);
+deviceMap.set('Layers_wave_edition', LAYERS_WAVES_NAME);
+deviceMap.set('Drum Seq', DRUM_SEQUENCER_NAME);
+deviceMap.set('Reason Amp', SOFTUBE_AMP_NAME);
+deviceMap.set('Reason Bass Amp', SOFTUBE_BASS_AMP_NAME);
+deviceMap.set('Scales And Chords', SCALES_AND_CHORDS_NAME);
+deviceMap.set('Radicalpiano', RADICAL_PIANO_NAME);
+deviceMap.set('Mutator', PATTERN_MUTATOR_NAME);
+deviceMap.set('REX Loop Player', DR_REX_NAME);
+deviceMap.set('REX', DR_REX_NAME);
+deviceMap.set('LM6', LINE_MIXER_NAME);
+deviceMap.set('Mixer14:2', MIXER_NAME);
+deviceMap.set('Arpeggio', DUAL_ARPEGGIO_NAME);
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
