@@ -69,7 +69,7 @@
 <style lang="scss" module>
 .main {
     margin-top: 1.5rem;
-	padding-bottom: 10em;
+	padding-bottom: 8em;
 }
 
 .nav {
