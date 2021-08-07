@@ -4,8 +4,11 @@
         class="container"
         v-if="isFinishedLoading"
     >
-        <header class="header">
+        <header>
             <site-title></site-title>
+            <div :class="$style.subtitle">
+                Preview the sound packs included with <a href="https://www.reasonstudios.com/" target="_blank" rel="noopener">Reason+</a>
+            </div>
             <nav :class="$style.nav">
                 <ul :class="$style.navList">
                     <li>
@@ -70,6 +73,10 @@
 .main {
     margin-top: 1.5rem;
 	padding-bottom: 8em;
+}
+
+.subtitle {
+    margin: 0.5em 0 0;
 }
 
 .nav {
