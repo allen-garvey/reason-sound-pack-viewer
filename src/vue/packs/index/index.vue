@@ -1,6 +1,11 @@
 <template>
 <div>
-    <h2>{{ title }} <items-count :count="packs.length" /></h2>
+    <div :class="$style.heading">
+        <h2>{{ title }} <items-count :count="packs.length" /></h2>
+        <div :class="$style.externalUrl" v-if="externalUrl">
+            <a :href="externalUrl" target="_blank" rel="noopener">Website</a>
+        </div>
+    </div>
     <pack-list
         :packs="packs"
         :is-pack-playing="isPackPlaying"
@@ -10,7 +15,13 @@
 </template>
 
 <style lang="scss" module>
+    .heading {
+        margin-bottom: 2rem;
+    }
 
+    .externalUrl {
+        margin-top: 0.5rem;
+    }
 </style>
 
 <script>
@@ -47,6 +58,9 @@ export default {
         title: {
             type: String,
             required: true,
+        },
+        externalUrl: {
+            type: String,
         },
     },
     components: {

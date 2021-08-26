@@ -3,6 +3,7 @@ import PacksShow from './vue/packs/show/show.vue';
 import TextListPage from './vue/common/text-list-page.vue';
 import PatchListPage from './vue/common/patch-list-page.vue';
 import { enumeratePacks } from './model-helpers';
+import authorSites from './author-sites';
 
 export function getRoutes(){
     return [
@@ -103,10 +104,13 @@ export function getRoutes(){
             name: 'creatorsShow',
             component: PacksIndex,
             props: (route) => {
+                const id = route.params.id;
+               
                 const props = {
-                    title: route.params.id,
+                    title: id,
+                    externalUrl: authorSites[id] || '',
                     getPacks(){
-                        return this.creatorsMap.get(route.params.id).map((id) => this.packsMap[id]);
+                        return this.creatorsMap.get(id).map((id) => this.packsMap[id]);
                     },
                 };
 
