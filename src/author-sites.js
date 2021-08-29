@@ -8,7 +8,13 @@ export default {
     'ModeAudio': 'https://modeaudio.com/',
     'New Loops': 'https://newloops.com/',
     'Paul Ortiz': 'https://paulortiz.bandcamp.com/',
+    'Quixotic Sound Design': 'https://www.quixoticsounddesign.com/',
+    'Reasonistas': 'https://www.reasonistas.com/',
+    'Reverb Machine': 'https://reverbmachine.com/',
     'Seán Murray': 'https://www.seanmurrayguitar.com/',
     'SKP Sound Design': 'https://www.skpsounds.com/',
+    'Theodora Flygt': 'https://soundcloud.com/theodora49',
+    'Tobtok': 'https://soundcloud.com/tobtok',
+    'Undrgrnd Sounds': 'https://www.undrgrndsounds.com/',
     'Venus Theory': 'https://venustheory.com/',
 };
