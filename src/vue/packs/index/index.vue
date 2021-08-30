@@ -16,7 +16,7 @@
 
 <style lang="scss" module>
     .heading {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
 
     .externalUrl {

@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h2>{{ title }} <items-count :count="getItems().length" /></h2>
+    <h2 :class="$style.title">{{ title }} <items-count :count="getItems().length" /></h2>
     <ul>
         <li
             v-for="item in getItems()"
@@ -20,6 +20,9 @@
 </template>
 
 <style lang="scss" module>
+.title {
+    margin-bottom: 1rem;
+}
 .item {
     font-size: 1.125rem;
     margin: 0 0 1em;
