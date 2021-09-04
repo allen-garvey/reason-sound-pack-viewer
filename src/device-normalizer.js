@@ -17,6 +17,7 @@ const LAYERS_WAVES_NAME = 'Layers Wave Edition';
 const LINE_MIXER_NAME = 'Line Mixer 6:2';
 const MALSTROM_NAME = 'Malström';
 const MASTER_BUS_COMPRESSOR_NAME = 'Master Bus Compressor';
+const MIMIC_NAME = 'Mimic Creative Sampler';
 const MIXER_NAME = 'Mixer 14:2';
 const MONOTONE_NAME = 'Monotone Bass Synthesizer';
 const NN19_NAME = 'NN-19 Sampler';
@@ -102,6 +103,7 @@ deviceMap.set('REX', DR_REX_NAME);
 deviceMap.set('LM6', LINE_MIXER_NAME);
 deviceMap.set('Mixer14:2', MIXER_NAME);
 deviceMap.set('Arpeggio', DUAL_ARPEGGIO_NAME);
+deviceMap.set('Mimic', MIMIC_NAME);
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
