@@ -59,6 +59,7 @@ export const getPacks = () =>
                 previewUrl: packRaw.audio?.audioPreviewKey,
                 description: packRaw.description,
                 size: packRaw.size,
+                created: packRaw.created.replace(/T.*$/, ''),
                 tags: fillSet(packTagsMap, packRaw.tagList, id),
                 patches: packRaw.patchList.map((patch) => {
                     const devicesCombined = (patch.data.devices.rackExtensions || patch.data.devices.builtin || []).concat(patch.devices);

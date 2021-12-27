@@ -16,6 +16,10 @@
     </p>
     <p>{{ pack.description }}</p>
     <dl>
+        <dt>Created:</dt>
+        <dd>{{ pack.created }}</dd>
+    </dl>
+    <dl>
         <dt>Size:</dt>
         <dd>{{ packSize }}</dd>
     </dl>
