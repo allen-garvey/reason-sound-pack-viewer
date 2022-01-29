@@ -67,6 +67,8 @@
     }
 </style>
 <script>
+import { nextTick } from 'vue';
+
 import CoverImage from '../../common/cover-image.vue';
 import InfiniteObserver from '../../common/infinite-observer.vue';
 
@@ -97,9 +99,11 @@ export default {
         }
     },
     watch: {
-        packs(){
-            this.setup();
-        },
+        '$route'(to, from){
+            nextTick().then(() => {
+                this.setup();
+            });
+        }
     },
     created(){
         this.setup();
