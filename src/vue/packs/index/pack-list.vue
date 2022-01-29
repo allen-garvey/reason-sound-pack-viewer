@@ -1,24 +1,26 @@
 <template>
     <div :class="$style.container">
-        <ul :class="$style.packList">
-            <li 
-                v-for="pack in packsVisible" 
-                :key="pack.id"
-                :class="$style.pack"
-            >
-                <cover-image
-                    :class="$style.imageContainer"
-                    :is-playing="isPackPlaying(pack.id)"
-                    :src="pack.coverPhoto"
-                    :pack-title="pack.title"
-                    @controls-clicked="packClicked(pack)"
-                 />
-                <div :class="$style.packTitle">
-                    <router-link :to="{name: 'packsShow', params: {id: pack.id}}">{{ pack.title }}</router-link>
-                </div>
-            </li>
-        </ul>
-        <infinite-observer :on-trigger="loadMorePacks" />
+        <template v-if="isLoaded">
+            <ul :class="$style.packList">
+                <li 
+                    v-for="pack in packsVisible" 
+                    :key="pack.id"
+                    :class="$style.pack"
+                >
+                    <cover-image
+                        :class="$style.imageContainer"
+                        :is-playing="isPackPlaying(pack.id)"
+                        :src="pack.coverPhoto"
+                        :pack-title="pack.title"
+                        @controls-clicked="packClicked(pack)"
+                    />
+                    <div :class="$style.packTitle">
+                        <router-link :to="{name: 'packsShow', params: {id: pack.id}}">{{ pack.title }}</router-link>
+                    </div>
+                </li>
+            </ul>
+            <infinite-observer :on-trigger="loadMorePacks" />
+        </template>
     </div>
 </template>
 
@@ -89,6 +91,7 @@ export default {
     },
     data(){
         return {
+            isLoaded: false,
             packsEndIndex: 0,
             packChunkSize: 0,
         };
@@ -110,8 +113,13 @@ export default {
     },
     methods: {
         setup(){
+            this.isLoaded = false;
             this.setChunkSize();
             this.packsEndIndex = this.packChunkSize;
+
+            nextTick().then(() => {
+                this.isLoaded = true;
+            });
         },
         setChunkSize(){
             if(window.innerWidth <= 366){
