@@ -31,7 +31,7 @@
                 viewBox="0 0 24 24"
             >
                 <use 
-                    xlink:href="#icon-volume"
+                    xlink:href="#icon-volume-x"
                     v-if="audioVolume === 0" />
                 <use 
                     xlink:href="#icon-volume-1"
