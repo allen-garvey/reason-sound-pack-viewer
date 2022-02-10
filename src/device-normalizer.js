@@ -3,6 +3,7 @@ const deviceMap = new Map();
 const ALGORITM_NAME = 'Algoritm FM Synthesizer';
 const ALLIGATOR_NAME = 'Alligator Filter Gate';
 const AUDIOMATIC_NAME = 'Audiomatic Retro Transformer';
+const BASSLINE_GENERATOR_NAME = 'Bassline Generator';
 const COMPLEX_NAME = 'Complex-1 Modular Synthesizer';
 const DRUM_SEQUENCER_NAME = 'Drum Sequencer';
 const DR_REX_NAME = 'Dr. Octo Rex Loop Player';
@@ -70,6 +71,7 @@ const UMPF_NAME = 'Umpf Club Drums';
     PULSAR_NAME,
     POLAR_NAME,
     MONOTONE_NAME,
+    BASSLINE_GENERATOR_NAME,
 ].forEach((deviceFullName) => {
     const firstWord = deviceFullName.split(' ')[0];
     deviceMap.set(firstWord, deviceFullName);
@@ -104,6 +106,7 @@ deviceMap.set('LM6', LINE_MIXER_NAME);
 deviceMap.set('Mixer14:2', MIXER_NAME);
 deviceMap.set('Arpeggio', DUAL_ARPEGGIO_NAME);
 deviceMap.set('Mimic', MIMIC_NAME);
+deviceMap.set('Bassline', BASSLINE_GENERATOR_NAME);
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
