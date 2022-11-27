@@ -1,7 +1,10 @@
 <template>
 <div :class="$style.container">
     <div :class="$style.mobileTitle">
-        {{ title }}
+        <span>{{ title }}</span>
+        <span v-if="isAudioLoaded" :class="$style.time">
+            {{ formatSeconds(currentAudioTime) }} - {{ formatSeconds(audioLength) }}
+        </span>
     </div>
     <div :class="$style.innerContainer">
         <div
@@ -23,7 +26,10 @@
             </button>
         </div>
         <div :class="$style.desktopTitle">
-            {{ title }}
+            <span>{{ title }}</span>
+            <span v-if="isAudioLoaded" :class="$style.time">
+                {{ formatSeconds(currentAudioTime) }} - {{ formatSeconds(audioLength) }}
+            </span>
         </div>
         <div :class="$style.volumeContainer" v-show="!isAudioEmpty">
             <svg 
@@ -132,6 +138,11 @@ $breakpoint: 600px;
     width: 28px;
 }
 
+.time {
+    display: inline-block;
+    margin-left: 0.5rem;
+}
+
 $volume-slider-handle-color: #6b6b6b;
 $volume-slider-handle-dimensions: 15px;
 $volume-slider-handle-border-radius: 50%;
@@ -197,6 +208,7 @@ $volume-slider-range-color: #dbd9d6;
 
 <script>
 import playStates from '../models/play-states';
+import { formatSeconds } from '../../time';
 
 export default {
     props: {
@@ -213,6 +225,18 @@ export default {
         },
         audioVolume: {
             type: Number,
+            required: true,
+        },
+        currentAudioTime: {
+            type: Number,
+            required: true,
+        },
+        audioLength: {
+            type: Number,
+            required: true,
+        },
+        isAudioLoaded: {
+            type: Boolean,
             required: true,
         },
     },
@@ -234,6 +258,7 @@ export default {
         },
     },
     methods: {
+        formatSeconds,
         buttonClicked(){
             if(this.playState === playStates.IS_PAUSED){
                 this.$emit('audioRestart');

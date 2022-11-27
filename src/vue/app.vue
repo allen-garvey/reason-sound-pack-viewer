@@ -62,6 +62,9 @@
         :play-state="playState"
         :media-id="mediaId"
         :audio-volume="audioVolume"
+        :current-audio-time="currentAudioTime"
+        :audio-length="audioLength"
+        :is-audio-loaded="isAudioLoaded"
         @audio-restart="restartAudio"
         @audio-stop="stopAudio"
         @volume-changed="adjustVolume"
@@ -132,10 +135,14 @@ export default {
         audio.addEventListener('loadeddata', () => {
             this.playState = playStates.IS_PLAYING;
             audio.volume = this.audioVolume;
+            this.audioLength = Math.floor(audio.duration);
         });
         audio.addEventListener('ended', () => {
             this.playState = playStates.IS_PAUSED;
         });
+        audio.addEventListener('timeupdate', (e) => {
+			this.currentAudioTime = Math.floor(e.target.currentTime);
+		});
         getPacks().then(({packsMap, packTagsMap, patchTagsMap, patchDevicesMap, creatorsMap}) => {
             this.packsMap = packsMap;
             this.packTagsMap = packTagsMap;
@@ -155,6 +162,8 @@ export default {
             mediaId: null,
             playState: playStates.IS_EMPTY,
             audioVolume: 0,
+            audioLength: 0,
+            currentAudioTime: 0,
         };
     },
     computed: {
@@ -170,6 +179,9 @@ export default {
                 default:
                     return this.mediaTitle;
             }
+        },
+        isAudioLoaded(){
+            return this.playState === playStates.IS_PAUSED || this.playState === playStates.IS_PLAYING;
         },
     },
     methods: {
