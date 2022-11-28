@@ -65,6 +65,7 @@
         :current-audio-time="currentAudioTime"
         :audio-length="audioLength"
         :is-audio-loaded="isAudioLoaded"
+        :on-track-seek-requested="setCurrentTrackTime"
         @audio-restart="restartAudio"
         @audio-stop="stopAudio"
         @volume-changed="adjustVolume"
@@ -210,6 +211,9 @@ export default {
             audio.volume = value;
             this.audioVolume = value;
             userSettings.saveUserVolume(value);
+        },
+        setCurrentTrackTime(seconds){
+            audio.currentTime = seconds;
         },
     },
 };

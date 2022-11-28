@@ -1,5 +1,16 @@
 <template>
 <div :class="$style.container">
+    <div :class="$style.progressBarContainer" v-if="isAudioLoaded">
+        <input 
+            :class="$style.progressRange"
+            type="range" 
+            min="0" 
+            :max="audioLength" 
+            step="1" 
+            :value="currentAudioTime"
+            @input="progressBarUpdated"
+        />
+    </div>
     <div :class="$style.mobileTitle">
         <span>{{ title }}</span>
         <span v-if="isAudioLoaded" :class="$style.time">
@@ -80,6 +91,7 @@ $breakpoint: 600px;
     color: #fff;
     text-align: center;
     box-shadow: 0 -5px 15px rgba(84, 22, 8, 0.2);
+    padding-top: 0.5rem;
 
     @media screen and (max-width: $breakpoint) {
         height: 104px;
@@ -190,20 +202,14 @@ $volume-slider-range-color: #dbd9d6;
     }
 }
 
-// // chrome specific styles
-// @media screen and (-webkit-min-device-pixel-ratio:0) {
-//     .volumeInput {
-//         overflow: hidden;
-        
-//         &::-webkit-slider-runnable-track {
-//             height: 10px;
-//             -webkit-appearance: none;
-//             appearance: none;
-//             color: #13bba4;
-//             margin-top: -1px;
-//         }
-//     }
-// }
+.progressBarContainer {
+    width: calc(100% - 20px);
+    position: absolute;
+    top: -6px;
+}
+.progressRange {
+    width: 100%;
+}
 </style>
 
 <script>
@@ -239,6 +245,15 @@ export default {
             type: Boolean,
             required: true,
         },
+        onTrackSeekRequested: {
+            type: Function,
+            required: true,
+        },
+    },
+    data(){
+        return {
+            trackSeekTimeout: undefined,
+        };
     },
     computed: {
         isAudioEmpty(){
@@ -266,7 +281,14 @@ export default {
             else {
                 this.$emit('audioStop');
             }
-        }
+        },
+        progressBarUpdated(e){
+            clearTimeout(this.trackSeekTimeout);
+            const time = parseInt(e.target.value);
+            this.trackSeekTimeout = setTimeout(() => {
+                this.onTrackSeekRequested(time);
+            }, 300);
+        },
     }
 };
 </script>
