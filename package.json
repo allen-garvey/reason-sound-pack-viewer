@@ -22,7 +22,7 @@
     "@vue/compiler-sfc": "3.2.45",
     "css-loader": "^6.7.2",
     "mini-css-extract-plugin": "^2.7.0",
-    "node-fetch": "^3.3.0",
+    "node-fetch": "^2.6.7",
     "node-sass": "^8.0.0",
     "sass-loader": "^13.2.0",
     "sharp": "^0.31.2",
