@@ -1,7 +1,10 @@
-const fs = require('fs');
-const path = require('path');
-const fetch = require('node-fetch');
-const sharp = require('sharp');
+import fs from 'fs';
+import path from 'path';
+import fetch from 'node-fetch';
+import sharp from 'sharp';
+import * as url from 'url';
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const OUTPUT_DIR = path.join(__dirname, '..', 'public_html');
 const IMAGES_DIR = path.join(__dirname, '..', 'public_html', 'images');
@@ -19,8 +22,8 @@ const writePackImages = (packs, imageSet) => packs.map((pack) => {
         return Promise.resolve();
     }
     return fetch(pack.coverPhoto)
-        .then(res => res.buffer())
-        .then((data) => sharp(data)
+        .then(res => res.arrayBuffer())
+        .then((data) => sharp(Buffer.from(data))
             .resize({width: IMAGE_DIMENSIONS, height: IMAGE_DIMENSIONS, quality: 85})
             .toFile(path.join(IMAGES_DIR, imageName)))
         .then(() => 1);

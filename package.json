@@ -8,7 +8,7 @@
     "start": "webpack serve --config webpack.config.js",
     "build": "webpack --config webpack.config.js",
     "deploy": "webpack --config webpack.config.js --mode='production'",
-    "hydrate": "time node scripts/hydrate.js",
+    "hydrate": "time node scripts/hydrate.mjs",
     "dev": "npm run hydrate && npm start"
   },
   "repository": {
@@ -20,16 +20,16 @@
   "homepage": "",
   "devDependencies": {
     "@vue/compiler-sfc": "3.2.45",
-    "css-loader": "^6.7.2",
-    "mini-css-extract-plugin": "^2.7.0",
-    "node-fetch": "^2.6.7",
+    "css-loader": "^6.7.3",
+    "mini-css-extract-plugin": "^2.7.2",
+    "node-fetch": "^3.3.0",
     "node-sass": "^8.0.0",
     "sass-loader": "^13.2.0",
     "sharp": "^0.31.2",
     "vue-loader": "^17.0.1",
     "vue-style-loader": "^4.1.3",
     "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.0",
+    "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
