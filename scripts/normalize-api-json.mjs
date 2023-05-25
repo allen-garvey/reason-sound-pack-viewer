@@ -1,21 +1,37 @@
 import { normalizeDeviceName } from './device-normalizer.mjs';
 
 /**
+@param {Object} map
+@param {String} value
+@returns {Number}
+*/
+const getIdAndAddToMap = (map, value) => {
+    if(map[value]){
+        return map[value];
+    }
+    const id = Object.keys(map).length + 1;
+    map[value] = id;
+    return id;
+};
+
+const reverseObject = (object) => Object.fromEntries(Object.entries(object).map(([key, value]) => [value, key]));
+
+/**
 @param {Array.<Object>} rawJson
 @returns {Array.<Object>}
 */
-
 export const normalizeApiJson = (rawJson) => {
     const patchTags = {};
     const packTags = {};
     const devicesMap = {};
+    const creatorsMap = {};
     
     const packs = rawJson.map(pack => ({
         id: pack.id,
         title: pack.title,
         created: pack.created.replace(/T.*$/, ''),
         previewUrl: pack.audio?.audioPreviewKey,
-        author: pack.authorDisplayName,
+        author: getIdAndAddToMap(creatorsMap, pack.authorDisplayName),
         coverPhoto: pack.coverPhoto,
         description: pack.description,
         size: pack.size,
@@ -31,14 +47,7 @@ export const normalizeApiJson = (rawJson) => {
                 id: patch.id,
                 name: patch.patchName,
                 previewUrl: patch.patchAudio?.audioPreviewKey,
-                devices: devices.map(name => {
-                    if(devicesMap[name]){
-                        return devicesMap[name];
-                    }
-                    const id = Object.keys(devicesMap).length + 1;
-                    devicesMap[name] = id;
-                    return id;
-                }),
+                devices: devices.map(name => getIdAndAddToMap(devicesMap, name)),
                 tags: patch.tagList.map(({id, title}) => {
                     patchTags[id] = title;
                     return id;
@@ -55,6 +64,7 @@ export const normalizeApiJson = (rawJson) => {
         packs,
         patchTags,
         packTags,
-        devicesMap: Object.fromEntries(Object.entries(devicesMap).map(([key, value]) => [value, key])),
+        devicesMap: reverseObject(devicesMap),
+        creators: reverseObject(creatorsMap),
     };
 };

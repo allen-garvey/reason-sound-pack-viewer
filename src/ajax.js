@@ -38,7 +38,7 @@ const fillInnerSet = (masterMap, items, packId, getItemName=identity) => {
 export const getPacks = () => 
     fetch('/packs.json')
     .then((res) => res.json())
-    .then(({ packs, patchTags, packTags, devicesMap }) => {
+    .then(({ packs, patchTags, packTags, devicesMap, creators }) => {
         const packsMap = {};
         const packTagsMap = new Map();
         const patchTagsMap = new Map();
@@ -47,8 +47,9 @@ export const getPacks = () =>
         
         packs.forEach(pack => {
             const id = pack.id;
-            const author = pack.author;
+            const author = creators[pack.author];
 
+            pack.author = author;
             pack.coverPhoto = {
                 webp: `/images/pack-${id}.webp`,
                 png: pack.coverPhoto,
