@@ -36,7 +36,7 @@
             </div>
             <ul :class="$style.deviceList">
                 <li
-                    v-for="device of patch.devices"
+                    v-for="device of devicesForPack(patch.devices)"
                     :key="device"
                     :class="$style.device"
                 >
@@ -112,6 +112,7 @@ $icon-controls-dimensions: 40px;
 import { AUDIO_PREVIEW_URL_PREFIX } from '../../jukebox.js';
 import { isMediaPlaying } from '../models/media-helpers';
 import ReasonPlusLink from '../common/reason-plus-link.vue';
+import { sortDevices } from '../../devices';
 
 export default {
     props: {
@@ -166,6 +167,9 @@ export default {
                     id: this.patchId(patch),
                 });
             }
+        },
+        devicesForPack(devices){
+            return sortDevices(Array.from(devices));
         },
     },
 };
