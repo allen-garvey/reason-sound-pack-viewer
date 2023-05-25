@@ -3,6 +3,7 @@ import path from 'path';
 import fetch from 'node-fetch';
 import sharp from 'sharp';
 import * as url from 'url';
+import { normalizeApiJson } from './normalize-api-json.mjs';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -36,7 +37,7 @@ Promise.all([
     .then(([res]) => Promise.all([res.json(), createImageCacheSet()]))
     .then(([packs, imageSet]) => {
         const promises = writePackImages(packs, imageSet);
-        promises.push(fs.promises.writeFile(path.join(OUTPUT_DIR, 'packs.json'), JSON.stringify(packs)));
+        promises.push(fs.promises.writeFile(path.join(OUTPUT_DIR, 'packs.json'), JSON.stringify(normalizeApiJson(packs))));
         
         return Promise.all(promises);
     })

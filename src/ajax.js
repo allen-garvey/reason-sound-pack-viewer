@@ -1,5 +1,3 @@
-import { normalizeDeviceName } from './device-normalizer';
-
 const fillSet = (masterMap, items, packId, key='title') => {
     return items.reduce((localSet, item) => { 
         const itemName = item[key] || item;
@@ -44,40 +42,22 @@ export const getPacks = () =>
         const patchTagsMap = new Map();
         const patchDevicesMap = new Map();
         const creatorsMap = new Map();
-        packs.forEach((packRaw) => {
-            const id = packRaw.id;
-            const author = packRaw.authorDisplayName;
+        
+        packs.forEach(pack => {
+            const id = pack.id;
+            const author = pack.author;
 
-            const pack = {
-                id,
-                title: packRaw.title,
-                coverPhoto: {
-                    webp: `/images/pack-${id}.webp`,
-                    png: packRaw.coverPhoto,
-                },
-                author,
-                previewUrl: packRaw.audio?.audioPreviewKey,
-                description: packRaw.description,
-                size: packRaw.size,
-                created: packRaw.created.replace(/T.*$/, ''),
-                tags: fillSet(packTagsMap, packRaw.tagList, id),
-                patches: packRaw.patchList.map((patch) => {
-                    const devicesCombined = (patch.data.devices.rackExtensions || patch.data.devices.builtin || []).concat(patch.devices);
-                    
-                    const devices = [...new Set(devicesCombined.map((deviceRaw) => {
-                        const deviceName = typeof deviceRaw === 'object' ? deviceRaw.name : deviceRaw;
-                        return normalizeDeviceName(deviceName);
-                    })).keys()];
-                    
-                    return {
-                        id: patch.id,
-                        name: patch.patchName,
-                        previewUrl: patch.patchAudio?.audioPreviewKey,
-                        tags: fillInnerSet(patchTagsMap, patch.tagList, id),
-                        devices: fillInnerSet(patchDevicesMap, devices, id, null),
-                    }
-                }),
+            pack.coverPhoto = {
+                webp: `/images/pack-${id}.webp`,
+                png: pack.coverPhoto,
             };
+            pack.patches = pack.patches.map((patch) => {
+                patch.tags = fillInnerSet(patchTagsMap, patch.tags, id);
+                patch.devices = fillInnerSet(patchDevicesMap, patch.devices, id, null);
+                return patch;
+            });
+            pack.tags = fillSet(packTagsMap, pack.tags, id);
+
             if(creatorsMap.has(author)){
                 creatorsMap.get(author).push(id);
             }
@@ -87,5 +67,5 @@ export const getPacks = () =>
             packsMap[id] = pack;
         });
 
-        return {packsMap, packTagsMap, patchTagsMap,patchDevicesMap, creatorsMap};
+        return { packsMap, packTagsMap, patchTagsMap,patchDevicesMap, creatorsMap };
     });
