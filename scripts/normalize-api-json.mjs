@@ -8,6 +8,7 @@ import { normalizeDeviceName } from './device-normalizer.mjs';
 export const normalizeApiJson = (rawJson) => {
     const patchTags = {};
     const packTags = {};
+    const devicesMap = {};
     
     const packs = rawJson.map(pack => ({
         id: pack.id,
@@ -30,7 +31,14 @@ export const normalizeApiJson = (rawJson) => {
                 id: patch.id,
                 name: patch.patchName,
                 previewUrl: patch.patchAudio?.audioPreviewKey,
-                devices,
+                devices: devices.map(name => {
+                    if(devicesMap[name]){
+                        return devicesMap[name];
+                    }
+                    const id = Object.keys(devicesMap).length + 1;
+                    devicesMap[name] = id;
+                    return id;
+                }),
                 tags: patch.tagList.map(({id, title}) => {
                     patchTags[id] = title;
                     return id;
@@ -47,5 +55,6 @@ export const normalizeApiJson = (rawJson) => {
         packs,
         patchTags,
         packTags,
+        devicesMap: Object.fromEntries(Object.entries(devicesMap).map(([key, value]) => [value, key])),
     };
 };

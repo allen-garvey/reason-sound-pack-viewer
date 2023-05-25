@@ -38,7 +38,7 @@ const fillInnerSet = (masterMap, items, packId, getItemName=identity) => {
 export const getPacks = () => 
     fetch('/packs.json')
     .then((res) => res.json())
-    .then(({ packs, patchTags, packTags }) => {
+    .then(({ packs, patchTags, packTags, devicesMap }) => {
         const packsMap = {};
         const packTagsMap = new Map();
         const patchTagsMap = new Map();
@@ -55,7 +55,7 @@ export const getPacks = () =>
             };
             pack.patches = pack.patches.map((patch) => {
                 patch.tags = fillInnerSet(patchTagsMap, patch.tags, id, (item) => patchTags[item]);
-                patch.devices = fillInnerSet(patchDevicesMap, patch.devices, id);
+                patch.devices = fillInnerSet(patchDevicesMap, patch.devices, id, (item) => devicesMap[item]);
                 return patch;
             });
             pack.tags = fillSet(packTagsMap, pack.tags, id, (item) => packTags[item]);
