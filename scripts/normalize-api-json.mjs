@@ -6,7 +6,10 @@ import { normalizeDeviceName } from './device-normalizer.mjs';
 */
 
 export const normalizeApiJson = (rawJson) => {
-    return rawJson.map(pack => ({
+    const patchTags = {};
+    const packTags = {};
+    
+    const packs = rawJson.map(pack => ({
         id: pack.id,
         title: pack.title,
         created: pack.created.replace(/T.*$/, ''),
@@ -28,9 +31,21 @@ export const normalizeApiJson = (rawJson) => {
                 name: patch.patchName,
                 previewUrl: patch.patchAudio?.audioPreviewKey,
                 devices,
-                tags: patch.tagList,
+                tags: patch.tagList.map(({id, title}) => {
+                    patchTags[id] = title;
+                    return id;
+                }),
             };
         }),
-        tags: pack.tagList,
+        tags: pack.tagList.map(({id, title}) => {
+            packTags[id] = title;
+            return id;
+        }),
     }));
+
+    return {
+        packs,
+        patchTags,
+        packTags,
+    };
 };

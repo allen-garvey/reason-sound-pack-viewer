@@ -1,6 +1,8 @@
-const fillSet = (masterMap, items, packId, key='title') => {
+const identity = (a) => a;
+
+const fillSet = (masterMap, items, packId, getItemName=identity) => {
     return items.reduce((localSet, item) => { 
-        const itemName = item[key] || item;
+        const itemName = getItemName(item);
         if(masterMap.has(itemName)){
             masterMap.get(itemName).push(packId);
         }
@@ -12,9 +14,9 @@ const fillSet = (masterMap, items, packId, key='title') => {
     }, new Set);
 };
 
-const fillInnerSet = (masterMap, items, packId, key='title') => {
+const fillInnerSet = (masterMap, items, packId, getItemName=identity) => {
     return items.reduce((localSet, item) => { 
-        const itemName = item[key] || item;
+        const itemName = getItemName(item);
         let masterEntry;
         if(masterMap.has(itemName)){
             masterEntry = masterMap.get(itemName);
@@ -36,7 +38,7 @@ const fillInnerSet = (masterMap, items, packId, key='title') => {
 export const getPacks = () => 
     fetch('/packs.json')
     .then((res) => res.json())
-    .then((packs) => {
+    .then(({ packs, patchTags, packTags }) => {
         const packsMap = {};
         const packTagsMap = new Map();
         const patchTagsMap = new Map();
@@ -52,11 +54,11 @@ export const getPacks = () =>
                 png: pack.coverPhoto,
             };
             pack.patches = pack.patches.map((patch) => {
-                patch.tags = fillInnerSet(patchTagsMap, patch.tags, id);
-                patch.devices = fillInnerSet(patchDevicesMap, patch.devices, id, null);
+                patch.tags = fillInnerSet(patchTagsMap, patch.tags, id, (item) => patchTags[item]);
+                patch.devices = fillInnerSet(patchDevicesMap, patch.devices, id);
                 return patch;
             });
-            pack.tags = fillSet(packTagsMap, pack.tags, id);
+            pack.tags = fillSet(packTagsMap, pack.tags, id, (item) => packTags[item]);
 
             if(creatorsMap.has(author)){
                 creatorsMap.get(author).push(id);
@@ -67,5 +69,5 @@ export const getPacks = () =>
             packsMap[id] = pack;
         });
 
-        return { packsMap, packTagsMap, patchTagsMap,patchDevicesMap, creatorsMap };
+        return { packsMap, packTagsMap, patchTagsMap, patchDevicesMap, creatorsMap, patchTags, packTags };
     });
