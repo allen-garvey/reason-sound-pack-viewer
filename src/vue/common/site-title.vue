@@ -6,7 +6,7 @@
 
 <style lang="scss" module>
 .title{
-    margin: 1.5rem 0 0;
+    margin: 1.2rem 0 0;
 
     a{
         color: #000;

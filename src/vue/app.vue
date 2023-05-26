@@ -75,22 +75,22 @@
 
 <style lang="scss" module>
 .main {
-    margin-top: 1.5rem;
-	padding-bottom: 8em;
+    margin-top: 1.25rem;
+	padding-bottom: 8rem;
 }
 
 .subtitle {
-    margin: 0.5em 0 0;
+    margin: 0.1em 0 0;
+    font-size: 0.8rem;
 }
 
 .nav {
-    margin-top: 0.5em;
+    margin-top: 1em;
 }
 
 .navList {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 1em;
 
     li {
         width: 50%;

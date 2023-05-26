@@ -25,13 +25,13 @@
 </template>
 
 <style lang="scss" module>
-    $image-dimensions: 150px;
+    $image-dimensions: 187.5px;
 
     .packList {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        gap: 20px 10px;
+        gap: 25px 12px;
     }
     
     .pack {
@@ -39,7 +39,6 @@
     }
 
     .packTitle {
-        font-size: 1.125rem;
         margin-top: 0.5em;
         padding: 0 0.25em;
         text-align: center;
@@ -49,10 +48,10 @@
         height: $image-dimensions;
     }
 
-    @media screen and (max-width: 668px) {
+    @media screen and (max-width: 850px) {
         .packList {
             justify-content: center;
-            column-gap: 28px;
+            gap: 52px 32px;
         }
     }
 </style>

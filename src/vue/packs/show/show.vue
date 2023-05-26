@@ -1,6 +1,6 @@
 <template>
 <div>
-    <h2>{{ pack.title }}</h2>
+    <h2 :class="$style.title">{{ pack.title }}</h2>
     <cover-image
         :class="$style.coverImageContainer"
         :is-playing="isPackPlaying"
@@ -50,6 +50,11 @@
 <style lang="scss" module>
 $cover-image-dimensions: 300px;
 
+.title {
+    // margin-bottom: 8px;
+    margin-bottom: 0.4rem;
+}
+
 .coverImageContainer {
     height: $cover-image-dimensions;
     width: $cover-image-dimensions;
@@ -61,6 +66,9 @@ $cover-image-dimensions: 300px;
 
 dl {
     display: flex;
+    dt {
+        min-width: 4em;
+    }
     dd {
         margin-left: 1.35em;
     }
