@@ -60,7 +60,6 @@
         v-if="isFinishedLoading"
         :title="audioTitle"
         :play-state="playState"
-        :media-id="mediaId"
         :audio-volume="audioVolume"
         :current-audio-time="currentAudioTime"
         :audio-length="audioLength"
@@ -144,6 +143,10 @@ export default {
         audio.addEventListener('timeupdate', (e) => {
 			this.currentAudioTime = Math.floor(e.target.currentTime);
 		});
+        audio.addEventListener('error', (e) => {
+            this.playState = playStates.IS_ERROR;
+            this.mediaId = null;
+		});
         getPacks().then(({packsMap, packTagsMap, patchTagsMap, patchDevicesMap, creatorsMap}) => {
             this.packsMap = packsMap;
             this.packTagsMap = packTagsMap;
@@ -175,6 +178,8 @@ export default {
             switch(this.playState){
                 case playStates.IS_EMPTY:
                     return '';
+                case playStates.IS_ERROR:
+                    return 'There was an error loading the audio preview';
                 case playStates.IS_LOADING:
                     return 'Loading…';
                 default:

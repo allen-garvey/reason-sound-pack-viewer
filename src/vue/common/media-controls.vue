@@ -20,7 +20,7 @@
     <div :class="$style.innerContainer">
         <div
             :class="$style.buttonContainer"
-            v-if="hasAudio"
+            v-if="isAudioLoaded"
         >
             <button @click="buttonClicked" tabindex="1">
                 <svg 
@@ -42,7 +42,7 @@
                 {{ formatSeconds(currentAudioTime) }} - {{ formatSeconds(audioLength) }}
             </span>
         </div>
-        <div :class="$style.volumeContainer" v-show="!isAudioEmpty">
+        <div :class="$style.volumeContainer" v-show="!shouldShowVolume">
             <svg 
                 :class="$style.volumeIcon"
                 viewBox="0 0 24 24"
@@ -226,9 +226,6 @@ export default {
             type: Number,
             required: true,
         },
-        mediaId: {
-            required: true,
-        },
         audioVolume: {
             type: Number,
             required: true,
@@ -256,20 +253,14 @@ export default {
         };
     },
     computed: {
-        isAudioEmpty(){
-            return this.playState === playStates.IS_EMPTY;
-        },
-        hasAudio(){
-            return this.playState !== playStates.IS_EMPTY && this.playState !== playStates.IS_LOADING;
+        shouldShowVolume(){
+            return this.playState === playStates.IS_EMPTY || this.playState === playStates.IS_ERROR;
         },
         isPlaying(){
             return this.playState === playStates.IS_PLAYING;
         },
         isPaused(){
             return this.playState === playStates.IS_PAUSED;
-        },
-        isLoading(){
-            return this.playState === playStates.IS_LOADING;
         },
     },
     methods: {

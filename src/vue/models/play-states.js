@@ -3,4 +3,5 @@ export default {
     IS_PLAYING: 2,
     IS_PAUSED: 3,
     IS_EMPTY: 4,
+    IS_ERROR: 5,
 };
