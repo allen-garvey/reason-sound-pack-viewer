@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.container">
+    <div>
         <template v-if="isLoaded">
             <ul :class="$style.packList">
                 <li 
@@ -26,21 +26,15 @@
 
 <style lang="scss" module>
     $image-dimensions: 150px;
-    $pack-right-margin: 10px;
-
-    .container {
-        
-    }
 
     .packList {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        margin-right: -1 * $pack-right-margin;
+        gap: 20px 10px;
     }
     
     .pack {
-        margin: 0 $pack-right-margin 20px 0;
         width: $image-dimensions;
     }
 
