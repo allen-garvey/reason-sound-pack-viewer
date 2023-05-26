@@ -49,16 +49,10 @@
         height: $image-dimensions;
     }
 
-    $pack-mobile-right-margin: 28px;
-
     @media screen and (max-width: 668px) {
         .packList {
             justify-content: center;
-            margin-right: -1 * $pack-mobile-right-margin;
-        }
-
-        .pack {
-            margin-right: $pack-mobile-right-margin;
+            column-gap: 28px;
         }
     }
 </style>
