@@ -4,6 +4,7 @@ const ALGORITM_NAME = 'Algoritm FM Synthesizer';
 const ALLIGATOR_NAME = 'Alligator Filter Gate';
 const AUDIOMATIC_NAME = 'Audiomatic Retro Transformer';
 const BASSLINE_GENERATOR_NAME = 'Bassline Generator';
+const BVX_NAME = 'BVX Vocoder';
 const COMPLEX_NAME = 'Complex-1 Modular Synthesizer';
 const DRUM_SEQUENCER_NAME = 'Drum Sequencer';
 const DR_REX_NAME = 'Dr. Octo Rex Loop Player';
@@ -47,6 +48,8 @@ const SYNCHRONOUS_NAME = 'Synchronous Effect Modulator';
 const THOR_NAME = 'Thor';
 const UMPF_NAME = 'Umpf Club Drums';
 
+// so that when only the first word of the device name is used,
+// it will be replaced by the full name
 [
     RV700_NAME,
     KONG_NAME,
@@ -107,6 +110,7 @@ deviceMap.set('Mixer14:2', MIXER_NAME);
 deviceMap.set('Arpeggio', DUAL_ARPEGGIO_NAME);
 deviceMap.set('Mimic', MIMIC_NAME);
 deviceMap.set('Bassline', BASSLINE_GENERATOR_NAME);
+deviceMap.set('BVXVocoder', BVX_NAME);
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
