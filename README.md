@@ -6,9 +6,12 @@ Preview all Reason+ sound packs in your browser.
 
 * npm
 * node >= 14
+* make
+* lame
 
 ## Getting Started
 
+* `make`
 * `npm install`
 * `npm run hydrate`
 * `npm start`

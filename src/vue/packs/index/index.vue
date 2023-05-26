@@ -25,7 +25,7 @@
 </style>
 
 <script>
-import { AUDIO_PREVIEW_URL_PREFIX } from '../../../jukebox.js';
+import { generatePreviewUrl } from '../../../jukebox.js';
 import { isMediaPlaying } from '../../models/media-helpers';
 import PackList from './pack-list.vue';
 import ItemsCount from '../../common/items-count.vue';
@@ -87,7 +87,7 @@ export default {
             else{
                 const pack = this.packsMap[packId];
                 this.$emit('audioStart', {
-                    url: `${AUDIO_PREVIEW_URL_PREFIX}${pack.previewUrl}`,
+                    url: generatePreviewUrl(pack.previewUrl),
                     title: pack.title,
                     id: pack.id,
                 });
