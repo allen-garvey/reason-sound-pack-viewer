@@ -109,7 +109,6 @@ $icon-controls-dimensions: 40px;
 </style>
 
 <script>
-import { generatePreviewUrl } from '../../jukebox.js';
 import { isMediaPlaying } from '../models/media-helpers';
 import ReasonPlusLink from '../common/reason-plus-link.vue';
 import { sortDevices } from '../../devices';
@@ -162,7 +161,7 @@ export default {
             }
             else {
                 this.$emit('audioStart', {
-                    url: generatePreviewUrl(patch.previewUrl),
+                    url: patch.previewUrl,
                     title: `${this.getPack(patch).title} - ${patch.name}`,
                     id: this.patchId(patch),
                 });

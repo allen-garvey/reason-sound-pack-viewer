@@ -1,3 +1,5 @@
+import { generatePreviewUrl } from './jukebox';
+
 const identity = (a) => a;
 
 const fillSet = (masterMap, items, packId, getItemName=identity) => {
@@ -50,11 +52,13 @@ export const getPacks = () =>
             const author = creators[pack.author];
 
             pack.author = author;
+            pack.previewUrl = generatePreviewUrl(pack.previewUrl);
             pack.coverPhoto = {
                 webp: `/images/pack-${id}.webp`,
                 png: pack.coverPhoto,
             };
             pack.patches = pack.patches.map((patch) => {
+                patch.previewUrl = generatePreviewUrl(patch.previewUrl);
                 patch.tags = fillInnerSet(patchTagsMap, patch.tags, id, (item) => patchTags[item]);
                 patch.devices = fillInnerSet(patchDevicesMap, patch.devices, id, (item) => devicesMap[item]);
                 return patch;

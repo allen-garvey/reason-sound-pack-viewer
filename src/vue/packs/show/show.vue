@@ -90,7 +90,6 @@ dl {
 </style>
 
 <script>
-import { generatePreviewUrl } from '../../../jukebox.js';
 import { isMediaPlaying } from '../../models/media-helpers';
 import bubbleAudioEventsMixinBuilder from '../../mixins/bubble-audio-events';
 import CoverImage from '../../common/cover-image.vue';
@@ -138,7 +137,7 @@ export default {
             }
             else {
                 this.$emit('audioStart', {
-                    url: generatePreviewUrl(this.pack.previewUrl),
+                    url: this.pack.previewUrl,
                     title: this.pack.title,
                     id: this.pack.id,
                 });
