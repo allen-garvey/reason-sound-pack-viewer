@@ -94,3 +94,5 @@ export const sortDevices = (devices) => devices.sort((a, b) => {
     const diff = deviceType[a] - deviceType[b];
     return diff || a.localeCompare(b);
 });
+
+export const isInstrument = (device) => deviceType[device] === deviceOrdering.INSTRUMENT;

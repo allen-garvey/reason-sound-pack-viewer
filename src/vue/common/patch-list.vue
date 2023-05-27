@@ -38,7 +38,7 @@
                 <li
                     v-for="device of devicesForPack(patch.devices)"
                     :key="device"
-                    :class="$style.device"
+                    :class="deviceClass(device)"
                 >
                     {{ device }}
                 </li>
@@ -106,12 +106,17 @@ $icon-controls-dimensions: 40px;
 .device {
     margin-right: 1em;
 }
+
+.instrumentDevice {
+    color: #7c564b;
+}
 </style>
 
 <script>
 import { isMediaPlaying } from '../models/media-helpers';
 import ReasonPlusLink from '../common/reason-plus-link.vue';
 import { sortDevices } from '../../devices';
+import { isInstrument } from '../../devices';
 
 export default {
     props: {
@@ -169,6 +174,12 @@ export default {
         },
         devicesForPack(devices){
             return sortDevices(Array.from(devices));
+        },
+        deviceClass(device){
+            return {
+                [this.$style.device]: true,
+                [this.$style.instrumentDevice]: isInstrument(device),
+            };
         },
     },
 };
