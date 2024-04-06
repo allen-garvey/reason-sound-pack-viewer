@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "node-fetch": "^3.3.2",
-    "sharp": "^0.32.6",
+    "sharp": "^0.33.3",
     "vue": "3.3.4",
     "vue-router": "^4.2.5"
   }
