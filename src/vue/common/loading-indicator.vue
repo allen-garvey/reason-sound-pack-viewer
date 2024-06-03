@@ -1,19 +1,19 @@
 <template>
-    <div :class="$style['loading-container']">
-        <div :class="$style['loading-message']">Loading&hellip;</div>
-        <div :class="$style['loader']"></div>
+    <div :class="$style.loadingContainer">
+        <div :class="$style.loadingMessage">Loading&hellip;</div>
+        <div :class="$style.loader"></div>
     </div>
 </template>
 
 <style lang="scss" module>
-    .loading-container{
+    .loadingContainer{
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-top: 2rem;
     }
-    .loading-message{
+    .loadingMessage{
         margin-bottom: 1em;
     }
 

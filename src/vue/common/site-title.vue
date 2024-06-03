@@ -1,5 +1,5 @@
 <template>
-    <h1 :class="$style['title']">
+    <h1 :class="$style.title">
         <router-link :to="{name: 'home'}">{{ title }}</router-link>
     </h1>
 </template>
