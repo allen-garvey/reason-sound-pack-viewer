@@ -5,12 +5,12 @@ import PatchListPage from './vue/common/patch-list-page.vue';
 import { enumeratePacks } from './model-helpers';
 import authorSites from './author-sites';
 
-export function getRoutes(){
+export function getRoutes() {
     return [
-        { 
-            path: '/', 
+        {
+            path: '/',
             name: 'home',
-            redirect: '/packs' 
+            redirect: '/packs',
         },
         {
             path: '/packs',
@@ -19,7 +19,7 @@ export function getRoutes(){
             props: (route) => {
                 const props = {
                     title: 'Packs',
-                    getPacks(){
+                    getPacks() {
                         return enumeratePacks(this.packsMap).reverse();
                     },
                 };
@@ -39,13 +39,13 @@ export function getRoutes(){
             props: (route) => {
                 const props = {
                     title: 'Patch Tags',
-                    getItems(){
+                    getItems() {
                         return Array.from(this.patchTagsMap.keys()).sort();
                     },
-                    getItemLength(patchTag){
+                    getItemLength(patchTag) {
                         return this.patchTagsMap.get(patchTag).length;
                     },
-                    itemRouteName: 'patchTagsShow'
+                    itemRouteName: 'patchTagsShow',
                 };
 
                 return props;
@@ -58,22 +58,21 @@ export function getRoutes(){
             props: (route) => {
                 const props = {
                     title: route.params.id,
-                    getPatches(){
+                    getPatches() {
                         const patchKey = route.params.id;
                         const patches = [];
                         const packsSet = this.patchTagsMap.get(patchKey).set;
 
-                        for(const packId of packsSet.keys()){
+                        for (const packId of packsSet.keys()) {
                             const pack = this.packsMap[packId];
-                            pack.patches
-                                .forEach(patch => {
-                                    if(patch.tags.has(patchKey)){
-                                        patch.packId = pack.id;
-                                        patches.push(patch);
-                                    }
-                                });
+                            pack.patches.forEach((patch) => {
+                                if (patch.tags.has(patchKey)) {
+                                    patch.packId = pack.id;
+                                    patches.push(patch);
+                                }
+                            });
                         }
-                        return patches;
+                        return patches.reverse();
                     },
                 };
 
@@ -87,13 +86,13 @@ export function getRoutes(){
             props: (route) => {
                 const props = {
                     title: 'Creators',
-                    getItems(){
+                    getItems() {
                         return Array.from(this.creatorsMap.keys()).sort();
                     },
-                    getItemLength(creator){
+                    getItemLength(creator) {
                         return this.creatorsMap.get(creator).length;
                     },
-                    itemRouteName: 'creatorsShow'
+                    itemRouteName: 'creatorsShow',
                 };
 
                 return props;
@@ -105,12 +104,15 @@ export function getRoutes(){
             component: PacksIndex,
             props: (route) => {
                 const id = route.params.id;
-               
+
                 const props = {
                     title: id,
                     externalUrl: authorSites[id] || '',
-                    getPacks(){
-                        return this.creatorsMap.get(id).map((id) => this.packsMap[id]);
+                    getPacks() {
+                        return this.creatorsMap
+                            .get(id)
+                            .map((id) => this.packsMap[id])
+                            .reverse();
                     },
                 };
 
@@ -124,13 +126,13 @@ export function getRoutes(){
             props: (route) => {
                 const props = {
                     title: 'Pack Tags',
-                    getItems(){
+                    getItems() {
                         return Array.from(this.packTagsMap.keys()).sort();
                     },
-                    getItemLength(packTag){
+                    getItemLength(packTag) {
                         return this.packTagsMap.get(packTag).length;
                     },
-                    itemRouteName: 'packTagsShow'
+                    itemRouteName: 'packTagsShow',
                 };
 
                 return props;
@@ -143,8 +145,11 @@ export function getRoutes(){
             props: (route) => {
                 const props = {
                     title: route.params.id,
-                    getPacks(){
-                        return this.packTagsMap.get(route.params.id).map((id) => this.packsMap[id]);
+                    getPacks() {
+                        return this.packTagsMap
+                            .get(route.params.id)
+                            .map((id) => this.packsMap[id])
+                            .reverse();
                     },
                 };
 
@@ -158,13 +163,13 @@ export function getRoutes(){
             props: (route) => {
                 const props = {
                     title: 'Devices',
-                    getItems(){
+                    getItems() {
                         return Array.from(this.patchDevicesMap.keys()).sort();
                     },
-                    getItemLength(device){
+                    getItemLength(device) {
                         return this.patchDevicesMap.get(device).length;
                     },
-                    itemRouteName: 'devicesShow'
+                    itemRouteName: 'devicesShow',
                 };
 
                 return props;
@@ -177,22 +182,22 @@ export function getRoutes(){
             props: (route) => {
                 const props = {
                     title: route.params.id,
-                    getPatches(){
+                    getPatches() {
                         const deviceKey = route.params.id;
                         const patches = [];
-                        const packsSet = this.patchDevicesMap.get(deviceKey).set;
+                        const packsSet =
+                            this.patchDevicesMap.get(deviceKey).set;
 
-                        for(const packId of packsSet.keys()){
+                        for (const packId of packsSet.keys()) {
                             const pack = this.packsMap[packId];
-                            pack.patches
-                                .forEach(patch => {
-                                    if(patch.devices.has(deviceKey)){
-                                        patch.packId = pack.id;
-                                        patches.push(patch);
-                                    }
-                                });
+                            pack.patches.forEach((patch) => {
+                                if (patch.devices.has(deviceKey)) {
+                                    patch.packId = pack.id;
+                                    patches.push(patch);
+                                }
+                            });
                         }
-                        return patches;
+                        return patches.reverse();
                     },
                 };
 
