@@ -8,14 +8,14 @@ const deviceOrdering = {
 
 const deviceType = {
     'Line Mixer 6:2': deviceOrdering.UTILITY,
-    'Malström': deviceOrdering.INSTRUMENT,
-    'MClass': deviceOrdering.EFFECT,
+    Malström: deviceOrdering.INSTRUMENT,
+    MClass: deviceOrdering.EFFECT,
     'MClass Stereo Imager': deviceOrdering.EFFECT,
     'Pattern Mutator': deviceOrdering.PLAYER,
     'D-11': deviceOrdering.EFFECT,
     'NN-XT Sampler': deviceOrdering.INSTRUMENT,
     'Pulveriser Demolition': deviceOrdering.CREATIVE_EFFECT,
-    'Neptune': deviceOrdering.CREATIVE_EFFECT,
+    Neptune: deviceOrdering.CREATIVE_EFFECT,
     'Scream 4 Distortion': deviceOrdering.CREATIVE_EFFECT,
     'Audiomatic Retro Transformer': deviceOrdering.CREATIVE_EFFECT,
     'Quartet Chorus Ensemble': deviceOrdering.CREATIVE_EFFECT,
@@ -41,7 +41,7 @@ const deviceType = {
     'Rotor Rotary Speaker': deviceOrdering.EFFECT,
     'Scales & Chords': deviceOrdering.PLAYER,
     'Dual Arpeggio': deviceOrdering.PLAYER,
-    'Thor': deviceOrdering.INSTRUMENT,
+    Thor: deviceOrdering.INSTRUMENT,
     'Mixer 14:2': deviceOrdering.UTILITY,
     'Humana Vocal Ensemble': deviceOrdering.INSTRUMENT,
     'Master Bus Compressor': deviceOrdering.EFFECT,
@@ -52,19 +52,19 @@ const deviceType = {
     'Pulsar Dual LFO': deviceOrdering.UTILITY,
     'MClass Equalizer': deviceOrdering.EFFECT,
     'Rytmik Drum Machine': deviceOrdering.INSTRUMENT,
-    'Matrix': deviceOrdering.UTILITY,
+    Matrix: deviceOrdering.UTILITY,
     'Reason Drum Kits': deviceOrdering.INSTRUMENT,
     'Synchronous Effect Modulator': deviceOrdering.CREATIVE_EFFECT,
-    'ID8': deviceOrdering.INSTRUMENT,
+    ID8: deviceOrdering.INSTRUMENT,
     'ECF-42': deviceOrdering.EFFECT,
     'Alligator Filter Gate': deviceOrdering.CREATIVE_EFFECT,
     'Polar Dual Pitch Shifter': deviceOrdering.CREATIVE_EFFECT,
     'Dr. Octo Rex Loop Player': deviceOrdering.INSTRUMENT,
     'Softube Amp': deviceOrdering.EFFECT,
-    'Subtractor': deviceOrdering.INSTRUMENT,
+    Subtractor: deviceOrdering.INSTRUMENT,
     'Reason Electric Bass': deviceOrdering.INSTRUMENT,
     'PH-90': deviceOrdering.EFFECT,
-    'PEQ2': deviceOrdering.EFFECT,
+    PEQ2: deviceOrdering.EFFECT,
     'RV-7': deviceOrdering.EFFECT,
     'Note Echo': deviceOrdering.PLAYER,
     'CF-101': deviceOrdering.EFFECT,
@@ -72,7 +72,7 @@ const deviceType = {
     'Radical Keys': deviceOrdering.INSTRUMENT,
     'Friktion Modeled Strings': deviceOrdering.INSTRUMENT,
     'COMP-01': deviceOrdering.EFFECT,
-    'DDL': deviceOrdering.EFFECT,
+    DDL: deviceOrdering.EFFECT,
     'UN-16': deviceOrdering.EFFECT,
     'Pangea World Instruments': deviceOrdering.INSTRUMENT,
     'Quad Note Generator': deviceOrdering.INSTRUMENT,
@@ -81,18 +81,25 @@ const deviceType = {
     'Umpf Club Drums': deviceOrdering.INSTRUMENT,
     'Algoritm FM Synthesizer': deviceOrdering.INSTRUMENT,
     'Layers Wave Edition': deviceOrdering.INSTRUMENT,
-    'Layers': deviceOrdering.INSTRUMENT,
+    Layers: deviceOrdering.INSTRUMENT,
     'Redrum Drum Computer': deviceOrdering.INSTRUMENT,
-    'BVXVocoder': deviceOrdering.CREATIVE_EFFECT,
+    BVXVocoder: deviceOrdering.CREATIVE_EFFECT,
     'Chord Sequencer': deviceOrdering.PLAYER,
     'Mimic Creative Sampler': deviceOrdering.INSTRUMENT,
     'Bassline Generator': deviceOrdering.PLAYER,
-    'Objekt': deviceOrdering.INSTRUMENT,
+    Objekt: deviceOrdering.INSTRUMENT,
+    'Polytone Dual-Layer Synthesizer': deviceOrdering.INSTRUMENT,
+    'Ripley Space Delay': deviceOrdering.EFFECT,
+    'Stereo Tool': deviceOrdering.EFFECT,
+    'Sidechain Tool': deviceOrdering.EFFECT,
+    'Gain Tool': deviceOrdering.UTILITY,
 };
 
-export const sortDevices = (devices) => devices.sort((a, b) => {
-    const diff = deviceType[a] - deviceType[b];
-    return diff || a.localeCompare(b);
-});
+export const sortDevices = (devices) =>
+    devices.sort((a, b) => {
+        const diff = deviceType[a] - deviceType[b];
+        return diff || a.localeCompare(b);
+    });
 
-export const isInstrument = (device) => deviceType[device] === deviceOrdering.INSTRUMENT;
+export const isInstrument = (device) =>
+    deviceType[device] === deviceOrdering.INSTRUMENT;
