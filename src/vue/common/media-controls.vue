@@ -12,7 +12,7 @@
         />
     </div>
     <div :class="$style.mobileTitle">
-        <span>{{ title }}</span>
+        <media-title :title="title" />
         <span v-if="isAudioLoaded" :class="$style.time">
             {{ formatSeconds(currentAudioTime) }} - {{ formatSeconds(audioLength) }}
         </span>
@@ -37,7 +37,7 @@
             </button>
         </div>
         <div :class="$style.desktopTitle">
-            <span>{{ title }}</span>
+            <media-title :title="title" />
             <span v-if="isAudioLoaded" :class="$style.time">
                 {{ formatSeconds(currentAudioTime) }} - {{ formatSeconds(audioLength) }}
             </span>
@@ -215,12 +215,12 @@ $volume-slider-range-color: #dbd9d6;
 <script>
 import playStates from '../models/play-states';
 import { formatSeconds } from '../../time';
+import MediaTitle from './media-title.vue';
 
 export default {
     props: {
         title: {
-            type: String,
-            required: true,
+            type: Object,
         },
         playState: {
             type: Number,
@@ -246,6 +246,9 @@ export default {
             type: Function,
             required: true,
         },
+    },
+    components: {
+        MediaTitle,
     },
     data(){
         return {

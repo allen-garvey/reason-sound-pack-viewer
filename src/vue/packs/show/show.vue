@@ -138,7 +138,10 @@ export default {
             else {
                 this.$emit('audioStart', {
                     url: this.pack.previewUrl,
-                    title: this.pack.title,
+                    title: {
+                        packTitle: this.pack.title,
+                        packId: this.pack.id,
+                    },
                     id: this.pack.id,
                 });
             }

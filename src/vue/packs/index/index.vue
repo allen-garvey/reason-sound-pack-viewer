@@ -87,7 +87,10 @@ export default {
                 const pack = this.packsMap[packId];
                 this.$emit('audioStart', {
                     url: pack.previewUrl,
-                    title: pack.title,
+                    title: {
+                        packTitle: pack.title,
+                        packId: pack.id,
+                    },
                     id: pack.id,
                 });
             }

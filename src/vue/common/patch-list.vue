@@ -165,9 +165,15 @@ export default {
                 this.$emit('audioStop');
             }
             else {
+                const pack = this.getPack(patch);
+                
                 this.$emit('audioStart', {
                     url: patch.previewUrl,
-                    title: `${this.getPack(patch).title} - ${patch.name}`,
+                    title: {
+                        packId: pack.id,
+                        subtitle: patch.name,
+                        packTitle: pack.title,
+                    },
                     id: this.patchId(patch),
                 });
             }

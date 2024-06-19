@@ -162,7 +162,7 @@ export default {
             patchTagsMap: null,
             patchDevicesMap: null,
             creatorsMap: null,
-            mediaTitle: '',
+            mediaTitle: null,
             mediaId: null,
             playState: playStates.IS_EMPTY,
             audioVolume: 0,
@@ -177,11 +177,15 @@ export default {
         audioTitle(){
             switch(this.playState){
                 case playStates.IS_EMPTY:
-                    return '';
+                    return null;
                 case playStates.IS_ERROR:
-                    return 'There was an error loading the audio preview';
+                    return {
+                        message: 'There was an error loading the audio preview', 
+                    };
                 case playStates.IS_LOADING:
-                    return 'Loading…';
+                    return {
+                        message: 'Loading…',
+                    };
                 default:
                     return this.mediaTitle;
             }
