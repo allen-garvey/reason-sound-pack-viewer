@@ -34,3 +34,5 @@ public_html/assets/*
 public_html/*.json
 public_html/images/*
 public_html/audio/*
+
+scripts/cache/*
