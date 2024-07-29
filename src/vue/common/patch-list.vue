@@ -85,6 +85,12 @@ $icon-controls-dimensions: 40px;
     }
 }
 
+@media (prefers-color-scheme: dark) {
+    .icon {
+        color: #fff;
+    }
+}
+
 .patchName {
     min-width: 13em;
 }

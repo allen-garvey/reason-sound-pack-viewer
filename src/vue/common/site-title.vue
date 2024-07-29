@@ -12,6 +12,14 @@
         color: #000;
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    .title{
+        a{
+            color: #fff;
+        }
+    }
+}
 </style>
 
 <script>

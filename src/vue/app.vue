@@ -108,7 +108,7 @@
     }
 }
 
-.navActive {
+a.navActive {
     color: red;
 }
 </style>
