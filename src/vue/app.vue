@@ -109,7 +109,7 @@
 }
 
 a.navActive {
-    color: red;
+    color: #ef4815;
 }
 </style>
 
