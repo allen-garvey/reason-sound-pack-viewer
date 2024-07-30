@@ -5,9 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: [
-            `${__dirname}/src/index.js`,
-        ],
+    entry: [`${__dirname}/src/index.js`],
     output: {
         filename: 'app.js',
         path: path.resolve(__dirname, 'public_html/assets'),
@@ -18,7 +16,7 @@ module.exports = {
             watch: true,
         },
         devMiddleware: {
-            publicPath: '/assets/'
+            publicPath: '/assets/',
         },
         port: 3000,
         open: true,
@@ -26,14 +24,14 @@ module.exports = {
             overlay: {},
         },
         historyApiFallback: {
-            index: 'index.html'
+            index: 'index.html',
         },
     },
     module: {
         rules: [
             {
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue-loader',
             },
             {
                 test: /\.scss$/,
@@ -48,14 +46,15 @@ module.exports = {
                                 options: {
                                     esModule: false,
                                     modules: {
-                                        localIdentName: '[local]_[hash:base64:8]',
+                                        localIdentName:
+                                            '[local]_[hash:base64:8]',
                                     },
-                                }
+                                },
                             },
                             {
                                 loader: 'sass-loader',
                             },
-                        ]
+                        ],
                     },
                     {
                         use: [
@@ -64,11 +63,11 @@ module.exports = {
                             },
                             'css-loader',
                             'sass-loader',
-                        ]
+                        ],
                     },
                 ],
             },
-        ]
+        ],
     },
     plugins: [
         new VueLoaderPlugin(),
@@ -78,6 +77,7 @@ module.exports = {
         new webpack.DefinePlugin({
             __VUE_OPTIONS_API__: true,
             __VUE_PROD_DEVTOOLS__: false,
+            __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
         }),
     ],
 };
