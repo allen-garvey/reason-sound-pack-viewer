@@ -209,6 +209,7 @@ $volume-slider-range-color: #dbd9d6;
 }
 .progressRange {
     width: 100%;
+    accent-color: #c8664c;
 }
 </style>
 
