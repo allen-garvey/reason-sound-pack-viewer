@@ -85,11 +85,6 @@ $icon-controls-dimensions: 40px;
     }
 }
 
-@media (prefers-color-scheme: dark) {
-    .icon {
-        color: #fff;
-    }
-}
 
 .patchName {
     min-width: 13em;
@@ -115,6 +110,16 @@ $icon-controls-dimensions: 40px;
 
 .instrumentDevice {
     color: #7c564b;
+}
+
+@media (prefers-color-scheme: dark) {
+    .icon {
+        color: #fff;
+    }
+
+    .instrumentDevice {
+        color: #a97c70;
+    }
 }
 </style>
 
