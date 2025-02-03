@@ -7,7 +7,7 @@ import { getFileListSet, createDirectory, fetchPack } from './cache.js';
 import { writePackImages } from './images.js';
 
 Promise.all([
-    fetch(API_PATH),
+    fetch(`${API_PATH}/`),
     createDirectory(IMAGES_DIR),
     createDirectory(API_CACHE_DIR),
 ])
