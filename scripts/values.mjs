@@ -1,7 +1,7 @@
 import path from 'path';
-import * as url from 'url';
+import { fileURLToPath } from 'url';
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export const API_PATH = 'https://nautilus.reasonstudios.com/pack';
 
