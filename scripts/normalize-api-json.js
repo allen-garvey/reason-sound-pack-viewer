@@ -1,4 +1,4 @@
-import { normalizeDeviceName } from './device-normalizer.mjs';
+import { normalizeDeviceName } from './device-normalizer.js';
 
 /**
 @param {Object} map
@@ -6,7 +6,7 @@ import { normalizeDeviceName } from './device-normalizer.mjs';
 @returns {Number}
 */
 const getIdAndAddToMap = (map, value) => {
-    if(map[value]){
+    if (map[value]) {
         return map[value];
     }
     const id = Object.keys(map).length + 1;
@@ -14,18 +14,21 @@ const getIdAndAddToMap = (map, value) => {
     return id;
 };
 
-const reverseObject = (object) => Object.fromEntries(Object.entries(object).map(([key, value]) => [value, key]));
+const reverseObject = object =>
+    Object.fromEntries(
+        Object.entries(object).map(([key, value]) => [value, key])
+    );
 
 /**
 @param {Array.<Object>} rawJson
 @returns {Array.<Object>}
 */
-export const normalizeApiJson = (rawJson) => {
+export const normalizeApiJson = rawJson => {
     const patchTags = {};
     const packTags = {};
     const devicesMap = {};
     const creatorsMap = {};
-    
+
     const packs = rawJson.map(pack => ({
         id: pack.id,
         title: pack.title,
@@ -36,25 +39,38 @@ export const normalizeApiJson = (rawJson) => {
         description: pack.description,
         size: pack.size,
         patches: pack.patchList.map(patch => {
-            const devicesCombined = (patch.data.devices.rackExtensions || patch.data.devices.builtin || []).concat(patch.devices);
+            const devicesCombined = (
+                patch.data.devices.rackExtensions ||
+                patch.data.devices.builtin ||
+                []
+            ).concat(patch.devices);
 
-            const devices = [...new Set(devicesCombined.map((deviceRaw) => {
-                const deviceName = typeof deviceRaw === 'object' ? deviceRaw.name : deviceRaw;
-                return normalizeDeviceName(deviceName);
-            })).keys()];
+            const devices = [
+                ...new Set(
+                    devicesCombined.map(deviceRaw => {
+                        const deviceName =
+                            typeof deviceRaw === 'object'
+                                ? deviceRaw.name
+                                : deviceRaw;
+                        return normalizeDeviceName(deviceName);
+                    })
+                ).keys(),
+            ];
 
             return {
                 id: patch.id,
                 name: patch.patchName,
                 previewUrl: patch.patchAudio?.audioPreviewKey,
-                devices: devices.map(name => getIdAndAddToMap(devicesMap, name)),
-                tags: patch.tagList.map(({id, title}) => {
+                devices: devices.map(name =>
+                    getIdAndAddToMap(devicesMap, name)
+                ),
+                tags: patch.tagList.map(({ id, title }) => {
                     patchTags[id] = title;
                     return id;
                 }),
             };
         }),
-        tags: pack.tagList.map(({id, title}) => {
+        tags: pack.tagList.map(({ id, title }) => {
             packTags[id] = title;
             return id;
         }),

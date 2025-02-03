@@ -1,9 +1,12 @@
-const path = require('path');
-const webpack = require('webpack');
-const { VueLoaderPlugin } = require('vue-loader');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import path from 'path';
+import { fileURLToPath } from 'url';
+import webpack from 'webpack';
+import { VueLoaderPlugin } from 'vue-loader';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-module.exports = {
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+
+export default {
     mode: 'development',
     entry: [`${__dirname}/src/index.js`],
     output: {

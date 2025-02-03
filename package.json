@@ -1,5 +1,6 @@
 {
   "name": "reason-sound-pack-viewer",
+  "type": "module",
   "version": "1.0.0",
   "description": "View reason sound packs",
   "main": "app.js",
@@ -8,7 +9,7 @@
     "start": "webpack serve --config webpack.config.js",
     "build": "webpack --config webpack.config.js",
     "deploy": "webpack --config webpack.config.js --mode='production'",
-    "hydrate": "time node scripts/hydrate.mjs",
+    "hydrate": "time node scripts/hydrate.js",
     "dev": "npm run hydrate && npm start"
   },
   "repository": {

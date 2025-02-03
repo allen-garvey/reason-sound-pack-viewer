@@ -1,20 +1,20 @@
 import path from 'path';
 import sharp from 'sharp';
-import { IMAGES_DIR } from './values.mjs';
+import { IMAGES_DIR } from './values.js';
 
 const IMAGE_DIMENSIONS = 300;
 
-const packImageName = (pack) => `pack-${pack.id}.webp`;
+const packImageName = pack => `pack-${pack.id}.webp`;
 
 export const writePackImages = (packs, imageSet) =>
-    packs.map((pack) => {
+    packs.map(pack => {
         const imageName = packImageName(pack);
         if (imageSet.has(imageName)) {
             return Promise.resolve();
         }
         return fetch(pack.coverPhoto)
-            .then((res) => res.arrayBuffer())
-            .then((data) =>
+            .then(res => res.arrayBuffer())
+            .then(data =>
                 sharp(Buffer.from(data))
                     .resize({
                         width: IMAGE_DIMENSIONS,

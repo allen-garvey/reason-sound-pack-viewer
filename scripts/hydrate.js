@@ -1,10 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import fetch from 'node-fetch';
-import { normalizeApiJson } from './normalize-api-json.mjs';
-import { API_PATH, OUTPUT_DIR, IMAGES_DIR, API_CACHE_DIR } from './values.mjs';
-import { getFileListSet, createDirectory, fetchPack } from './cache.mjs';
-import { writePackImages } from './images.mjs';
+import { normalizeApiJson } from './normalize-api-json.js';
+import { API_PATH, OUTPUT_DIR, IMAGES_DIR, API_CACHE_DIR } from './values.js';
+import { getFileListSet, createDirectory, fetchPack } from './cache.js';
+import { writePackImages } from './images.js';
 
 Promise.all([
     fetch(API_PATH),
@@ -20,7 +20,7 @@ Promise.all([
     )
     .then(([packs, imageSet, cachedPacksSet]) => {
         const packsPromises = Promise.all(
-            packs.map((pack) => fetchPack(cachedPacksSet, pack.id))
+            packs.map(pack => fetchPack(cachedPacksSet, pack.id))
         );
         return Promise.all([packsPromises, Promise.resolve(imageSet)]);
     })
@@ -35,7 +35,7 @@ Promise.all([
 
         return Promise.all(promises);
     })
-    .then((results) => {
+    .then(results => {
         const amountUpdated = results.reduce(
             (total, currentValue) =>
                 currentValue === 1 ? total + currentValue : total,
