@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import { normalizeApiJson } from './normalize-api-json.js';
 import { API_PATH, OUTPUT_DIR, IMAGES_DIR, API_CACHE_DIR } from './values.js';
 import { getFileListSet, createDirectory, fetchPack } from './cache.js';
-import { writePackImages } from './images.js';
+import { getFetchAndSaveImageForPack, getPackImageName } from './images.js';
 
 Promise.all([
     fetch(`${API_PATH}/`),
@@ -25,7 +25,16 @@ Promise.all([
         return Promise.all([packsPromises, Promise.resolve(imageSet)]);
     })
     .then(([packs, imageSet]) => {
-        const promises = writePackImages(packs, imageSet);
+        const packsThatNeedImages = packs.filter(pack => {
+            const imageName = getPackImageName(pack);
+            return !imageSet.has(imageName);
+        });
+        console.log(
+            `Fetching images for ${packsThatNeedImages.length} pack(s).`
+        );
+        const promises = packsThatNeedImages.map(pack =>
+            getFetchAndSaveImageForPack(pack)
+        );
         promises.push(
             fs.promises.writeFile(
                 path.join(OUTPUT_DIR, 'packs.json'),
@@ -35,15 +44,6 @@ Promise.all([
 
         return Promise.all(promises);
     })
-    .then(results => {
-        const amountUpdated = results.reduce(
-            (total, currentValue) =>
-                currentValue === 1 ? total + currentValue : total,
-            0
-        );
-        console.log(
-            `${amountUpdated} pack cover${
-                amountUpdated === 1 ? '' : 's'
-            } downloaded`
-        );
+    .then(() => {
+        console.log('Hydration complete.');
     });

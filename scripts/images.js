@@ -4,24 +4,20 @@ import { IMAGES_DIR } from './values.js';
 
 const IMAGE_DIMENSIONS = 300;
 
-const packImageName = pack => `pack-${pack.id}.webp`;
+export const getPackImageName = pack => `pack-${pack.id}.webp`;
 
-export const writePackImages = (packs, imageSet) =>
-    packs.map(pack => {
-        const imageName = packImageName(pack);
-        if (imageSet.has(imageName)) {
-            return Promise.resolve();
-        }
-        return fetch(pack.coverPhoto)
-            .then(res => res.arrayBuffer())
-            .then(data =>
-                sharp(Buffer.from(data))
-                    .resize({
-                        width: IMAGE_DIMENSIONS,
-                        height: IMAGE_DIMENSIONS,
-                        quality: 85,
-                    })
-                    .toFile(path.join(IMAGES_DIR, imageName))
-            )
-            .then(() => 1);
-    });
+export const getFetchAndSaveImageForPack = pack => {
+    const imageName = getPackImageName(pack);
+    return fetch(pack.coverPhoto)
+        .then(res => res.arrayBuffer())
+        .then(data =>
+            sharp(Buffer.from(data))
+                .resize({
+                    width: IMAGE_DIMENSIONS,
+                    height: IMAGE_DIMENSIONS,
+                    quality: 85,
+                })
+                .toFile(path.join(IMAGES_DIR, imageName))
+        )
+        .then(() => 1);
+};
