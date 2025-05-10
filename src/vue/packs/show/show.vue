@@ -1,50 +1,47 @@
 <template>
-<div>
-    <h2 :class="$style.title">{{ pack.title }}</h2>
-    <cover-image
-        :class="$style.coverImageContainer"
-        :is-playing="isPackPlaying"
-        :src="pack.coverPhoto"
-        :pack-title="pack.title"
-        @controls-clicked="packClicked(pack)"
-    />
-    <p>
-        <router-link
-            :to="{name: 'creatorsShow', params: {id: pack.author}}"
-        >{{ pack.author }}
-        </router-link>
-    </p>
-    <p>{{ pack.description }}</p>
-    <dl>
-        <dt>Created:</dt>
-        <dd>{{ pack.created }}</dd>
-    </dl>
-    <dl>
-        <dt>Size:</dt>
-        <dd>{{ packSize }}</dd>
-    </dl>
-    <ul :class="$style.tagsList">
-        <li><h4 :class="$style.tagsHeading">Tags:</h4></li>
-        <li
-            v-for="tag in tags"
-            :key="tag"
-        >
-            <router-link :to="{name: 'packTagsShow', params: {id: tag}}">{{ tag }}</router-link>
-        </li>
-    </ul>
-    <reason-plus-link
-        :class="$style.reasonPlusLink"
-        :pack-id="pack.id"
-    />
-    <patch-list 
-        :patches="pack.patches"
-        :media-id="mediaId"
-        :play-state="playState"
-        :get-pack="() => pack"
-        @audio-start="bubbleAudioStart"
-        @audio-stop="bubbleAudioStop"
-    />
-</div>
+    <div>
+        <h2 :class="$style.title">{{ pack.title }}</h2>
+        <cover-image
+            :class="$style.coverImageContainer"
+            :is-playing="isPackPlaying"
+            :src="pack.coverPhoto"
+            :pack-title="pack.title"
+            @controls-clicked="packClicked(pack)"
+        />
+        <p>
+            <router-link
+                :to="{ name: 'creatorsShow', params: { id: pack.author } }"
+                >{{ pack.author }}
+            </router-link>
+        </p>
+        <p>{{ pack.description }}</p>
+        <dl>
+            <dt>Created:</dt>
+            <dd>{{ pack.created }}</dd>
+        </dl>
+        <dl>
+            <dt>Size:</dt>
+            <dd>{{ packSize }}</dd>
+        </dl>
+        <ul :class="$style.tagsList">
+            <li><h4 :class="$style.tagsHeading">Tags:</h4></li>
+            <li v-for="tag in tags" :key="tag">
+                <router-link
+                    :to="{ name: 'packTagsShow', params: { id: tag } }"
+                    >{{ tag }}</router-link
+                >
+            </li>
+        </ul>
+        <reason-plus-link :class="$style.reasonPlusLink" :pack-id="pack.id" />
+        <patch-list
+            :patches="pack.patches"
+            :media-id="mediaId"
+            :play-state="playState"
+            :get-pack="() => pack"
+            @audio-start="bubbleAudioStart"
+            @audio-stop="bubbleAudioStop"
+        />
+    </div>
 </template>
 
 <style lang="scss" module>
@@ -86,12 +83,11 @@ dl {
 .reasonPlusLink {
     margin: 0 0 2em;
 }
-
 </style>
 
 <script>
 import { isMediaPlaying } from '../../models/media-helpers';
-import bubbleAudioEventsMixinBuilder from '../../mixins/bubble-audio-events';
+import bubbleAudioEventsMixinBuilder from '../../mixins/bubble-audio-events.js';
 import CoverImage from '../../common/cover-image.vue';
 import PatchList from '../../common/patch-list.vue';
 import ReasonPlusLink from '../../common/reason-plus-link.vue';
@@ -117,25 +113,24 @@ export default {
     },
     mixins: [bubbleAudioEventsMixinBuilder()],
     computed: {
-        pack(){
+        pack() {
             return this.packsMap[this.$route.params.id];
         },
-        isPackPlaying(){
+        isPackPlaying() {
             return isMediaPlaying(this.pack.id, this.mediaId, this.playState);
         },
-        tags(){
+        tags() {
             return Array.from(this.pack.tags.values()).sort();
         },
-        packSize(){
+        packSize() {
             return `${(this.pack.size / 1048576).toFixed(2)} MB`;
         },
     },
     methods: {
-        packClicked(pack){
-            if(this.isPackPlaying){
+        packClicked(pack) {
+            if (this.isPackPlaying) {
                 this.$emit('audioStop');
-            }
-            else {
+            } else {
                 this.$emit('audioStart', {
                     url: this.pack.previewUrl,
                     title: {

@@ -1,25 +1,23 @@
 <template>
-<div>
-    <h2>{{ title }} <items-count :count="patches.length" /></h2>
-    <patch-list 
-        :patches="patches"
-        :media-id="mediaId"
-        :get-pack="getPackForPatch"
-        :should-show-pack-link="true"
-        :should-show-reason-plus-link="true"
-        :play-state="playState"
-        @audio-start="bubbleAudioStart"
-        @audio-stop="bubbleAudioStop"
-    />
-</div>
+    <div>
+        <h2>{{ title }} <items-count :count="patches.length" /></h2>
+        <patch-list
+            :patches="patches"
+            :media-id="mediaId"
+            :get-pack="getPackForPatch"
+            :should-show-pack-link="true"
+            :should-show-reason-plus-link="true"
+            :play-state="playState"
+            @audio-start="bubbleAudioStart"
+            @audio-stop="bubbleAudioStop"
+        />
+    </div>
 </template>
 
-<style lang="scss" module>
-
-</style>
+<style lang="scss" module></style>
 
 <script>
-import bubbleAudioEventsMixinBuilder from '../mixins/bubble-audio-events';
+import bubbleAudioEventsMixinBuilder from '../mixins/bubble-audio-events.js';
 import PatchList from './patch-list.vue';
 import ItemsCount from './items-count.vue';
 
@@ -53,7 +51,7 @@ export default {
         getPatches: {
             type: Function,
             required: true,
-        }
+        },
     },
     components: {
         PatchList,
@@ -61,12 +59,12 @@ export default {
     },
     mixins: [bubbleAudioEventsMixinBuilder()],
     computed: {
-        patches(){
+        patches() {
             return this.getPatches();
         },
     },
     methods: {
-        getPackForPatch(patch){
+        getPackForPatch(patch) {
             return this.packsMap[patch.packId];
         },
     },

@@ -1,75 +1,63 @@
 <template>
-<div :class="$style.container">
-    <div :class="$style.progressBarContainer" v-if="isAudioLoaded">
-        <input 
-            :class="$style.progressRange"
-            type="range" 
-            min="0" 
-            :max="audioLength" 
-            step="1" 
-            :value="currentAudioTime"
-            @input="progressBarUpdated"
-        />
-    </div>
-    <div :class="$style.mobileTitle">
-        <media-title :title="title" />
-        <span v-if="isAudioLoaded" :class="$style.time">
-            {{ formatSeconds(currentAudioTime) }} - {{ formatSeconds(audioLength) }}
-        </span>
-    </div>
-    <div :class="$style.innerContainer">
-        <div
-            :class="$style.buttonContainer"
-            v-if="isAudioLoaded"
-        >
-            <button @click="buttonClicked" tabindex="1">
-                <svg 
-                    :class="$style.icon"
-                    viewBox="0 0 24 24"
-                >
-                    <use 
-                        xlink:href="#icon-play"
-                        v-if="isPaused" />
-                    <use 
-                        xlink:href="#icon-pause"
-                        v-if="isPlaying" />
-                </svg>
-            </button>
-        </div>
-        <div :class="$style.desktopTitle">
-            <media-title :title="title" />
-            <span v-if="isAudioLoaded" :class="$style.time">
-                {{ formatSeconds(currentAudioTime) }} - {{ formatSeconds(audioLength) }}
-            </span>
-        </div>
-        <div :class="$style.volumeContainer" v-show="!shouldShowVolume">
-            <svg 
-                :class="$style.volumeIcon"
-                viewBox="0 0 24 24"
-            >
-                <use 
-                    xlink:href="#icon-volume-x"
-                    v-if="audioVolume === 0" />
-                <use 
-                    xlink:href="#icon-volume-1"
-                    v-else-if="audioVolume <= 0.6" />
-                <use 
-                    xlink:href="#icon-volume-2"
-                    v-else />
-            </svg>
-            <input 
-                tabindex="2"
+    <div :class="$style.container">
+        <div :class="$style.progressBarContainer" v-if="isAudioLoaded">
+            <input
+                :class="$style.progressRange"
                 type="range"
                 min="0"
-                max="1"
-                :value="audioVolume"
-                step="0.05"
-                :class="$style.volumeInput"
-                @input="$emit('volumeChanged', parseFloat($event.target.value))"
+                :max="audioLength"
+                step="1"
+                :value="currentAudioTime"
+                @input="progressBarUpdated"
             />
         </div>
+        <div :class="$style.mobileTitle">
+            <media-title :title="title" />
+            <span v-if="isAudioLoaded" :class="$style.time">
+                {{ formatSeconds(currentAudioTime) }} -
+                {{ formatSeconds(audioLength) }}
+            </span>
+        </div>
+        <div :class="$style.innerContainer">
+            <div :class="$style.buttonContainer" v-if="isAudioLoaded">
+                <button @click="buttonClicked" tabindex="1">
+                    <svg :class="$style.icon" viewBox="0 0 24 24">
+                        <use xlink:href="#icon-play" v-if="isPaused" />
+                        <use xlink:href="#icon-pause" v-if="isPlaying" />
+                    </svg>
+                </button>
+            </div>
+            <div :class="$style.desktopTitle">
+                <media-title :title="title" />
+                <span v-if="isAudioLoaded" :class="$style.time">
+                    {{ formatSeconds(currentAudioTime) }} -
+                    {{ formatSeconds(audioLength) }}
+                </span>
+            </div>
+            <div :class="$style.volumeContainer" v-show="!shouldShowVolume">
+                <svg :class="$style.volumeIcon" viewBox="0 0 24 24">
+                    <use xlink:href="#icon-volume-x" v-if="audioVolume === 0" />
+                    <use
+                        xlink:href="#icon-volume-1"
+                        v-else-if="audioVolume <= 0.6"
+                    />
+                    <use xlink:href="#icon-volume-2" v-else />
+                </svg>
+                <input
+                    tabindex="2"
+                    type="range"
+                    min="0"
+                    max="1"
+                    :value="audioVolume"
+                    step="0.05"
+                    :class="$style.volumeInput"
+                    @input="
+                        $emit('volumeChanged', parseFloat($event.target.value))
+                    "
+                />
+            </div>
+        </div>
     </div>
-</div>
 </template>
 
 <style lang="scss" module>
@@ -106,7 +94,7 @@ $breakpoint: 600px;
 
 .mobileTitle {
     margin: 0 0 5px;
-    
+
     @media screen and (min-width: $breakpoint) {
         display: none;
     }
@@ -114,7 +102,7 @@ $breakpoint: 600px;
 
 .desktopTitle {
     margin-left: 1em;
-    
+
     @media screen and (max-width: $breakpoint) {
         display: none;
     }
@@ -132,7 +120,7 @@ $breakpoint: 600px;
     max-height: 100%;
     width: $icon-controls-dimensions;
     cursor: pointer;
-    
+
     &:hover {
         color: #888;
     }
@@ -175,7 +163,7 @@ $volume-slider-range-color: #dbd9d6;
     &::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
-        
+
         width: $volume-slider-handle-dimensions;
         height: $volume-slider-handle-dimensions;
         border-radius: $volume-slider-handle-border-radius;
@@ -193,10 +181,10 @@ $volume-slider-range-color: #dbd9d6;
 
     &::-moz-range-progress {
         height: 100%;
-        background-color: $volume-slider-progress-color; 
+        background-color: $volume-slider-progress-color;
     }
 
-    &::-moz-range-track {  
+    &::-moz-range-track {
         height: 100%;
         background-color: $volume-slider-range-color;
     }
@@ -214,8 +202,8 @@ $volume-slider-range-color: #dbd9d6;
 </style>
 
 <script>
-import playStates from '../models/play-states';
-import { formatSeconds } from '../../time';
+import playStates from '../models/play-states.js';
+import { formatSeconds } from '../../time.js';
 import MediaTitle from './media-title.vue';
 
 export default {
@@ -251,39 +239,41 @@ export default {
     components: {
         MediaTitle,
     },
-    data(){
+    data() {
         return {
             trackSeekTimeout: undefined,
         };
     },
     computed: {
-        shouldShowVolume(){
-            return this.playState === playStates.IS_EMPTY || this.playState === playStates.IS_ERROR;
+        shouldShowVolume() {
+            return (
+                this.playState === playStates.IS_EMPTY ||
+                this.playState === playStates.IS_ERROR
+            );
         },
-        isPlaying(){
+        isPlaying() {
             return this.playState === playStates.IS_PLAYING;
         },
-        isPaused(){
+        isPaused() {
             return this.playState === playStates.IS_PAUSED;
         },
     },
     methods: {
         formatSeconds,
-        buttonClicked(){
-            if(this.playState === playStates.IS_PAUSED){
+        buttonClicked() {
+            if (this.playState === playStates.IS_PAUSED) {
                 this.$emit('audioRestart');
-            }
-            else {
+            } else {
                 this.$emit('audioStop');
             }
         },
-        progressBarUpdated(e){
+        progressBarUpdated(e) {
             clearTimeout(this.trackSeekTimeout);
             const time = parseInt(e.target.value);
             this.trackSeekTimeout = setTimeout(() => {
                 this.onTrackSeekRequested(time);
             }, 300);
         },
-    }
+    },
 };
 </script>

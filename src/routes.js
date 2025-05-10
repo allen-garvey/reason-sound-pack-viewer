@@ -2,8 +2,8 @@ import PacksIndex from './vue/packs/index/index.vue';
 import PacksShow from './vue/packs/show/show.vue';
 import TextListPage from './vue/common/text-list-page.vue';
 import PatchListPage from './vue/common/patch-list-page.vue';
-import { enumeratePacks } from './model-helpers';
-import authorSites from './author-sites';
+import { enumeratePacks } from './model-helpers.js';
+import authorSites from './author-sites.js';
 
 export function getRoutes() {
     return [
@@ -16,7 +16,7 @@ export function getRoutes() {
             path: '/packs',
             name: 'packsIndex',
             component: PacksIndex,
-            props: (route) => {
+            props: route => {
                 const props = {
                     title: 'Packs',
                     getPacks() {
@@ -36,7 +36,7 @@ export function getRoutes() {
             path: '/patch-tags',
             name: 'patchTagsIndex',
             component: TextListPage,
-            props: (route) => {
+            props: route => {
                 const props = {
                     title: 'Patch Tags',
                     getItems() {
@@ -55,7 +55,7 @@ export function getRoutes() {
             path: '/patch-tags/:id',
             name: 'patchTagsShow',
             component: PatchListPage,
-            props: (route) => {
+            props: route => {
                 const props = {
                     title: route.params.id,
                     getPatches() {
@@ -65,7 +65,7 @@ export function getRoutes() {
 
                         for (const packId of packsSet.keys()) {
                             const pack = this.packsMap[packId];
-                            pack.patches.forEach((patch) => {
+                            pack.patches.forEach(patch => {
                                 if (patch.tags.has(patchKey)) {
                                     patch.packId = pack.id;
                                     patches.push(patch);
@@ -83,7 +83,7 @@ export function getRoutes() {
             path: '/creators',
             name: 'creatorsIndex',
             component: TextListPage,
-            props: (route) => {
+            props: route => {
                 const props = {
                     title: 'Creators',
                     getItems() {
@@ -102,7 +102,7 @@ export function getRoutes() {
             path: '/creators/:id',
             name: 'creatorsShow',
             component: PacksIndex,
-            props: (route) => {
+            props: route => {
                 const id = route.params.id;
 
                 const props = {
@@ -111,7 +111,7 @@ export function getRoutes() {
                     getPacks() {
                         return this.creatorsMap
                             .get(id)
-                            .map((id) => this.packsMap[id])
+                            .map(id => this.packsMap[id])
                             .reverse();
                     },
                 };
@@ -123,7 +123,7 @@ export function getRoutes() {
             path: '/pack-tags',
             name: 'packTagsIndex',
             component: TextListPage,
-            props: (route) => {
+            props: route => {
                 const props = {
                     title: 'Pack Tags',
                     getItems() {
@@ -142,13 +142,13 @@ export function getRoutes() {
             path: '/pack-tags/:id',
             name: 'packTagsShow',
             component: PacksIndex,
-            props: (route) => {
+            props: route => {
                 const props = {
                     title: route.params.id,
                     getPacks() {
                         return this.packTagsMap
                             .get(route.params.id)
-                            .map((id) => this.packsMap[id])
+                            .map(id => this.packsMap[id])
                             .reverse();
                     },
                 };
@@ -160,7 +160,7 @@ export function getRoutes() {
             path: '/devices',
             name: 'devicesIndex',
             component: TextListPage,
-            props: (route) => {
+            props: route => {
                 const props = {
                     title: 'Devices',
                     getItems() {
@@ -179,7 +179,7 @@ export function getRoutes() {
             path: '/devices/:id',
             name: 'devicesShow',
             component: PatchListPage,
-            props: (route) => {
+            props: route => {
                 const props = {
                     title: route.params.id,
                     getPatches() {
@@ -190,7 +190,7 @@ export function getRoutes() {
 
                         for (const packId of packsSet.keys()) {
                             const pack = this.packsMap[packId];
-                            pack.patches.forEach((patch) => {
+                            pack.patches.forEach(patch => {
                                 if (patch.devices.has(deviceKey)) {
                                     patch.packId = pack.id;
                                     patches.push(patch);
