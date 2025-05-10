@@ -93,13 +93,14 @@ const deviceType = {
     'Stereo Tool': deviceOrdering.EFFECT,
     'Sidechain Tool': deviceOrdering.EFFECT,
     'Gain Tool': deviceOrdering.UTILITY,
+    'Arpeggio Lab': deviceOrdering.PLAYER,
 };
 
-export const sortDevices = (devices) =>
+export const sortDevices = devices =>
     devices.sort((a, b) => {
         const diff = deviceType[a] - deviceType[b];
         return diff || a.localeCompare(b);
     });
 
-export const isInstrument = (device) =>
+export const isInstrument = device =>
     deviceType[device] === deviceOrdering.INSTRUMENT;
