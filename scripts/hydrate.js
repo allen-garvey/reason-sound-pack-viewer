@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import fetch from 'node-fetch';
 import { normalizeApiJson } from './normalize-api-json.js';
 import { API_PATH, OUTPUT_DIR, IMAGES_DIR, API_CACHE_DIR } from './values.js';
 import { getFileListSet, createDirectory, fetchPack } from './cache.js';

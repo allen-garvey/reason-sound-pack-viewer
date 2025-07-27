@@ -5,7 +5,7 @@ Preview all Reason+ sound packs in your browser.
 ## Dependencies
 
 * npm
-* node >= 14
+* node >= 22
 * make
 * lame
 
