@@ -77,7 +77,10 @@ const RIPLEY_NAME = 'Ripley Space Delay';
     POLAR_NAME,
     MONOTONE_NAME,
     BASSLINE_GENERATOR_NAME,
-].forEach((deviceFullName) => {
+    MIMIC_NAME,
+    POLYTONE_NAME,
+    RIPLEY_NAME,
+].forEach(deviceFullName => {
     const firstWord = deviceFullName.split(' ')[0];
     deviceMap.set(firstWord, deviceFullName);
 });
@@ -109,18 +112,14 @@ deviceMap.set('REX', DR_REX_NAME);
 deviceMap.set('LM6', LINE_MIXER_NAME);
 deviceMap.set('Mixer14:2', MIXER_NAME);
 deviceMap.set('Arpeggio', DUAL_ARPEGGIO_NAME);
-deviceMap.set('Mimic', MIMIC_NAME);
-deviceMap.set('Bassline', BASSLINE_GENERATOR_NAME);
 deviceMap.set('BVXVocoder', BVX_NAME);
-deviceMap.set('Polytone', POLYTONE_NAME);
-deviceMap.set('Ripley', RIPLEY_NAME);
 
-const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
 
 // based on https://stackoverflow.com/questions/5582228/insert-space-before-capital-letters
-const removePascalCase = (str) => str.replace(/([a-z])([A-Z])/g, '$1 $2');
+const removePascalCase = str => str.replace(/([a-z])([A-Z])/g, '$1 $2');
 
-export const normalizeDeviceName = (deviceNameRaw) => {
+export const normalizeDeviceName = deviceNameRaw => {
     const deviceName = removePascalCase(
         capitalize(deviceNameRaw.replace(/^.*\./, ''))
     );
