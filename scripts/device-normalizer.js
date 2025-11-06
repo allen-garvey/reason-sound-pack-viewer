@@ -49,6 +49,7 @@ const THOR_NAME = 'Thor';
 const UMPF_NAME = 'Umpf Club Drums';
 const POLYTONE_NAME = 'Polytone Dual-Layer Synthesizer';
 const RIPLEY_NAME = 'Ripley Space Delay';
+const OSMIUM_NAME = 'Osmium Distortion Matrix';
 
 // so that when only the first word of the device name is used,
 // it will be replaced by the full name
@@ -80,6 +81,7 @@ const RIPLEY_NAME = 'Ripley Space Delay';
     MIMIC_NAME,
     POLYTONE_NAME,
     RIPLEY_NAME,
+    OSMIUM_NAME,
 ].forEach(deviceFullName => {
     const firstWord = deviceFullName.split(' ')[0];
     deviceMap.set(firstWord, deviceFullName);

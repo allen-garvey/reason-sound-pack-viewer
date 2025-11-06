@@ -94,6 +94,7 @@ const deviceType = {
     'Sidechain Tool': deviceOrdering.EFFECT,
     'Gain Tool': deviceOrdering.UTILITY,
     'Arpeggio Lab': deviceOrdering.PLAYER,
+    'Osmium Distortion Matrix': deviceOrdering.CREATIVE_EFFECT,
 };
 
 export const sortDevices = devices =>
