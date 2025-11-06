@@ -87,7 +87,7 @@ const deviceType = {
     'Chord Sequencer': deviceOrdering.PLAYER,
     'Mimic Creative Sampler': deviceOrdering.INSTRUMENT,
     'Bassline Generator': deviceOrdering.PLAYER,
-    Objekt: deviceOrdering.INSTRUMENT,
+    'Objekt Modeling Synthesizer': deviceOrdering.INSTRUMENT,
     'Polytone Dual-Layer Synthesizer': deviceOrdering.INSTRUMENT,
     'Ripley Space Delay': deviceOrdering.EFFECT,
     'Stereo Tool': deviceOrdering.EFFECT,
