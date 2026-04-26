@@ -1,23 +1,15 @@
 <template>
     <h1 :class="$style.title">
-        <router-link :to="{name: 'home'}">{{ title }}</router-link>
+        <router-link :to="{ name: 'home' }">{{ title }}</router-link>
     </h1>
 </template>
 
 <style lang="scss" module>
-.title{
+.title {
     margin: 1.2rem 0 0;
 
-    a{
-        color: #000;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    .title{
-        a{
-            color: #fff;
-        }
+    a {
+        color: var(--color-font);
     }
 }
 </style>
@@ -27,9 +19,9 @@ import { siteTitle } from '../models/site.js';
 
 export default {
     computed: {
-        title(){
+        title() {
             return siteTitle;
-        }
-    }
+        },
+    },
 };
 </script>

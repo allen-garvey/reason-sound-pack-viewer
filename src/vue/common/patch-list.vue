@@ -1,56 +1,67 @@
 <template>
-<ul>
-    <li 
-        v-for="patch in patches" 
-        :key="patch.id"
-        :class="$style.patch"
-    >
-        <span :class="$style.iconContainer">
-            <button @click="patchClicked(patch)" :disabled="!patchHasAudioPreview(patch)">
-                <svg 
-                    :class="[$style.icon, patchHasAudioPreview(patch) && $style.enabledIcon]"
-                    viewBox="0 0 24 24"
+    <ul>
+        <li v-for="patch in patches" :key="patch.id" :class="$style.patch">
+            <span :class="$style.iconContainer">
+                <button
+                    @click="patchClicked(patch)"
+                    :disabled="!patchHasAudioPreview(patch)"
                 >
-                    <use 
-                        xlink:href="#icon-play"
-                        v-if="!isPatchPlaying(patch) && patchHasAudioPreview(patch)" />
-                    <use 
-                        xlink:href="#icon-pause"
-                        v-if="isPatchPlaying(patch)" />
-                    <use 
-                        xlink:href="#icon-x"
-                        v-if="!patchHasAudioPreview(patch)" />
-                </svg>
-            </button>
-        </span>
-        <div>
+                    <svg
+                        :class="[
+                            $style.icon,
+                            patchHasAudioPreview(patch) && $style.enabledIcon,
+                        ]"
+                        viewBox="0 0 24 24"
+                    >
+                        <use
+                            xlink:href="#icon-play"
+                            v-if="
+                                !isPatchPlaying(patch) &&
+                                patchHasAudioPreview(patch)
+                            "
+                        />
+                        <use
+                            xlink:href="#icon-pause"
+                            v-if="isPatchPlaying(patch)"
+                        />
+                        <use
+                            xlink:href="#icon-x"
+                            v-if="!patchHasAudioPreview(patch)"
+                        />
+                    </svg>
+                </button>
+            </span>
             <div>
-                <span :class="$style.patchName">{{ patch.name }}</span>
-                <router-link 
-                    :to="{name: 'packsShow', params: {id: getPack(patch).id}}"
-                    :class="$style.packLink"
-                    v-if="shouldShowPackLink"
-                >
-                    {{ getPack(patch).title }}
-                </router-link>
+                <div>
+                    <span :class="$style.patchName">{{ patch.name }}</span>
+                    <router-link
+                        :to="{
+                            name: 'packsShow',
+                            params: { id: getPack(patch).id },
+                        }"
+                        :class="$style.packLink"
+                        v-if="shouldShowPackLink"
+                    >
+                        {{ getPack(patch).title }}
+                    </router-link>
+                </div>
+                <ul :class="$style.deviceList">
+                    <li
+                        v-for="device of devicesForPack(patch.devices)"
+                        :key="device"
+                        :class="deviceClass(device)"
+                    >
+                        {{ device }}
+                    </li>
+                </ul>
+                <reason-plus-link
+                    :class="$style.reasonPlusLink"
+                    :pack-id="getPack(patch).id"
+                    v-if="shouldShowReasonPlusLink"
+                />
             </div>
-            <ul :class="$style.deviceList">
-                <li
-                    v-for="device of devicesForPack(patch.devices)"
-                    :key="device"
-                    :class="deviceClass(device)"
-                >
-                    {{ device }}
-                </li>
-            </ul>
-            <reason-plus-link 
-                :class="$style.reasonPlusLink"
-                :pack-id="getPack(patch).id"
-                v-if="shouldShowReasonPlusLink"
-            />
-        </div>
-    </li>
-</ul>
+        </li>
+    </ul>
 </template>
 
 <style lang="scss" module>
@@ -74,17 +85,17 @@ $icon-controls-dimensions: 40px;
     max-height: 100%;
     width: $icon-controls-dimensions;
     opacity: 0.3;
+    color: var(--color-font);
 
     &.enabledIcon {
         cursor: pointer;
         opacity: 1;
-        
+
         &:hover {
             color: #666;
         }
     }
 }
-
 
 .patchName {
     min-width: 13em;
@@ -94,7 +105,8 @@ $icon-controls-dimensions: 40px;
     margin-left: 2em;
 }
 
-.deviceList, .reasonPlusLink {
+.deviceList,
+.reasonPlusLink {
     font-size: 0.8rem;
 }
 
@@ -109,17 +121,7 @@ $icon-controls-dimensions: 40px;
 }
 
 .instrumentDevice {
-    color: #7c564b;
-}
-
-@media (prefers-color-scheme: dark) {
-    .icon {
-        color: #fff;
-    }
-
-    .instrumentDevice {
-        color: #a97c70;
-    }
+    color: var(--color-font-highlight);
 }
 </style>
 
@@ -159,25 +161,28 @@ export default {
         ReasonPlusLink,
     },
     methods: {
-        patchId(patch){
+        patchId(patch) {
             return patch.id;
         },
-        patchHasAudioPreview(patch){
+        patchHasAudioPreview(patch) {
             return !!patch.previewUrl;
         },
-        isPatchPlaying(patch){
-            return isMediaPlaying(this.patchId(patch), this.mediaId, this.playState);
+        isPatchPlaying(patch) {
+            return isMediaPlaying(
+                this.patchId(patch),
+                this.mediaId,
+                this.playState
+            );
         },
-        patchClicked(patch){
-            if(!this.patchHasAudioPreview(patch)){
+        patchClicked(patch) {
+            if (!this.patchHasAudioPreview(patch)) {
                 return;
             }
-            if(this.isPatchPlaying(patch)){
+            if (this.isPatchPlaying(patch)) {
                 this.$emit('audioStop');
-            }
-            else {
+            } else {
                 const pack = this.getPack(patch);
-                
+
                 this.$emit('audioStart', {
                     url: patch.previewUrl,
                     title: {
@@ -189,10 +194,10 @@ export default {
                 });
             }
         },
-        devicesForPack(devices){
+        devicesForPack(devices) {
             return sortDevices(Array.from(devices));
         },
-        deviceClass(device){
+        deviceClass(device) {
             return {
                 [this.$style.device]: true,
                 [this.$style.instrumentDevice]: isInstrument(device),
