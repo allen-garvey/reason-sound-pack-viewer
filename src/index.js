@@ -1,4 +1,4 @@
-import css from '../sass/style.scss';
+import '../sass/style.scss';
 import { createApp } from 'vue';
 import App from './vue/app.vue';
 import { createRouter, createWebHistory } from 'vue-router';
