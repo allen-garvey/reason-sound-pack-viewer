@@ -1,4 +1,4 @@
-AUDIO_OUTPUT_DIR=public_html/audio
+AUDIO_OUTPUT_DIR=public/audio
 TRACK_1=$(AUDIO_OUTPUT_DIR)/medicina-dramatica-demo-track.mp3
 TRACK_2=$(AUDIO_OUTPUT_DIR)/hazy-lofi-demo-track.mp3
 TRACK_3=$(AUDIO_OUTPUT_DIR)/cinetronica-demo-track.mp3

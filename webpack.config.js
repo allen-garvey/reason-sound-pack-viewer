@@ -11,11 +11,11 @@ export default {
     entry: [`${__dirname}/src/index.js`],
     output: {
         filename: 'app.js',
-        path: path.resolve(__dirname, 'public_html/assets'),
+        path: path.resolve(__dirname, 'public/assets'),
     },
     devServer: {
         static: {
-            directory: path.join(__dirname, 'public_html'),
+            directory: path.join(__dirname, 'public'),
             watch: true,
         },
         devMiddleware: {

@@ -30,9 +30,9 @@ Thumbs.db
 lib/*
 
 #compiled files
-public_html/assets/*
-public_html/*.json
-public_html/images/*
-public_html/audio/*
+public/assets/*
+public/*.json
+public/images/*
+public/audio/*
 
 scripts/cache/*
