@@ -33,6 +33,7 @@ lib/*
 public/*.json
 public/images/*
 public/audio/*
+public_html/*
 
 dist/*
 

@@ -13,7 +13,7 @@ Preview all Reason+ sound packs in your browser.
 
 * `make`
 * `npm install`
-* `npm run hydrate`
+* `npm run hydrate:dev`
 * `npm start`
 
 ## Make production build
