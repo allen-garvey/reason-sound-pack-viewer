@@ -7,8 +7,7 @@
   "scripts": {
     "start": "vite",
     "deploy": "vite build",
-    "hydrate": "time node scripts/hydrate.js",
-    "hydrate:dev": "time node scripts/hydrate.js dev"
+    "hydrate": "time node scripts/hydrate.js"
   },
   "repository": {
     "type": "git",

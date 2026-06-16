@@ -5,10 +5,7 @@ import { API_PATH, IMAGES_DIR, API_CACHE_DIR } from './values.js';
 import { getFileListSet, createDirectory, fetchPack } from './cache.js';
 import { getFetchAndSaveImageForPack, getPackImageName } from './images.js';
 
-const OUTPUT_DIR =
-    process.argv[2] === 'dev'
-        ? path.join(import.meta.dirname, '..', 'public')
-        : path.join(import.meta.dirname, '..', 'public_html');
+const OUTPUT_DIR = path.join(import.meta.dirname, '..', 'public');
 
 Promise.all([
     fetch(`${API_PATH}/`),

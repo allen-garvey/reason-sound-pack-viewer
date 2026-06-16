@@ -36,5 +36,6 @@ public/audio/*
 public_html/*
 
 dist/*
+dist-images/*
 
 scripts/cache/*
